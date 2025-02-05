@@ -1,0 +1,43 @@
+<th:block th:each="iter: ${#numbers.sequence(support_messages.size() - 1, 0, -1)}">
+    <th:block th:with="message=${support_messages.get(iter)}">
+        <div th:if="${message.toSupport()}" class="d-flex justify-content-start mb-10">
+            <div class="d-flex flex-column align-items-start">
+                <div class="d-flex align-items-center mb-2">
+                    <div class="symbol symbol-35px symbol-circle">
+                        <img alt="Pic" th:src="${user.profilePhoto == null ? '../assets/img/profile/avatar.svg' : '../' + user.profilePhoto}">
+                    </div>
+                    <div class="ms-3">
+                        <a th:href="'user-edit?id=' + ${user.id}" target="_blank" class="fs-5 fw-bold text-gray-900 text-hover-primary me-1" th:text="${user.email}"></a>
+                        <span class="text-muted fs-7 mb-1" th:text="${message.formattedDate}"></span>
+                        <span class="SupportDeleteMessage" th:onclick="'deleteMessage(event, ' + ${user.id} + ', ' + ${message.id} + ')'" style="cursor: pointer; color: red; font-size: 12px; margin-left: 10px; margin-right: 10px">Delete</span>
+                        <span th:unless="${message.isImage()}" class="SupportDeleteMessageSp" style="cursor: pointer; color: blue; font-size: 12px; margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#kt_edit_support_message" th:onclick="'editMessage(event, ' + ${user.id} + ', ' + ${message.id} + ')'">Edit</span>
+                    </div>
+                </div>
+                <div class="p-3 rounded bg-light-info text-dark fw-semibold text-start" data-kt-element="message-text">
+                    <img th:if="${message.isImage()}" style="max-width: 100%; display: block;" th:src="${message.message}">
+                    <span th:id="'msg_block_' + ${message.id}" th:unless="${message.isImage()}" th:text="${message.message}"></span>
+                </div>
+            </div>
+        </div>
+
+        <div th:unless="${message.toSupport()}" class="d-flex justify-content-end mb-10">
+            <div class="d-flex flex-column align-items-end">
+                <div class="d-flex align-items-center mb-2">
+                    <div class="me-3">
+                        <span th:unless="${message.isImage()}" class="SupportDeleteMessageSp" style="cursor: pointer; color: blue; font-size: 12px; margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#kt_edit_support_message" th:onclick="'editMessage(event, ' + ${user.id} + ', ' + ${message.id} + ')'">Edit</span>
+                        <span class="SupportDeleteMessageSp" th:onclick="'deleteMessage(event, ' + ${user.id} + ', ' + ${message.id} + ')'" style="cursor: pointer; color: red; font-size: 12px; margin-right: 5px;">Delete</span>
+                        <span class="text-muted fs-7 mb-1" th:text="${message.formattedDate} + ' / ' + ${message.userViewed ? 'Прочитано' : ' Не прочитано'}"></span>
+                        <a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary ms-1">You</a>
+                    </div>
+                    <div class="symbol symbol-35px symbol-circle">
+                        <img alt="Pic" src="../assets/img/profile/avatar.svg">
+                    </div>
+                </div>
+                <div class="p-3 rounded bg-light-primary text-gray-800 fw-semibold text-end" data-kt-element="message-text" style="text-align: left!important">
+                    <img th:if="${message.isImage()}" style="max-width: 100%; display: block;" th:src="${message.message}">
+                    <span th:id="'msg_block_' + ${message.id}" th:unless="${message.isImage()}" th:text="${message.message}"></span>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>

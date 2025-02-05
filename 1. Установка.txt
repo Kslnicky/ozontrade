@@ -1,0 +1,151 @@
+################################################################################################
+#Установка написана для ubuntu 22.04 или новее, поэтому рекомендуем использовать именно эту ОС.#
+#Минимальные требования для vds - от 8гб ОЗУ, процессор не менее 4 ядер                        #
+#                        !!!Не покупайте vds с локацией США!!!                                 #
+################################################################################################
+
+Установка:
+1. Подключаемся к дедику по SSH и прописываем команды из последующих пунктов.
+
+2. Устанавливаем Java:
+
+На всех всплывающих окнах/вопросах просто нажимаем Enter:
+apt-get update -y && apt-get upgrade -y && apt-get install openjdk-17-jdk -y
+
+3. Устанавливаем MySql:
+На всех всплывающих окнах/вопросах просто нажимаем Enter:
+apt install mysql-server -y
+
+На все вопросы кроме третьего нажимаем Enter, на третьем y и Enter
+sudo mysql_secure_installation
+
+4. Задаем пароль для MySql:
+mysql -u root -p
+Нажимаем Enter
+
+Прописываем команды, 123123123 замените на любой придуманный вами пароль:
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by '123123123';
+create database exchange;
+exit;
+
+5. Загрузка и запуск биржи:
+Настройте application.properties, укажите в spring.datasource.password ваш пароль от MySql (4 пункт)
+
+Подключитесь к дедику по FTP
+
+Загрузите файлы yellow-exchange.jar и application.properties на вашу vds, например, в папку /home
+
+Перейдите обратно в SSH и пропишите следующие команды:
+apt-get install iptables-persistent -y && apt-get install screen
+
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 80 -j REDIRECT --to-ports 8080
+iptables-save > /etc/iptables/rules.v4
+
+cd /home
+
+screen -S exchange
+
+Вместо 6G укажите доступное количество ГБ озу вашей VDS минус 1-2гб (например, если VDS на 8гб, то указываем 7G или 6G)
+java -Xmx6G -jar yellow-exchange.jar --spring.config.location=/home/application.properties
+
+Если все нормально, то после запуска (строка Started Bootstrapper...) биржа будет доступна по ip адресу вашей vds
+
+Выходим из скрина:
+ctrl + a + d
+
+6. Выдача админ-панели (ТОЛЬКО на момент установки, в дальнейшем админ-панели так не выдавать, это только для первого зарегистрированного пользователя!)
+Заходим на биржу и регистрируем аккаунт администратора.
+
+Переходим в SSH и прописываем команды:
+mysql -u root -p
+Пишем ваш пароль и жмем Enter
+
+use exchange;
+update user_roles set role_id = 3;
+update users set role_type = 2;
+
+exit;
+
+7. Перезагружаем биржу:
+fuser -k 8080/tcp
+fuser -k 8080/tcp
+screen -r exchange
+java -Xmx6G -jar yellow-exchange.jar --spring.config.location=/home/application.properties
+
+Теперь в профиле у вас будет доступна кнопка для перехода в админ панель.################################################################################################
+#Установка написана для ubuntu 22.04 или новее, поэтому рекомендуем использовать именно эту ОС.#
+#Минимальные требования для vds - от 8гб ОЗУ, процессор не менее 4 ядер                        #
+#                        !!!Не покупайте vds с локацией США!!!                                 #
+################################################################################################
+
+Установка:
+1. Подключаемся к дедику по SSH и прописываем команды из последующих пунктов.
+
+2. Устанавливаем Java:
+
+На всех всплывающих окнах/вопросах просто нажимаем Enter:
+apt-get update -y && apt-get upgrade -y && apt-get install openjdk-17-jdk -y
+
+3. Устанавливаем MySql:
+На всех всплывающих окнах/вопросах просто нажимаем Enter:
+apt install mysql-server -y
+
+На все вопросы кроме третьего нажимаем Enter, на третьем y и Enter
+sudo mysql_secure_installation
+
+4. Задаем пароль для MySql:
+mysql -u root -p
+Нажимаем Enter
+
+Прописываем команды, 123123123 замените на любой придуманный вами пароль:
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by '123123123';
+create database exchange;
+exit;
+
+5. Загрузка и запуск биржи:
+Настройте application.properties, укажите в spring.datasource.password ваш пароль от MySql (4 пункт)
+
+Подключитесь к дедику по FTP
+
+Загрузите файлы yellow-exchange.jar и application.properties на вашу vds, например, в папку /home
+
+Перейдите обратно в SSH и пропишите следующие команды:
+apt-get install iptables-persistent -y && apt-get install screen
+
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 80 -j REDIRECT --to-ports 8080
+iptables-save > /etc/iptables/rules.v4
+
+cd /home
+
+screen -S exchange
+
+Вместо 6G укажите доступное количество ГБ озу вашей VDS минус 1-2гб (например, если VDS на 8гб, то указываем 7G или 6G)
+java -Xmx6G -jar yellow-exchange.jar --spring.config.location=/home/application.properties
+
+Если все нормально, то после запуска (строка Started Bootstrapper...) биржа будет доступна по ip адресу вашей vds
+
+Выходим из скрина:
+ctrl + a + d
+
+6. Выдача админ-панели (ТОЛЬКО на момент установки, в дальнейшем админ-панели так не выдавать, это только для первого зарегистрированного пользователя!)
+Заходим на биржу и регистрируем аккаунт администратора.
+
+Переходим в SSH и прописываем команды:
+mysql -u root -p
+Пишем ваш пароль и жмем Enter
+
+use exchange;
+update user_roles set role_id = 3;
+update users set role_type = 2;
+
+exit;
+
+7. Перезагружаем биржу:
+fuser -k 8080/tcp
+fuser -k 8080/tcp
+screen -r exchange
+java -Xmx6G -jar yellow-exchange.jar --spring.config.location=/home/application.properties
+
+Теперь в профиле у вас будет доступна кнопка для перехода в админ панель.
