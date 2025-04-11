@@ -1,0 +1,8 @@
+bot_username: '@ewrgrgbot'
+bot_token: '8040894122:AAFLAyT_y47wufHXaUtcT4fFgaaXCFzguEc'
+host: 'http://127.0.0.1:8080'
+exchange_api_key: 'regergeprgerglerlewrg'
+messages:
+  send_answer: '✅ Ответ успешно отправлен'
+  user_not_found: '❌ Пользователь не найден'
+  message_too_large: '❌ Сообщение слишком длинное'

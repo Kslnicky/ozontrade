@@ -935,7 +935,7 @@ public class SupporterPanelApiController {
             userSupportMessageRepository.save(supportMessage);
         }
 
-        if (image != null && image.getOriginalFilename() != null) {
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
             String fileName = user.getId() + "_" + System.currentTimeMillis() + ".png";
             try {
                 FileUploadUtil.saveFile(Resources.SUPPORT_IMAGES, fileName, image);

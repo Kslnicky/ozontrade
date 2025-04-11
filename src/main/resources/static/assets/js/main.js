@@ -10,7 +10,7 @@ if (lang == null) {
 
 $.ajax({
     type: "GET",
-    url: "/api/getLocale?lang=" + lang,
+    url: "/api/getLocale?v=2&lang=" + lang,
     success: function (response) {
         locale = response;
         messagesLoaded = true;

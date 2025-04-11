@@ -2,6 +2,7 @@ package me.yukitale.yellowexchange.panel.common.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -65,6 +66,9 @@ public class Domain {
 
     private boolean buyCryptoEnabled;
 
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean promoPopupEnabled;
+
     private boolean verif2Enabled;
 
     @Column(columnDefinition = "DOUBLE DEFAULT 10000")
@@ -84,6 +88,9 @@ public class Domain {
 
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean fiatWithdrawEnabled;
+
+    @Column(columnDefinition = "INT DEFAULT 0")
+    private int homeDesign;
 
     @Size(max = 64)
     private String server;
@@ -124,6 +131,10 @@ public class Domain {
     @JoinColumn(name = "worker_id")
     private Worker worker;
 
+    public HomePageDesign getHomePageDesign() {
+        return HomePageDesign.values()[this.homeDesign];
+    }
+
     public String getFormattedCreated() {
         return StringUtil.formatDateToTimeAgo(this.created.getTime());
     }
@@ -156,5 +167,15 @@ public class Domain {
         if (StringUtils.isNotBlank(url)) {
             nets.put(net, url);
         }
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum HomePageDesign {
+
+        DESIGN_1("index"),
+        DESIGN_2("index_2");
+
+        private final String fileName;
     }
 }

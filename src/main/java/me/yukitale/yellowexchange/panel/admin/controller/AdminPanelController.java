@@ -689,6 +689,8 @@ public class AdminPanelController {
 
         model.addAttribute("domain_type", type);
 
+        model.addAttribute("home_page", domain.getHomeDesign());
+
         return "panel/admin/domain-edit";
     }
 

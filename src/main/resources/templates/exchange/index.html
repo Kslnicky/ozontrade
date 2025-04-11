@@ -30,7 +30,7 @@
     <meta property="twitter:description" th:content="${site_description}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/css/root.css">
+    <link rel="stylesheet" href="../assets/css/root.css?v=3">
 </head>
 
 <body>
@@ -560,7 +560,6 @@
                                 </button>
                                 <div class="main-menu__section__menu menu-lang main-menu__section-flex" style="display: none; padding: 15px">
                                     <div class="main-menu__section__menu__nav" onclick="location.replace('?lang=en')">
-                                    <div class="main-menu__section__menu__nav" onclick="location.replace('?lang=ru')"><div class="main-menu__section__menu__nav__title"><div class="main-menu__section__menu__nav__title__prefix"> RU </div><span th:styleappend="${lang_code == 'RU' ? 'color: #ffc014' : ''">Русский</span></div></div>
                                         <div class="main-menu__section__menu__nav__title">
                                             <div class="main-menu__section__menu__nav__title__prefix"> EN </div>
                                             <span th:styleappend="${lang_code == 'EN' ? 'color: #ffc014' : ''}">English</span>
@@ -2074,7 +2073,7 @@
                                     </svg>
                                 </button>
                                 <span id="support_photo_size" style="display: none;"></span>
-                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg" name="support_send_image">
+                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg,image/png" name="support_send_image">
                             </div>
                             <textarea id="chat_input" th:placeholder="#{support.textarea.placeholder}" class="chat-box-meta"></textarea>
                             <button id="support_send" class="chat-box-meta">
@@ -2224,9 +2223,35 @@
     </div>
 </div>
 <input type="hidden" hidden="hidden" id="user-authorized" th:value="${user != null}">
+<script th:inline="javascript">
+    var fbId = [[${fbpixel}]];
+    fbId = parseFloat(fbId) != -1 ? fbId : undefined;
+
+    !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', fbId);
+    fbq('track', 'PageView');
+</script>
 <script src="../assets/js/toastr.js"></script>
-<script src="../assets/js/noti.js"></script>
-<script src="../assets/js/main.js?v=3"></script>
+<script src="../assets/js/noti.js?v=2"></script>
+<script src="../assets/js/main.js?v=5"></script>
 <script>
     const e = window.lottie,
         t = setInterval(() => {

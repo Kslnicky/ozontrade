@@ -3,7 +3,6 @@ package me.yukitale.yellowexchange.exchange.controller.api;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
 import me.yukitale.yellowexchange.exchange.model.user.User;
 import me.yukitale.yellowexchange.exchange.repository.user.UserRepository;
 import me.yukitale.yellowexchange.exchange.service.EmailService;
@@ -18,7 +17,9 @@ import me.yukitale.yellowexchange.security.auth.captcha.CaptchaService;
 import me.yukitale.yellowexchange.security.auth.utils.JwtUtils;
 import me.yukitale.yellowexchange.security.auth.utils.ServletUtil;
 import me.yukitale.yellowexchange.utils.DataValidator;
+import me.yukitale.yellowexchange.utils.GeoUtil;
 import me.yukitale.yellowexchange.utils.GoogleUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpHeaders;
@@ -155,6 +156,17 @@ public class AuthApiController {
 
         String platform = ServletUtil.getPlatform(request);
         String regIp = ServletUtil.getIpAddress(request);
+        String countryCode = "NO";
+        try {
+            GeoUtil.GeoData geoData = GeoUtil.getGeo(regIp);
+            if (geoData != null && !StringUtils.isBlank(countryCode)) {
+                countryCode = geoData.getCountryCode().equals("N/A") ? "NO" : geoData.getCountryCode();
+            }
+        } catch (Exception ignored) {}
+
+        if (countryCode.equalsIgnoreCase("RU") || countryCode.equalsIgnoreCase("BY") || countryCode.equalsIgnoreCase("KZ")) {
+            return ResponseEntity.ok("blocked_country");
+        }
 
         Domain domain = domainRepository.findByName(domainName).orElse(null);
 
@@ -170,7 +182,7 @@ public class AuthApiController {
                 emailRequiredConfirm = true;
                 registered = true;
             } else {
-                user = userService.createUser(referrer, domain, domainName, email, password, regIp, platform, promocodeName, refCode, false);
+                user = userService.createUser(referrer, domain, domainName, email, password, regIp, platform, promocodeName, refCode, false, countryCode);
                 emailService.createEmailConfirmation(domain, email, domainName, user);
                 registered = true;
             }
@@ -182,7 +194,7 @@ public class AuthApiController {
                     emailRequiredConfirm = true;
                     registered = true;
                 } else {
-                    user = userService.createUser(referrer, null, domainName, email, password, regIp, platform, promocodeName, refCode, true);
+                    user = userService.createUser(referrer, null, domainName, email, password, regIp, platform, promocodeName, refCode, true, countryCode);
                     emailService.createEmailConfirmation(null, email, domainName, user);
                     registered = true;
                 }
@@ -190,7 +202,7 @@ public class AuthApiController {
         }
 
         if (!registered) {
-            user = userService.createUser(referrer, domain, domainName, email, password, regIp, platform, promocodeName, refCode, true);
+            user = userService.createUser(referrer, domain, domainName, email, password, regIp, platform, promocodeName, refCode, true, countryCode);
         }
 
         captchaService.removeCaptchaCache(sessionKey);
@@ -274,7 +286,7 @@ public class AuthApiController {
 
         return ResponseEntity.ok("success");
     }
-    
+
     @GetMapping("/logout")
     public RedirectView logoutUser(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();

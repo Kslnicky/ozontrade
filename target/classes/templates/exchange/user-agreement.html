@@ -29,7 +29,7 @@
     <meta th:if="${site_title != null && !site_title.isEmpty()}" property="twitter:title" th:content="${site_title}">
     <meta property="twitter:description" th:content="${site_description}">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/css/root.css">
+    <link rel="stylesheet" href="../assets/css/root.css?v=3">
 </head>
 
 <body>
@@ -818,7 +818,7 @@
                                     </svg>
                                 </button>
                                 <span id="support_photo_size" style="display: none;"></span>
-                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg" name="support_send_image">
+                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg,image/png" name="support_send_image">
                             </div>
                             <textarea id="chat_input" th:placeholder="#{support.textarea.placeholder}" class="chat-box-meta"></textarea>
                             <button id="support_send" class="chat-box-meta">
@@ -969,7 +969,7 @@
 </div>
 <input type="hidden" hidden="hidden" id="user-authorized" th:value="${user != null}">
 <script src="../assets/js/toastr.js"></script>
-<script src="../assets/js/noti.js"></script>
-<script src="../assets/js/main.js?v=3"></script>
+<script src="../assets/js/noti.js?v=2"></script>
+<script src="../assets/js/main.js?v=5"></script>
 </body>
 </html>

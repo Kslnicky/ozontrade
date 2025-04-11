@@ -51,7 +51,7 @@
                             </a>
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px" data-kt-menu="true" data-kt-element="english-menu" style="">
                                 <div class="menu-item px-3 my-0">
-                                    <a href="?panel_lang=en" class="menu-link px-3 py-2" th:classappend="${lang_code != 'RU' ? 'active' : ''}">
+                                    <a href="./?panel_lang=en" class="menu-link px-3 py-2" th:classappend="${lang_code != 'RU' ? 'active' : ''}">
                                         <span class="menu-icon" data-kt-element="icon">
                                             <img class="rounded-1" src="../assets/media/flags/united-states.svg" alt="" style=" width: 20px; height: 20px; ">
                                         </span>
@@ -59,7 +59,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item px-3 my-0">
-                                    <a href="?panel_lang=ru" class="menu-link px-3 py-2" th:classappend="${lang_code == 'RU' ? 'active' : ''}">
+                                    <a href="./?panel_lang=ru" class="menu-link px-3 py-2" th:classappend="${lang_code == 'RU' ? 'active' : ''}">
                                         <span class="menu-icon" data-kt-element="icon">
                                             <img class="rounded-1" src="../assets/media/flags/russia.svg" alt="" style=" width: 20px; height: 20px; ">
                                         </span>
@@ -600,7 +600,7 @@
                     <div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
                         <div class="text-dark order-2 order-md-1">
                             <span class="text-muted fw-semibold me-1">2025&copy;</span>
-                            <a href="#" target="_blank" class="text-gray-800 text-hover-primary">X-IT Admin Panel</a>
+                            <a href="#" target="_blank" class="text-gray-800 text-hover-primary">Admin Panel</a>
                         </div>
                     </div>
                 </div>
@@ -620,7 +620,7 @@
 <script src="../assets/js/scripts.bundle.js"></script>
 <script src="../assets/js/toastr.js"></script>
 <script src="../assets/js/panelnoti.js"></script>
-<script src="../assets/js/panel-locale.js"></script>
+<script src="../assets/js/panel-locale.js?v=2"></script>
 <script src="../assets/js/admin-counters.js?v=4"></script>
 </body>
 </html>

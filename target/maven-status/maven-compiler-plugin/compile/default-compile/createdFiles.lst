@@ -23,6 +23,7 @@ me/yukitale/yellowexchange/panel/admin/controller/AdminPanelController.class
 me/yukitale/yellowexchange/exchange/repository/user/UserTransactionRepository.class
 me/yukitale/yellowexchange/exchange/model/Coin.class
 me/yukitale/yellowexchange/exchange/controller/api/UserApiController$3.class
+me/yukitale/yellowexchange/panel/common/model/Domain$HomePageDesign.class
 me/yukitale/yellowexchange/exchange/model/user/UserTradeOrder$Type.class
 me/yukitale/yellowexchange/config/WebSecurityConfig.class
 me/yukitale/yellowexchange/panel/worker/repository/WorkerErrorMessagesRepository.class
@@ -54,6 +55,7 @@ me/yukitale/yellowexchange/panel/worker/model/WithdrawCoinLimit.class
 me/yukitale/yellowexchange/exchange/repository/user/UserLogRepository.class
 me/yukitale/yellowexchange/panel/worker/repository/WorkerSupportPresetRepository.class
 me/yukitale/yellowexchange/exchange/model/user/UserRequiredDepositCoin.class
+me/yukitale/yellowexchange/exchange/controller/api/ExchangeApiController$4.class
 me/yukitale/yellowexchange/exchange/service/EmailService$2.class
 me/yukitale/yellowexchange/exchange/service/CoinService$1$1.class
 me/yukitale/yellowexchange/exchange/model/user/UserAlert.class

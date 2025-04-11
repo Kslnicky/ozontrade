@@ -17,6 +17,12 @@
   "title" : "Tether",
   "min_receive" : 50.0
 }, {
+  "symbol" : "USDC",
+  "coin_type" : "USDCERC20",
+  "icon" : "../assets/img/coins/USDC.png",
+  "title" : "USD Coin",
+  "min_receive" : 50.0
+}, {
   "symbol" : "TRX",
   "coin_type" : "TRX",
   "icon" : "../assets/img/coins/TRX.png",
@@ -27,6 +33,12 @@
   "coin_type" : "USDTTRC20",
   "icon" : "../assets/img/coins/USDT.png",
   "title" : "Tether",
+  "min_receive" : 10.0
+}, {
+  "symbol" : "USDC",
+  "coin_type" : "USDCTRC20",
+  "icon" : "../assets/img/coins/USDC.png",
+  "title" : "USD coin",
   "min_receive" : 10.0
 }, {
   "symbol" : "TON",

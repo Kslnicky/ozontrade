@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface WorkerTelegramSettingsRepository extends JpaRepository<WorkerTelegramSettings, Long> {
 
+    Optional<WorkerTelegramSettings> findByTelegramId(long telegramId);
+
     @Cacheable(value = "worker_telegram_settings", key = "#workerId")
     Optional<WorkerTelegramSettings> findByWorkerId(long workerId);
 

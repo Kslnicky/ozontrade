@@ -18,6 +18,7 @@
 	<link href="../assets/css/spcustom.css" rel="stylesheet" type="text/css">
 	<link href="../assets/css/toastr.css" rel="stylesheet" type="text/css">
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<link href="../assets/css/home-page.select.css" rel="stylesheet" type="text/css">
 	<link href="../assets/css/summernote-lite.min.css" rel="stylesheet">
 	<script src="../assets/js/summernote-lite.min.js"></script>
 </head>
@@ -55,7 +56,7 @@
 							</a>
 							<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px" data-kt-menu="true" data-kt-element="english-menu" style="">
 								<div class="menu-item px-3 my-0">
-									<a href="?panel_lang=en" class="menu-link px-3 py-2" th:classappend="${lang_code != 'RU' ? 'active' : ''}">
+									<a href="./?panel_lang=en" class="menu-link px-3 py-2" th:classappend="${lang_code != 'RU' ? 'active' : ''}">
                                         <span class="menu-icon" data-kt-element="icon">
                                             <img class="rounded-1" src="../assets/media/flags/united-states.svg" alt="" style=" width: 20px; height: 20px; ">
                                         </span>
@@ -63,7 +64,7 @@
 									</a>
 								</div>
 								<div class="menu-item px-3 my-0">
-									<a href="?panel_lang=ru" class="menu-link px-3 py-2" th:classappend="${lang_code == 'RU' ? 'active' : ''}">
+									<a href="./?panel_lang=ru" class="menu-link px-3 py-2" th:classappend="${lang_code == 'RU' ? 'active' : ''}">
                                         <span class="menu-icon" data-kt-element="icon">
                                             <img class="rounded-1" src="../assets/media/flags/russia.svg" alt="" style=" width: 20px; height: 20px; ">
                                         </span>
@@ -613,6 +614,9 @@
 											<a class="nav-link text-active-primary ms-0 me-10 py-5 user_edit_menu" onclick="openTab('u_social_networks', this)" th:text="#{domain.edit.tab.3}"></a>
 										</li>
 										<li class="nav-item mt-2">
+											<a class="nav-link text-active-primary ms-0 me-10 py-5 user_edit_menu" onclick="openTab('u_home_design', this)" th:text="#{domain.edit.tab.5}"></a>
+										</li>
+										<li class="nav-item mt-2">
 											<a class="nav-link text-active-primary ms-0 me-10 py-5 user_edit_menu" onclick="" th:text="#{domain.edit.tab.4}"></a>
 										</li>
 									</ul>
@@ -663,7 +667,7 @@
 																	   </svg>
 																	</span>
 																</label>
-																<input type="file" hidden="" id="domainIcon" accept="image/x-png,image/jpeg,image/svg+xml,image/x-icon">
+																<input type="file" hidden="" id="domainIcon" accept="image/png,image/jpeg,image/svg+xml">
 															</div>
 														</div>
 														<div class="fv-plugins-message-container invalid-feedback"></div>
@@ -725,6 +729,14 @@
 															<input th:if="${enabled}" class="form-check-input user_feature" id="fiatWithdrawEnabled" type="checkbox" checked>
 															<input th:unless="${enabled}" class="form-check-input user_feature" id="fiatWithdrawEnabled" type="checkbox">
 															<span style="color: GreenYellow" class="fw-semibold ps-2 fs-6" th:text="#{domain.edit.fiat.withdraw}"></span>
+														</label>
+														<div class="fv-plugins-message-container invalid-feedback"></div>
+													</div>
+													<div class="col-md-6 fv-row fv-plugins-icon-container">
+														<label th:with="enabled=${domain.promoPopupEnabled}" class="form-check form-check-custom form-check-inline form-check-solid me-5">
+															<input th:if="${enabled}" class="form-check-input user_feature" id="promoPopupEnabled" type="checkbox" checked>
+															<input th:unless="${enabled}" class="form-check-input user_feature" id="promoPopupEnabled" type="checkbox">
+															<span style="color: GreenYellow" class="fw-semibold ps-2 fs-6" th:text="#{domain.edit.promo.popup}"></span>
 														</label>
 														<div class="fv-plugins-message-container invalid-feedback"></div>
 													</div>
@@ -932,6 +944,39 @@
 									</div>
 								</div>
 							</div>
+
+							<div class="card" id="u_home_design" style="display: none;">
+								<div class="card-header card-header-stretch">
+									<div class="card-title d-flex align-items-center">
+										<h3 class="fw-bold m-0 text-gray-800" th:text="#{domain.edit.tab.5}"></h3>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="tab-content">
+										<div class="timeline">
+											<div class="home-page_image-container mt-5">
+												<div class="home-page_image-row">
+													<div class="home-page_image-item">
+														<img th:styleappend="${home_page == 0 ? 'opacity: 0.8;' : 'opacity: 1;'}" id="home-page-img_1" class="home-page_img" src="../assets/img/home-page/home_page_1.png">
+														<label>
+															<input th:if="${home_page == 0}" name="group1" id="home-page_1" class="home-page" type="radio" value="Home page #1" checked>
+															<input th:unless="${home_page == 0}" name="group1" id="home-page_1" class="home-page" type="radio" value="Home page #1">
+														</label>
+													</div>
+													<div class="home-page_image-item">
+														<img th:styleappend="${home_page == 1 ? 'opacity: 0.8;' : 'opacity: 1;'}" id="home-page-img_2" class="home-page_img" src="../assets/img/home-page/home_page_2.png">
+														<label>
+															<input th:if="${home_page == 1}" name="group1" id="home-page_2" class="home-page" type="radio" value="Home page #2" checked>
+															<input th:unless="${home_page == 1}" name="group1" id="home-page_2" class="home-page" type="radio" value="Home page #2">
+														</label>
+													</div>
+												</div>
+											</div>
+											<span style="float: right" class="btn btn-sm btn-primary me-2 mt-10" onclick="saveHomePage(event)" th:text="#{main.save.settings.btn}"></span>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -951,10 +996,58 @@
 <script src="../assets/js/scripts.bundle.js"></script>
 <script src="../assets/js/toastr.js"></script>
 <script src="../assets/js/panelnoti.js"></script>
-<script src="../assets/js/panel-locale.js"></script>
+<script src="../assets/js/panel-locale.js?v=2"></script>
 <script src="../assets/js/admin-counters.js?v=4"></script>
 <script src="../assets/plugins/raphael-min.js"></script>
 <script src="../assets/plugins/morris.min.js"></script>
+<script>
+	const imageItems = document.querySelectorAll('.home-page_image-item');
+
+	imageItems.forEach(imageItem => {
+		const radioButton = imageItem.querySelector('input[type="radio"]');
+		const image = imageItem.querySelector('img');
+
+		image.addEventListener('click', function () {
+			radioButton.checked = true;
+			imageItems.forEach(item => {
+				const itemImage = item.querySelector('img');
+				itemImage.style.opacity = '1';
+			});
+			image.style.opacity = '0.8';
+		});
+	});
+
+	function saveHomePage(event) {
+		event.preventDefault();
+
+		let siteHomePage;
+		for (let element of document.querySelectorAll(".home-page")) {
+			if ($("#" + element.id).is(":checked")) {
+				siteHomePage = element.id.split("_")[1];
+			}
+		}
+
+		const domainEditId = $("#domainEditId").val();
+
+		$.ajax({
+			url: "/api/admin/domains",
+			type: "POST",
+			contentType: 'application/json; charset=UTF-8',
+			data: JSON.stringify({
+				action: "EDIT_DOMAIN_HOME_PAGE",
+				id: domainEditId,
+				home_page: siteHomePage
+			}),
+			success: function (response) {
+				if (response === 'success') {
+					noti(getMessage('main.changes.saved'), "success");
+				} else {
+					noti(getMessage('main.common.error'), "error");
+				}
+			}
+		});
+	}
+</script>
 <script>
 	const domainIconInput = document.getElementById('domainIcon');
 	const domainIconUploadButton = document.getElementById('domainIconButton');
@@ -992,6 +1085,7 @@
 		const signupPromoEnabled = $("#signupPromoEnabled").is(':checked');
 		const signupRefEnabled = $("#signupRefEnabled").is(':checked');
 		const fiatWithdrawEnabled = $("#fiatWithdrawEnabled").is(':checked');
+		const promoPopupEnabled = $("#promoPopupEnabled").is(':checked');
 		const verif2Enabled = $("#verif2Enabled").is(':checked');
 		const verif2Balance = $("#verif2Balance").val();
 		const robotsTxt = $("#robotsTxt").val();
@@ -1014,6 +1108,7 @@
 		formData.append('signupPromoEnabled', signupPromoEnabled);
 		formData.append('signupRefEnabled', signupRefEnabled);
 		formData.append('fiatWithdrawEnabled', fiatWithdrawEnabled);
+		formData.append('promoPopupEnabled', promoPopupEnabled);
 		formData.append('verif2Enabled', verif2Enabled);
 		formData.append('verif2Balance', verif2Balance);
 		formData.append('robotsTxt', robotsTxt);

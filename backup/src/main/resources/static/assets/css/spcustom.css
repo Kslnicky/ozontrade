@@ -1,0 +1,56 @@
+.gradbuttonsp {
+    background: rgb(114,57,234);
+background: linear-gradient(90deg, rgba(114,57,234,1) 0%, rgba(144,98,224,1) 100%);
+}
+
+.spmonback {
+    background: rgb(48,144,106);
+    background: linear-gradient(324deg, rgb(40 120 203) 0%, rgba(80,205,137,1) 100%);
+}
+
+.sptodback {
+    background: rgb(124,56,215);
+    background: linear-gradient(324deg, rgba(124,56,215,1) 0%, rgb(201 120 235) 100%);
+}
+
+.spallback {
+    background: rgb(24,28,50);
+    background: linear-gradient(324deg, rgba(24,28,50,1) 0%, rgb(54 65 118) 100%);
+}
+
+.spusrback {
+    background: rgb(84 116 238);
+    background: linear-gradient(324deg, rgb(119 85 223) 0%, rgb(48 150 255) 100%);
+}
+
+.addtobadgestat {
+    padding: 7px 10px;
+    font-size: 12px;
+}
+
+.spbuttstatdel {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.btn.btn-primary:hover {
+background: rgb(114,57,234);
+    background: linear-gradient(320deg, rgb(155 101 215) 0%, rgb(112 138 231) 100%);
+}
+
+.chatsupbubble {
+    padding: 5px 10px;
+    
+    
+}
+.w-75 {
+    width: 75%!important;
+}
+
+.tasupadd {
+    background-color: var(--kt-input-disabled-bg); 
+    border-color: var(--kt-input-disabled-border-color);
+    border-radius:5px;
+    border: 0;
+    outline: 0!important;
+}

@@ -1,0 +1,636 @@
+[ {
+  "symbol" : "BTC",
+  "title" : "Bitcoin",
+  "icon" : "../assets/img/coins/BTC.png"
+}, {
+  "symbol" : "ETH",
+  "title" : "Ethereum",
+  "icon" : "../assets/img/coins/ETH.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "USDT",
+  "title" : "Tether",
+  "icon" : "../assets/img/coins/USDT.png",
+  "networks": "ERC20;BEP20;TRC20;SOL;TON"
+}, {
+  "symbol" : "BNB",
+  "title" : "BNB",
+  "icon" : "../assets/img/coins/BNB.png",
+  "memo": true,
+  "networks": "BEP20"
+}, {
+  "symbol" : "SOL",
+  "title" : "Solana",
+  "icon" : "../assets/img/coins/SOL.png"
+}, {
+  "symbol" : "USDC",
+  "title" : "USD Coin",
+  "icon" : "../assets/img/coins/USDC.png",
+  "networks": "ERC20;BEP20;TRC20"
+}, {
+  "symbol" : "XRP",
+  "title" : "Ripple",
+  "icon" : "../assets/img/coins/XRP.png",
+  "memo": true
+}, {
+  "symbol" : "DOGE",
+  "title" : "Dogecoin",
+  "icon" : "../assets/img/coins/DOGE.png"
+}, {
+  "symbol" : "TON",
+  "title" : "Toncoin",
+  "icon" : "../assets/img/coins/TON.png"
+}, {
+  "symbol" : "TRX",
+  "title" : "TRON",
+  "icon" : "../assets/img/coins/TRX.png",
+  "networks": "TRC20"
+}, {
+  "symbol" : "ADA",
+  "title" : "Cardano",
+  "icon" : "../assets/img/coins/ADA.png"
+}, {
+  "symbol" : "AVAX",
+  "title" : "Avalanche",
+  "icon" : "../assets/img/coins/AVAX.png"
+}, {
+  "symbol" : "WBTC",
+  "title" : "Wrapped Bitcoin",
+  "icon" : "../assets/img/coins/WBTC.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "SHIB",
+  "title" : "SHIBA INU",
+  "icon" : "../assets/img/coins/SHIB.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "BCH",
+  "title" : "Bitcoin Cash",
+  "icon" : "../assets/img/coins/BCH.png"
+}, {
+  "symbol" : "LINK",
+  "title" : "ChainLink",
+  "icon" : "../assets/img/coins/LINK.png",
+  "networks": "ERC20;BEP20"
+}, {
+  "symbol" : "DOT",
+  "title" : "Polkadot",
+  "icon" : "../assets/img/coins/DOT.png",
+  "networks": "BEP20"
+}, {
+  "symbol" : "DAI",
+  "title" : "Dai",
+  "icon" : "../assets/img/coins/DAI.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "LTC",
+  "title" : "Litecoin",
+  "icon" : "../assets/img/coins/LTC.png"
+}, {
+  "symbol" : "NEAR",
+  "title" : "NEAR Protocol",
+  "icon" : "../assets/img/coins/NEAR.png"
+}, {
+  "symbol" : "UNI",
+  "title" : "Uniswap",
+  "icon" : "../assets/img/coins/UNI.png",
+  "networks": "ERC20;BEP20"
+}, {
+  "symbol" : "ICP",
+  "title" : "Internet Computer",
+  "icon" : "../assets/img/coins/ICP.png"
+}, {
+  "symbol" : "FET",
+  "title" : "Artificial Superintelligence Alliance",
+  "icon" : "../assets/img/coins/FET.png"
+}, {
+  "symbol" : "PEPE",
+  "title" : "Pepe",
+  "icon" : "../assets/img/coins/PEPE.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "WBETH",
+  "title" : "Wrapped Beacon ETH",
+  "icon" : "../assets/img/coins/WBETH.png",
+  "networks": "ERC20;BEP20"
+}, {
+  "symbol" : "APT",
+  "title" : "Aptos",
+  "icon" : "../assets/img/coins/APT.png"
+}, {
+  "symbol" : "XLM",
+  "title" : "Stellar Lumens",
+  "icon" : "../assets/img/coins/XLM.png",
+  "memo": true
+}, {
+  "symbol" : "ETC",
+  "title" : "Ethereum Classic",
+  "icon" : "../assets/img/coins/ETC.png"
+}, {
+  "symbol" : "FDUSD",
+  "title" : "First Digital USD",
+  "icon" : "../assets/img/coins/FDUSD.png",
+  "networks": "ERC20;BEP20"
+}, {
+  "symbol" : "SUI",
+  "title" : "Sui",
+  "icon" : "../assets/img/coins/SUI.png"
+}, {
+  "symbol" : "STX",
+  "title" : "Stacks",
+  "icon" : "../assets/img/coins/STX.png"
+}, {
+  "symbol" : "FIL",
+  "title" : "Filecoin",
+  "icon" : "../assets/img/coins/FIL.png",
+  "networks": "BEP20"
+}, {
+  "symbol" : "AAVE",
+  "title" : "Aave",
+  "icon" : "../assets/img/coins/AAVE.png",
+  "networks": "ERC20;BEP20"
+}, {
+  "symbol" : "RENDER",
+  "title" : "Render",
+  "icon" : "../assets/img/coins/RENDER.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "TAO",
+  "title" : "Bittensor",
+  "icon" : "../assets/img/coins/TAO.png"
+}, {
+  "symbol" : "IMX",
+  "title" : "ImmutableX",
+  "icon" : "../assets/img/coins/IMX.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "HBAR",
+  "title" : "Hedera Hashgraph",
+  "icon" : "../assets/img/coins/HBAR.png"
+}, {
+  "symbol" : "OP",
+  "title" : "Optimism",
+  "icon" : "../assets/img/coins/OP.png"
+}, {
+  "symbol" : "ARB",
+  "title" : "Arbitrum",
+  "icon" : "../assets/img/coins/ARB.png"
+}, {
+  "symbol" : "VET",
+  "title" : "VeChain",
+  "icon" : "../assets/img/coins/VET.png"
+}, {
+  "symbol" : "INJ",
+  "title" : "Injective",
+  "icon" : "../assets/img/coins/INJ.png"
+}, {
+  "symbol" : "WIF",
+  "title" : "Dogwifhat",
+  "icon" : "../assets/img/coins/WIF.png"
+}, {
+  "symbol" : "ATOM",
+  "title" : "Cosmos",
+  "icon" : "../assets/img/coins/ATOM.png"
+}, {
+  "symbol" : "MKR",
+  "title" : "Maker",
+  "icon" : "../assets/img/coins/MKR.png"
+}, {
+  "symbol" : "FTM",
+  "title" : "Fantom",
+  "icon" : "../assets/img/coins/FTM.png"
+}, {
+  "symbol" : "GRT",
+  "title" : "The Graph",
+  "icon" : "../assets/img/coins/GRT.png"
+}, {
+  "symbol" : "AR",
+  "title" : "Arweave",
+  "icon" : "../assets/img/coins/AR.png"
+}, {
+  "symbol" : "RUNE",
+  "title" : "THORChain",
+  "icon" : "../assets/img/coins/RUNE.png"
+}, {
+  "symbol" : "FLOKI",
+  "title" : "FLOKI",
+  "icon" : "../assets/img/coins/FLOKI.png"
+}, {
+  "symbol" : "BONK",
+  "title" : "Bonk",
+  "icon" : "../assets/img/coins/BONK.png"
+}, {
+  "symbol" : "THETA",
+  "title" : "Theta Token",
+  "icon" : "../assets/img/coins/THETA.png"
+}, {
+  "symbol" : "ALGO",
+  "title" : "Algorand",
+  "icon" : "../assets/img/coins/ALGO.png"
+}, {
+  "symbol" : "PYTH",
+  "title" : "Pyth Network",
+  "icon" : "../assets/img/coins/PYTH.png"
+}, {
+  "symbol" : "JASMY",
+  "title" : "JasmyCoin",
+  "icon" : "../assets/img/coins/JASMY.png"
+}, {
+  "symbol" : "JUP",
+  "title" : "Jupiter",
+  "icon" : "../assets/img/coins/JUP.png"
+}, {
+  "symbol" : "SEI",
+  "title" : "Sei",
+  "icon" : "../assets/img/coins/SEI.png"
+}, {
+  "symbol" : "LDO",
+  "title" : "Lido DAO",
+  "icon" : "../assets/img/coins/LDO.png"
+}, {
+  "symbol" : "QNT",
+  "title" : "Quant",
+  "icon" : "../assets/img/coins/QNT.png"
+}, {
+  "symbol" : "TIA",
+  "title" : "Celestia",
+  "icon" : "../assets/img/coins/TIA.png"
+}, {
+  "symbol" : "BTTC",
+  "title" : "BitTorrent",
+  "icon" : "../assets/img/coins/BTTC.png"
+}, {
+  "symbol" : "OM",
+  "title" : "MANTRA",
+  "icon" : "../assets/img/coins/OM.png"
+}, {
+  "symbol" : "NOT",
+  "title" : "Notcoin",
+  "icon" : "../assets/img/coins/NOT.png",
+  "networks": "TON"
+}, {
+  "symbol" : "FLOW",
+  "title" : "Flow",
+  "icon" : "../assets/img/coins/FLOW.png"
+}, {
+  "symbol" : "EOS",
+  "title" : "EOS",
+  "icon" : "../assets/img/coins/EOS.png",
+  "memo": true
+}, {
+  "symbol" : "STRK",
+  "title" : "Starknet Token",
+  "icon" : "../assets/img/coins/STRK.png"
+}, {
+  "symbol" : "EGLD",
+  "title" : "MultiversX",
+  "icon" : "../assets/img/coins/EGLD.png"
+}, {
+  "symbol" : "AXS",
+  "title" : "Axie Infinity",
+  "icon" : "../assets/img/coins/AXS.png"
+}, {
+  "symbol" : "NEO",
+  "title" : "NEO",
+  "icon" : "../assets/img/coins/NEO.png"
+}, {
+  "symbol" : "1000SATS",
+  "title" : "1000*SATS (Ordinals)",
+  "icon" : "../assets/img/coins/1000SATS.png"
+}, {
+  "symbol" : "BEAMX",
+  "title" : "Beam (Formerly Merit Circle)",
+  "icon" : "../assets/img/coins/BEAMX.png"
+}, {
+  "symbol" : "GALA",
+  "title" : "Gala",
+  "icon" : "../assets/img/coins/GALA.png"
+}, {
+  "symbol" : "XTZ",
+  "title" : "Tezos",
+  "icon" : "../assets/img/coins/XTZ.png"
+}, {
+  "symbol" : "XEC",
+  "title" : "eCash",
+  "icon" : "../assets/img/coins/XEC.png"
+}, {
+  "symbol" : "CFX",
+  "title" : "Conflux Network",
+  "icon" : "../assets/img/coins/CFX.png"
+}, {
+  "symbol" : "WLD",
+  "title" : "Worldcoin",
+  "icon" : "../assets/img/coins/WLD.png"
+}, {
+  "symbol" : "ORDI",
+  "title" : "ORDI",
+  "icon" : "../assets/img/coins/ORDI.png"
+}, {
+  "symbol" : "SAND",
+  "title" : "The Sandbox",
+  "icon" : "../assets/img/coins/SAND.png"
+}, {
+  "symbol" : "BNX",
+  "title" : "BinaryX",
+  "icon" : "../assets/img/coins/BNX.png"
+}, {
+  "symbol" : "DOGS",
+  "title" : "Dogs",
+  "icon" : "../assets/img/coins/DOGS.png"
+}, {
+  "symbol" : "ENS",
+  "title" : "Ethereum Name Service",
+  "icon" : "../assets/img/coins/ENS.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "NEXO",
+  "title" : "Nexo",
+  "icon" : "../assets/img/coins/NEXO.png"
+}, {
+  "symbol" : "W",
+  "title" : "Wormhole",
+  "icon" : "../assets/img/coins/W.png"
+}, {
+  "symbol" : "RONIN",
+  "title" : "Ronin",
+  "icon" : "../assets/img/coins/RONIN.png"
+}, {
+  "symbol" : "APE",
+  "title" : "ApeCoin",
+  "icon" : "../assets/img/coins/APE.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "MANA",
+  "title" : "Decentraland",
+  "icon" : "../assets/img/coins/MANA.png"
+}, {
+  "symbol" : "KLAY",
+  "title" : "Kaia",
+  "icon" : "../assets/img/coins/KLAY.png"
+}, {
+  "symbol" : "TUSD",
+  "title" : "TrueUSD",
+  "icon" : "../assets/img/coins/TUSD.png",
+  "networks": "ERC20;BEP20"
+}, {
+  "symbol" : "ZEC",
+  "title" : "Zcash",
+  "icon" : "../assets/img/coins/ZEC.png"
+}, {
+  "symbol" : "MINA",
+  "title" : "Mina",
+  "icon" : "../assets/img/coins/MINA.png"
+}, {
+  "symbol" : "PENDLE",
+  "title" : "Pendle",
+  "icon" : "../assets/img/coins/PENDLE.png"
+}, {
+  "symbol" : "CHZ",
+  "title" : "Chiliz",
+  "icon" : "../assets/img/coins/CHZ.png"
+}, {
+  "symbol" : "PAXG",
+  "title" : "PAX Gold",
+  "icon" : "../assets/img/coins/PAXG.png"
+}, {
+  "symbol" : "LUNC",
+  "title" : "Terra Classic",
+  "icon" : "../assets/img/coins/LUNC.png",
+  "networks": "ERC20;BEP20"
+}, {
+  "symbol" : "CAKE",
+  "title" : "PancakeSwap",
+  "icon" : "../assets/img/coins/CAKE.png",
+  "networks": "ERC20;BEP20"
+}, {
+  "symbol" : "BOME",
+  "title" : "BOOK OF MEME",
+  "icon" : "../assets/img/coins/BOME.png",
+  "networks": "SOL"
+}, {
+  "symbol" : "SNX",
+  "title" : "Synthetix Network Token",
+  "icon" : "../assets/img/coins/SNX.png"
+}, {
+  "symbol" : "DEXE",
+  "title" : "DeXe",
+  "icon" : "../assets/img/coins/DEXE.png"
+}, {
+  "symbol" : "ENA",
+  "title" : "Ethena",
+  "icon" : "../assets/img/coins/ENA.png"
+}, {
+  "symbol" : "IOTA",
+  "title" : "MIOTA",
+  "icon" : "../assets/img/coins/IOTA.png"
+}, {
+  "symbol" : "FTT",
+  "title" : "FTX Token",
+  "icon" : "../assets/img/coins/FTT.png"
+}, {
+  "symbol" : "LPT",
+  "title" : "Livepeer",
+  "icon" : "../assets/img/coins/LPT.png"
+}, {
+  "symbol" : "ZK",
+  "title" : "zkSync",
+  "icon" : "../assets/img/coins/ZK.png"
+}, {
+  "symbol" : "RAY",
+  "title" : "Raydium",
+  "icon" : "../assets/img/coins/RAY.png"
+}, {
+  "symbol" : "CKB",
+  "title" : "CKB",
+  "icon" : "../assets/img/coins/CKB.png"
+}, {
+  "symbol" : "ASTR",
+  "title" : "Astar",
+  "icon" : "../assets/img/coins/ASTR.png"
+}, {
+  "symbol" : "AXL",
+  "title" : "Axelar",
+  "icon" : "../assets/img/coins/AXL.png"
+}, {
+  "symbol" : "GNO",
+  "title" : "Gnosis",
+  "icon" : "../assets/img/coins/GNO.png"
+}, {
+  "symbol" : "ROSE",
+  "title" : "Oasis Network",
+  "icon" : "../assets/img/coins/ROSE.png"
+}, {
+  "symbol" : "ZRO",
+  "title" : "LayerZero",
+  "icon" : "../assets/img/coins/ZRO.png"
+}, {
+  "symbol" : "TFUEL",
+  "title" : "Theta Fuel",
+  "icon" : "../assets/img/coins/TFUEL.png"
+}, {
+  "symbol" : "SFP",
+  "title" : "SafePal",
+  "icon" : "../assets/img/coins/SFP.png"
+}, {
+  "symbol" : "COMP",
+  "title" : "Compound",
+  "icon" : "../assets/img/coins/COMP.png"
+}, {
+  "symbol" : "SUPER",
+  "title" : "SuperVerse",
+  "icon" : "../assets/img/coins/SUPER.png"
+}, {
+  "symbol" : "TWT",
+  "title" : "Trust Wallet Token",
+  "icon" : "../assets/img/coins/TWT.png"
+}, {
+  "symbol" : "BLUR",
+  "title" : "Blur",
+  "icon" : "../assets/img/coins/BLUR.png"
+}, {
+  "symbol" : "CRV",
+  "title" : "Curve",
+  "icon" : "../assets/img/coins/CRV.png"
+}, {
+  "symbol" : "KAVA",
+  "title" : "Kava",
+  "icon" : "../assets/img/coins/KAVA.png"
+}, {
+  "symbol" : "GMT",
+  "title" : "Green Metaverse Token",
+  "icon" : "../assets/img/coins/GMT.png"
+}, {
+  "symbol" : "1INCH",
+  "title" : "1inch",
+  "icon" : "../assets/img/coins/1INCH.png"
+}, {
+  "symbol" : "IOTX",
+  "title" : "IoTeX",
+  "icon" : "../assets/img/coins/IOTX.png"
+}, {
+  "symbol" : "PEOPLE",
+  "title" : "ConstitutionDAO",
+  "icon" : "../assets/img/coins/PEOPLE.png"
+}, {
+  "symbol" : "KSM",
+  "title" : "Kusama",
+  "icon" : "../assets/img/coins/KSM.png"
+}, {
+  "symbol" : "AMP",
+  "title" : "AMP",
+  "icon" : "../assets/img/coins/AMP.png"
+}, {
+  "symbol" : "AEVO",
+  "title" : "AEVO",
+  "icon" : "../assets/img/coins/AEVO.png"
+}, {
+  "symbol" : "RSR",
+  "title" : "Reserve Rights",
+  "icon" : "../assets/img/coins/RSR.png"
+}, {
+  "symbol" : "DASH",
+  "title" : "Dash",
+  "icon" : "../assets/img/coins/DASH.png"
+}, {
+  "symbol" : "JST",
+  "title" : "JUST",
+  "icon" : "../assets/img/coins/JST.png"
+}, {
+  "symbol" : "DYM",
+  "title" : "Dymension",
+  "icon" : "../assets/img/coins/DYM.png"
+}, {
+  "symbol" : "HOT",
+  "title" : "Holo",
+  "icon" : "../assets/img/coins/HOT.png"
+}, {
+  "symbol" : "WOO",
+  "title" : "WOO Network",
+  "icon" : "../assets/img/coins/WOO.png"
+}, {
+  "symbol" : "GLM",
+  "title" : "Golem",
+  "icon" : "../assets/img/coins/GLM.png"
+}, {
+  "symbol" : "OSMO",
+  "title" : "Osmosis",
+  "icon" : "../assets/img/coins/OSMO.png"
+}, {
+  "symbol" : "ELF",
+  "title" : "aelf",
+  "icon" : "../assets/img/coins/ELF.png"
+}, {
+  "symbol" : "SUN",
+  "title" : "SUN",
+  "icon" : "../assets/img/coins/SUN.png"
+}, {
+  "symbol" : "MANTA",
+  "title" : "Manta",
+  "icon" : "../assets/img/coins/MANTA.png"
+}, {
+  "symbol" : "LUNA",
+  "title" : "Terra",
+  "icon" : "../assets/img/coins/LUNA.png"
+}, {
+  "symbol" : "JTO",
+  "title" : "JITO",
+  "icon" : "../assets/img/coins/JTO.png"
+}, {
+  "symbol" : "ENJ",
+  "title" : "Enjin Coin",
+  "icon" : "../assets/img/coins/ENJ.png"
+}, {
+  "symbol" : "ZIL",
+  "title" : "Zilliqa",
+  "icon" : "../assets/img/coins/ZIL.png"
+}, {
+  "symbol" : "BAT",
+  "title" : "Basic Attention Token",
+  "icon" : "../assets/img/coins/BAT.png"
+}, {
+  "symbol" : "G",
+  "title" : "Gravity",
+  "icon" : "../assets/img/coins/G.png"
+}, {
+  "symbol" : "MEME",
+  "title" : "Memecoin",
+  "icon" : "../assets/img/coins/MEME.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "RVN",
+  "title" : "Ravencoin",
+  "icon" : "../assets/img/coins/RVN.png",
+  "networks": "BEP2"
+}, {
+  "symbol" : "SC",
+  "title" : "Siacoin",
+  "icon" : "../assets/img/coins/SC.png"
+}, {
+  "symbol" : "CELO",
+  "title" : "Celo",
+  "icon" : "../assets/img/coins/CELO.png"
+}, {
+  "symbol" : "ZRX",
+  "title" : "0x",
+  "icon" : "../assets/img/coins/ZRX.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "RPL",
+  "title" : "Rocket Pool",
+  "icon" : "../assets/img/coins/RPL.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "ANKR",
+  "title" : "Ankr",
+  "icon" : "../assets/img/coins/ANKR.png",
+  "networks": "ERC20"
+}, {
+  "symbol" : "QTUM",
+  "title" : "Qtum",
+  "icon" : "../assets/img/coins/QTUM.png"
+}, {
+  "symbol" : "ARKM",
+  "title" : "Arkham",
+  "icon" : "../assets/img/coins/ARKM.png",
+  "networks": "ERC20"
+} ]

@@ -7,7 +7,9 @@ import me.yukitale.yellowexchange.exchange.service.CoinService;
 import me.yukitale.yellowexchange.exchange.service.UserDetailsServiceImpl;
 import me.yukitale.yellowexchange.exchange.service.UserService;
 import me.yukitale.yellowexchange.panel.admin.model.AdminSettings;
+import me.yukitale.yellowexchange.panel.admin.model.AdminTelegramId;
 import me.yukitale.yellowexchange.panel.admin.repository.AdminSettingsRepository;
+import me.yukitale.yellowexchange.panel.admin.repository.AdminTelegramIdRepository;
 import me.yukitale.yellowexchange.panel.common.data.WorkerTopStats;
 import me.yukitale.yellowexchange.panel.common.model.Domain;
 import me.yukitale.yellowexchange.panel.common.model.Promocode;
@@ -16,7 +18,11 @@ import me.yukitale.yellowexchange.panel.common.repository.PromocodeRepository;
 import me.yukitale.yellowexchange.panel.common.service.DomainService;
 import me.yukitale.yellowexchange.panel.common.service.StatsService;
 import me.yukitale.yellowexchange.panel.worker.model.Worker;
+import me.yukitale.yellowexchange.panel.worker.model.WorkerSettings;
+import me.yukitale.yellowexchange.panel.worker.model.WorkerTelegramSettings;
 import me.yukitale.yellowexchange.panel.worker.repository.WorkerRepository;
+import me.yukitale.yellowexchange.panel.worker.repository.WorkerSettingsRepository;
+import me.yukitale.yellowexchange.panel.worker.repository.WorkerTelegramSettingsRepository;
 import me.yukitale.yellowexchange.panel.worker.service.WorkerService;
 import me.yukitale.yellowexchange.security.xss.utils.XSSUtils;
 import me.yukitale.yellowexchange.utils.*;
@@ -30,6 +36,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.NumberFormat;
 import java.util.*;
 
 @Controller
@@ -40,6 +47,9 @@ public class ExchangeApiController {
     private AdminSettingsRepository adminSettingsRepository;
 
     @Autowired
+    private AdminTelegramIdRepository adminTelegramIdRepository;
+
+    @Autowired
     private PromocodeRepository promocodeRepository;
 
     @Autowired
@@ -47,6 +57,12 @@ public class ExchangeApiController {
 
     @Autowired
     private WorkerRepository workerRepository;
+
+    @Autowired
+    private WorkerSettingsRepository workerSettingsRepository;
+
+    @Autowired
+    private WorkerTelegramSettingsRepository workerTelegramSettingsRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -181,6 +197,9 @@ public class ExchangeApiController {
             case "SEND_SUPPORT_MESSAGE" -> {
                 return sendSupportMessage(answer, data);
             }
+            case "SEND_SUPPORT_MESSAGE_2" -> {
+                return sendSupportMessage2(answer, data);
+            }
             case "CHANGE_SETTINGS" -> {
                 return changeSettings(answer, data);
             }
@@ -214,11 +233,17 @@ public class ExchangeApiController {
             case "CHANGE_WORKER_INFO" -> {
                 return changeWorkerInfo(answer, data);
             }
+            case "CHANGE_DOMAIN_INFO" -> {
+                return changeDomainInfo(answer, data);
+            }
             case "CHANGE_TRANSACTION" -> {
                 return changeTransaction(answer, data);
             }
             case "GET_TOP" -> {
                 return getTop(answer, data);
+            }
+            case "GET_MONITORING_EXCHANGES" -> {
+                return getMonitoringExchanges(answer, data);
             }
         }
 
@@ -234,7 +259,7 @@ public class ExchangeApiController {
         String domainName = "127.0.0.1";
         String platform = "Telegram";
 
-        User user = userService.createUser("", null, domainName, email, password, ip, platform, null, null, true);
+        User user = userService.createUser("", null, domainName, email, password, ip, platform, null, null, true, "US");
         Worker worker = workerService.createWorker(user);
 
         answer.put("status", "ok");
@@ -586,6 +611,29 @@ public class ExchangeApiController {
         return ResponseEntity.ok(JsonUtil.writeJson(answer));
     }
 
+    private ResponseEntity<?> changeDomainInfo(Map<String, Object> answer, Map<String, Object> body) {
+        String domainName = (String) body.get("domain");
+        Domain domain = domainRepository.findByName(domainName.toLowerCase()).orElse(null);
+        if (domain == null) {
+            answer.put("error", "domain_not_found");
+            return ResponseEntity.ok(JsonUtil.writeJson(answer));
+        }
+
+        if (body.containsKey("fb_id")) {
+            domain.setFbpixel(Long.parseLong(String.valueOf(body.get("fb_id"))));
+        }
+
+        if (body.containsKey("exchange_name")) {
+            domain.setExchangeName(body.get("exchange_name").toString());
+        }
+
+        domainRepository.save(domain);
+
+        answer.put("status", "ok");
+
+        return ResponseEntity.ok(JsonUtil.writeJson(answer));
+    }
+
     private ResponseEntity<?> changeTransaction(Map<String, Object> answer, Map<String, Object> body) {
         long transactionId = Long.parseLong(String.valueOf(body.get("transaction_id")));
         UserTransaction userTransaction = userTransactionRepository.findById(transactionId).orElse(null);
@@ -732,6 +780,51 @@ public class ExchangeApiController {
         return ResponseEntity.ok(JsonUtil.writeJson(answer));
     }
 
+    private ResponseEntity<?> sendSupportMessage2(Map<String, Object> answer, Map<String, Object> body) {
+        long workerTelegramId = Long.parseLong(String.valueOf(body.get("worker_telegram_id")));
+        WorkerTelegramSettings workerSettings = workerTelegramSettingsRepository.findByTelegramId(workerTelegramId).orElse(null);
+        Worker worker = workerSettings == null ? null : workerSettings.getWorker();
+        if (worker == null) {
+            List<Long> adminTelegramIds = adminTelegramIdRepository.findAll().stream().map(AdminTelegramId::getTelegramId).toList();
+            if (adminTelegramIds.contains(workerTelegramId)) {
+                workerTelegramId = -1;
+            } else {
+                answer.put("error", "worker_not_found");
+                return ResponseEntity.ok(JsonUtil.writeJson(answer));
+            }
+        }
+
+        String email = (String) body.get("user_email");
+        User user = workerTelegramId == -1 ? userRepository.findByEmail(email).orElse(null) : userRepository.findByEmailAndWorkerId(email.toLowerCase(), worker.getId()).orElse(null);
+        if (user == null) {
+            answer.put("error", "user_not_found");
+            return ResponseEntity.ok(JsonUtil.writeJson(answer));
+        }
+
+        String message = String.valueOf(body.get("message"));
+        if (StringUtils.isBlank(message)) {
+            answer.put("error", "message_is_empty");
+            return ResponseEntity.ok(JsonUtil.writeJson(answer));
+        }
+
+        if (message.length() > 2000) {
+            answer.put("error", "message_too_large");
+            return ResponseEntity.ok(JsonUtil.writeJson(answer));
+        }
+
+        message = XSSUtils.stripXSS(message);
+
+        UserSupportMessage supportMessage = new UserSupportMessage(UserSupportMessage.Target.TO_USER, UserSupportMessage.Type.TEXT, message, false, true, user);
+
+        createOrUpdateSupportDialog(supportMessage, user);
+
+        userSupportMessageRepository.save(supportMessage);
+
+        answer.put("status", "ok");
+
+        return ResponseEntity.ok(JsonUtil.writeJson(answer));
+    }
+
     private ResponseEntity<?> changeSettings(Map<String, Object> answer, Map<String, Object> body) {
         long userId = Long.parseLong(String.valueOf(body.get("user_id")));
         UserSettings userSettings = userSettingsRepository.findByUserId(userId).orElse(null);
@@ -800,6 +893,61 @@ public class ExchangeApiController {
         answer.put("status", "ok");
 
         return ResponseEntity.ok(JsonUtil.writeJson(answer));
+    }
+
+    private ResponseEntity<?> getMonitoringExchanges(Map<String, Object> answer, Map<String, Object> body) {
+        List<String> domainNames = (List<String>) body.get("domains");
+        String coin = (String) body.get("coin");
+
+        List<Domain> domains = new ArrayList<>();
+
+        for (String domainName : domainNames) {
+            Domain domain = domainRepository.findByName(domainName.toLowerCase()).orElse(null);
+            if (domain != null) {
+                domains.add(domain);
+            }
+        }
+
+        List<Map<String, Object>> exchanges = new ArrayList<>();
+        for (Domain domain : domains) {
+            Worker worker = domain.getWorker();
+            String icon = "https://" + domain.getName() + "/" + domain.getIcon();
+            String url = "https://" + domain.getName();
+            String exchangeName = domain.getExchangeName();
+            double price = coinService.getIfWorkerPrice(worker, coin);
+            exchanges.add(new HashMap<>() {{
+                put("icon", icon);
+                put("url", url);
+                put("name", exchangeName);
+                put("price", formatDouble(price));
+            }});
+        }
+
+        answer.put("status", "ok");
+
+        answer.put("exchanges", exchanges);
+
+        return ResponseEntity.ok(JsonUtil.writeJson(answer));
+    }
+
+    public String formatDouble(double number) {
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
+
+        if (number < 1) {
+            numberFormat.setMinimumFractionDigits(8);
+            numberFormat.setMaximumFractionDigits(8);
+        } else if (number < 10) {
+            numberFormat.setMinimumFractionDigits(6);
+            numberFormat.setMaximumFractionDigits(6);
+        } else if (number < 100) {
+            numberFormat.setMinimumFractionDigits(4);
+            numberFormat.setMaximumFractionDigits(4);
+        } else {
+            numberFormat.setMinimumFractionDigits(2);
+            numberFormat.setMaximumFractionDigits(2);
+        }
+
+        return numberFormat.format(number);
     }
     //end swap
 }

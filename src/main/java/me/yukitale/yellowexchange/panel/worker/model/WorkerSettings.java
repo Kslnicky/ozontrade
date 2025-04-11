@@ -18,8 +18,6 @@ public class WorkerSettings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long telegramId;
-
     @Size(max = 512)
     private String supportWelcomeMessage;
 

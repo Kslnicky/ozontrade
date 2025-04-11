@@ -21,6 +21,7 @@ import me.yukitale.yellowexchange.security.auth.captcha.CachedCaptcha;
 import me.yukitale.yellowexchange.security.auth.captcha.CaptchaService;
 import me.yukitale.yellowexchange.security.auth.utils.JwtUtils;
 import me.yukitale.yellowexchange.utils.DataValidator;
+import me.yukitale.yellowexchange.utils.GeoUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -68,8 +69,7 @@ public class AuthController {
 
     @GetMapping(value = "signup")
     public String signupController(HttpServletRequest request, HttpServletResponse response, Authentication authentication, Model model, @RequestParam(value = "ref", required = false) String ref,
-                                   @RequestParam(value = "promo", required = false) String promo, @RequestParam(value = "fbpixel", required = false) String fbpixel,
-                                   @RequestHeader(value = "host") String host, @RequestParam(name = "lang", required = false) String lang) {
+                                   @RequestParam(value = "promo", required = false) String promo, @RequestHeader(value = "host") String host, @RequestParam(name = "lang", required = false) String lang, @RequestParam(value = "error", required = false) String error) {
         if (userService.isAuthorized(authentication)) {
             return "redirect:profile/wallet";
         }
@@ -77,19 +77,6 @@ public class AuthController {
         userService.addLangAttribute(model, request, lang);
 
         Domain domain = domainService.addDomainAttribute(model, host);
-
-        Cookie cookie = null;
-
-        if (fbpixel != null) {
-            cookie = new Cookie("fbpixel", fbpixel);
-            response.addCookie(cookie);
-        }
-
-        if (cookie == null) {
-            cookie = WebUtils.getCookie(request, "fbpixel");
-        }
-
-        model.addAttribute("fbpixel", cookie == null ? "none" : cookie.getValue());
 
         addCaptcha(request, model);
 
@@ -104,6 +91,12 @@ public class AuthController {
         model.addAttribute("signup_promo_enabled", domain == null ? adminSettings.isSignupPromoEnabled() : domain.isSignupPromoEnabled());
 
         model.addAttribute("signup_ref_enabled", domain == null ? adminSettings.isSignupRefEnabled() : domain.isSignupRefEnabled());
+
+        model.addAttribute("fbpixel", domain == null ? -1 : domain.getFbpixel());
+
+        model.addAttribute("promo_show_enabled", domain != null && domain.isPromoPopupEnabled() && domain.isPromoEnabled());
+
+        model.addAttribute("error", error);
 
         return "exchange/sign/signup";
     }
@@ -178,9 +171,17 @@ public class AuthController {
                 return "redirect:signup?error=already_exists";
             }
 
+            String countryCode = "NO";
+            try {
+                GeoUtil.GeoData geoData = GeoUtil.getGeo(emailRegistration.getRegIp());
+                if (geoData != null && !StringUtils.isBlank(countryCode)) {
+                    countryCode = geoData.getCountryCode().equals("N/A") ? "NO" : geoData.getCountryCode();
+                }
+            } catch (Exception ignored) {}
+
             Domain domain = domainRepository.findByName(emailRegistration.getDomainName()).orElse(null);
             userService.createUser(emailRegistration.getReferrer(), domain, emailRegistration.getDomainName(), emailRegistration.getEmail(), emailRegistration.getPassword(),
-                    emailRegistration.getRegIp(), emailRegistration.getPlatform(), emailRegistration.getPromocodeName(), emailRegistration.getRefCode(), true);
+                    emailRegistration.getRegIp(), emailRegistration.getPlatform(), emailRegistration.getPromocodeName(), emailRegistration.getRefCode(), true, countryCode);
 
             emailService.removeEmailRegistration(hash);
 

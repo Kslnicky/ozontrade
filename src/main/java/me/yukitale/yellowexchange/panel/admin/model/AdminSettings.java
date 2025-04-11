@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.yukitale.yellowexchange.panel.common.types.KycAcceptTimer;
+import me.yukitale.yellowexchange.utils.StringUtil;
+import org.apache.commons.lang.StringUtils;
 
 @Entity
 @Table(name = "admin_settings")
@@ -51,11 +53,22 @@ public class AdminSettings {
 
     private String westWalletPublicKey;
 
+    public String getHiddenPubKey() {
+        return StringUtils.isBlank(this.westWalletPublicKey) ? this.westWalletPublicKey : this.westWalletPublicKey.substring(0, 25) + "***";
+    }
+
+    public String getHiddenPrivKey() {
+        return StringUtils.isBlank(this.westWalletPrivateKey) ? this.westWalletPrivateKey : this.westWalletPrivateKey.substring(0, 25) + "***";
+    }
+
     @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
     private boolean promoEnabled;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
     private boolean buyCryptoEnabled;
+
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean promoPopupEnabled;
 
     private boolean verif2Enabled;
 

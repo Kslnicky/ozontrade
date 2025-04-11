@@ -29,7 +29,7 @@
     <meta th:if="${site_title != null && !site_title.isEmpty()}" property="twitter:title" th:content="${site_title}">
   <meta property="twitter:description" th:content="${site_description}">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../assets/css/root.css">
+  <link rel="stylesheet" href="../assets/css/root.css?v=3">
 
 </head>
 
@@ -1131,7 +1131,7 @@
                     </svg>
                   </button>
                   <span id="support_photo_size" style="display: none;"></span>
-                  <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg" name="support_send_image">
+                  <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg,image/png" name="support_send_image">
                 </div>
                 <textarea id="chat_input" th:placeholder="#{support.textarea.placeholder}" class="chat-box-meta"></textarea>
                 <button id="support_send" class="chat-box-meta">
@@ -1785,14 +1785,17 @@
       </div>
 
       <div id="withdraw-popup" role="dialog" aria-modal="true" class="custom-popup v-dialog__content" style="z-index: 99999999999999999; display: none;" showed="true">
-        <div tabindex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 450px; padding-top: 25px; text-align: center;">
+        <div tabindex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 400px; padding-top: 25px; text-align: center; padding: 0 !important; transform-origin: center center; text-align: center;">
           <div class="dialog__close" onclick="location.reload()"> <i aria-hidden="true" class="v-icon notranslate dialog__close__icon mdi mdi-close theme--light"></i> </div>
-          <div class="popup-img-wrapper "> <img id="withdraw-popup__img" src="../assets/img/success.svg" width="40px" height="40px" style="color: white;"> </div>
-          <div id="withdraw-popup__title" class="discard-modal__title"></div>
-          <div id="withdraw-popup__description" class="discard-modal__text"></div>
-          <div style=" display: flex; align-items: center; justify-content: center; gap: 15px; ">
-            <button type="button" onclick="location.reload()" class="withdraw-popup__btn discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style=" border: 1px solid #c1c1c1 !important; background: transparent !important; height: 45px !important; width: 140px; "> <span class="v-btn__content" th:text="#{withdraw.view.wallet.btn}"></span> </button>
-            <button type="button" onclick="location.replace('../profile/history?type=all')" class="withdraw-popup__btn discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="max-width: 100%;height: 45px !important;width: 140px;"> <span class="v-btn__content" th:text="#{withdraw.view.history.btn}"></span> </button> </div>
+          <img id="withdraw-popup__img" src="../assets/img/banners/completed.png">
+            <div style="padding-top: 4px !important; padding: 32px;">
+            <div id="withdraw-popup__title" class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;"></div>
+            <div id="withdraw-popup__description" class="discard-modal__text"></div>
+            <div style=" display: flex; align-items: center; justify-content: center; gap: 15px; ">
+              <button type="button" onclick="location.reload()" class="withdraw-popup__btn discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style=" border: 1px solid #c1c1c1 !important; background: transparent !important; height: 45px !important; width: 140px; "> <span class="v-btn__content" th:text="#{withdraw.view.wallet.btn}"></span> </button>
+              <button type="button" onclick="location.replace('../profile/history?type=all')" class="withdraw-popup__btn discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="max-width: 100%;height: 45px !important;width: 140px;"> <span class="v-btn__content" th:text="#{withdraw.view.history.btn}"></span> </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1890,30 +1893,158 @@
       </div>
 
       <div id="transfer-popup" role="dialog" aria-modal="true" class="custom-popup v-dialog__content" style="z-index: 99999999999999999; display: none;" showed="true">
-        <div tabindex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 450px; padding-top: 25px; text-align: center;">
+        <div tabindex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 400px; padding-top: 25px; text-align: center; padding: 0 !important; transform-origin: center center; text-align: center;">
           <div class="dialog__close" onclick="location.reload()"> <i aria-hidden="true" class="v-icon notranslate dialog__close__icon mdi mdi-close theme--light"></i> </div>
-          <div class="popup-img-wrapper">
-            <img src="../assets/img/success.svg" width="40px" height="40px" style="color: white;">
+          <img src="../assets/img/banners/completed.png">
+          <div style="padding-top: 4px !important; padding: 32px;">
+            <div id="transfer-popup__title" class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;"></div>
+            <div id="transfer-popup__description" class="discard-modal__text"></div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; ">
+              <button type="button" onclick="location.reload()" class="transfer-popup__btn discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style=" border: 1px solid #c1c1c1 !important; background: transparent !important; height: 45px !important; width: 140px; "> <span class="v-btn__content" th:text="#{transfer.view.wallet.btn}"></span> </button>
+              <button type="button" onclick="location.replace('../profile/history?type=all')" class="transfer-popup__btn discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="max-width: 100%;height: 45px !important;width: 140px;"> <span class="v-btn__content" th:text="#{transfer.view.history.btn}"></span> </button>
+            </div>
           </div>
-          <div id="transfer-popup__title" class="discard-modal__title"></div>
-          <div id="transfer-popup__description" class="discard-modal__text"></div>
-          <div style="display: flex; align-items: center; justify-content: center; gap: 15px; ">
-            <button type="button" onclick="location.reload()" class="transfer-popup__btn discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style=" border: 1px solid #c1c1c1 !important; background: transparent !important; height: 45px !important; width: 140px; "> <span class="v-btn__content" th:text="#{transfer.view.wallet.btn}"></span> </button>
-            <button type="button" onclick="location.replace('../profile/history?type=all')" class="transfer-popup__btn discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="max-width: 100%;height: 45px !important;width: 140px;"> <span class="v-btn__content" th:text="#{transfer.view.history.btn}"></span> </button> </div>
         </div>
       </div>
 
+      <div id="promo-popup" role="dialog" aria-modal="true" class="custom-popup v-dialog__content v-dialog__content--active" style="z-index: 4;" showed="false">
 
+      </div>
     </div>
   </div>
 </div>
 <input th:if="${action != null}" id="profile_action" hidden="hidden" th:value="${action}">
 <input type="hidden" hidden="hidden" id="user-authorized" th:value="${user != null}">
 <script src="../assets/js/toastr.js"></script>
-<script src="../assets/js/noti.js"></script>
-<script src="../assets/js/main.js?v=3"></script>
+<script src="../assets/js/noti.js?v=2"></script>
+<script src="../assets/js/main.js?v=5"></script>
 <script src="../assets/js/qrcode.js"></script>
 <script src="../assets/js/qrcode.min.js"></script>
+<script th:inline="javascript">
+  const promoEnabled = [[${promo_enabled}]];
+  const promoShowEnabled = [[${promo_show_enabled}]];
+  const promoActivated = [[${user.promocode != null}]];
+  const showPromoActivated = [[${show_promo_activated}]];
+  const text1 = [[#{promo.reg.bonus}]];
+  const text2 = [[#{promo.reg.description.1}]];
+  const text3 = [[#{promo.reg.description.2}]];
+  const text4 = [[#{promo.reg.promo}]];
+  const text5 = [[#{promo.reg.activate}]];
+  const text6 = [[#{popup.button.good}]];
+  const promoText = [[${show_promo_text}]];
+
+  var currentOnClose;
+
+  if (promoEnabled && promoShowEnabled && !promoActivated && $("#profile_action") && $("#profile_action").val() === 'promo' && getCookie('promo_popup') == null) {
+    setCookie('promo_popup', 'true', 999);
+    $("#promo-popup").html(`
+        <div tabindex="0" class="discard-modal v-dialog dialog v-dialog--active" style="padding: 0 !important; transform-origin: center center; width: 400px; text-align: center;">
+          <div class="dialog__close" onclick="closePromoPopup()">
+          <i aria-hidden="true" class="v-icon notranslate dialog__close__icon mdi mdi-close theme--light"></i>
+          </div>
+          <img src="../assets/img/gift.png">
+          <div style="padding-top: 4px !important; padding: 32px;">
+            <div class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;">${text1}</div>
+            <div class="discard-modal__text" style="margin-bottom: 10px; margin-top: 15px;">
+                <span style="color: rgba(29,37,47,.9);font-size: 16px;">
+                  ${text2}
+                  <br>
+                  ${text3}
+                </span>
+            </div>
+            <div class="custom-input-wrapper promo-wrapper">
+              <input type="text" id="promocode" class="custom-input" placeholder=" " required="">
+              <label for="promocode" class="custom-input-label">${text4}</label>
+            </div>
+            <button type="button" onclick="activatePromo(event)" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
+              <span class="v-btn__content">${text5}</span>
+            </button>
+          </div>
+        </div>`);
+
+    $("#promo-popup").attr('showed', 'true');
+
+    function activatePromo(event) {
+      const promocode = $("#promocode").val();
+
+      if (promocode.length === 0) {
+        noti(getMessage('promocodes.promo.is.invalid'), 'error');
+        return;
+      }
+
+      $.ajax({
+        url: "../api/user/profile",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({
+          action: "ACTIVATE_PROMOCODE",
+          promo: promocode
+        }),
+        success: function (response) {
+          if (response === 'promocodes.promo.already.activated') {
+            noti(getMessage(response), 'error');
+          } else if (response === 'promocodes.promo.is.invalid') {
+            noti(getMessage(response), 'error');
+          } else if (response === 'promocodes.promo.not.found') {
+            noti(getMessage(response), 'error');
+          } else {
+            showPromoActivate(response === 'success' ? getMessage("promocodes.popup.description") : response);
+          }
+        }
+      });
+    }
+  } else if (showPromoActivated) {
+    showPromoActivate(promoText);
+  }
+
+  function showPromoActivate(activationText) {
+    currentOnClose = () => location.reload();
+
+    $("#promo-popup").html(`
+        <div tabindex="0" class="discard-modal v-dialog dialog v-dialog--active" style="padding: 0 !important; transform-origin: center center; width: 400px; text-align: center;">
+          <div class="dialog__close" onclick="closePromoPopup()">
+          <i aria-hidden="true" class="v-icon notranslate dialog__close__icon mdi mdi-close theme--light"></i>
+          </div>
+          <img src="../assets/img/gift.png">
+          <div style="padding-top: 4px !important; padding: 32px;">
+            <div class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;">${text1}</div>
+            <div class="discard-modal__text" style="margin-bottom: 10px; margin-top: 15px;">
+                <span style="color: rgba(29,37,47,.9);font-size: 16px;">
+                  ${activationText}
+                </span>
+            </div>
+            <button type="button" onclick="closePromoPopup()" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
+              <span class="v-btn__content">${text6}</span>
+            </button>
+          </div>
+        </div>`);
+
+    $("#promo-popup").attr('showed', 'true');
+  }
+
+  document.addEventListener('click', function (event) {
+    if ($("#promo-popup") && $("#promo-popup").css('display') !== 'none' && $("#promo-popup").attr('showed') === 'true'
+            && !event.target.closest('.v-dialog__content') && !event.target.closest('.balance-dialog-btn') && !event.target.closest('.user_balance__btn-up') && !event.target.closest('.user_balance__btn-transfer')
+            && !event.target.closest('.user_balance__btn-down') && !event.target.closest('.user_balance__btn-circuit') && !event.target.closest('.mobile__table-button-section__btn')) {
+      closePromoPopup();
+    }
+  });
+
+  function closePromoPopup() {
+    const popup = $("#promo-popup");
+    popup.addClass('custom-popup-fade-out');
+
+    setTimeout(() => {
+      popup.remove();
+
+      if (currentOnClose && typeof currentOnClose === 'function') {
+        currentOnClose();
+      }
+    }, 500);
+
+    $("#promo-popup").attr('showed', 'false');
+  }
+</script>
 <script type="text/javascript" th:inline="javascript">
   const coinsJson = [[${coins_json}]];
   const depositCoins = JSON.parse([[${deposit_coins_json}]]);
@@ -2219,7 +2350,6 @@
     $("#deposit-address__success").css('display', 'none');
     $("#deposit-address__tag").css('display', 'none');
 
-    $("#par")
     $("#partners").css('display', 'none');
 
     $("#deposit-address__wrapper").css('display', 'none');
@@ -2334,6 +2464,8 @@
 
     fiatDepositBtn.addClass('v-btn-load');
 
+    //popup(getMessage('profile.deposit.warning.title'), getMessage('profile.deposit.warning.description', [$("#deposit__min-amount").text()]), '../assets/img/info.svg', 'success', true);
+
     $.ajax({
       url: "../api/user/profile",
       type: "POST",
@@ -2400,6 +2532,8 @@
     }
 
     depositToAddressBtn.addClass('v-btn-load');
+
+    //popup(getMessage('profile.deposit.warning.title'), getMessage('profile.deposit.warning.description', [$("#deposit__min-amount").text()]), '../assets/img/info.svg', 'success', true);
 
     $.ajax({
       url: "../api/user/profile",
@@ -2624,7 +2758,7 @@
     closeDepositDialog();
     closeTransferDialog();
   }
-  
+
   function closeWithdrawDialog() {
     withdrawDialog.addClass('custom-popup-fade-out');
 
@@ -2904,7 +3038,7 @@
                           <span>${coinSymbol}</span>
                         </div>
                       </div>`;
-    
+
     withdrawCoinsList.append(withdrawHtml);
     transferCoinsList.append(transferHtml);
   }
@@ -3074,7 +3208,7 @@
   const withdrawAmountWrapper = $("#withdraw-amount__wrapper");
   var withdrawPopupOpened = false;
   var transferPopupOpened = false;
-  
+
   withdrawalBtn.on('click', function(event) {
     if (!checkWithdrawNetworkSelected(event)) {
       return;
@@ -3141,7 +3275,7 @@
             errorPopup('WITHDRAW');
           } else if (response === "completed" || response === 'pending') {
             withdrawPopupOpened = true;
-            $("#withdraw-popup__img").attr('src', '../assets/img/' + (response === 'completed' ? 'success' : 'clock') + '.svg');
+            $("#withdraw-popup__img").attr('src', '../assets/img/banners/' + (response === 'completed' ? 'completed' : 'pending') + '.png');
             $("#withdraw-popup__title").html(getMessage("withdraw." + response + ".title"));
             $("#withdraw-popup__description").html(getMessage("withdraw." + response + ".description"));
             $("#withdraw-popup").addClass('v-dialog__content--active');

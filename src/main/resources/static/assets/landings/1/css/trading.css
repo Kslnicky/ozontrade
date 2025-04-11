@@ -1,0 +1,243 @@
+.trading {
+    margin-top: 100px;
+    position: relative;
+    z-index: 2;
+}
+
+.trading__title {
+    color: #110F18;
+    text-align: center;
+    margin: 0 auto 20px auto;
+}
+
+.trading__description {
+    color: #1B1B1B;
+    text-align: center;
+    margin: 0 auto 43px auto;
+    max-width: 920px;
+}
+
+.trading__container {
+    max-width: 1264px;
+    padding: 0 24px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.trading__circle {
+    position: absolute;
+    left: -200px;
+    bottom: -1330px;
+}
+
+.trading__item-name {
+    width: 298px;
+}
+
+.trading__item-price {
+    width: 213px;
+}
+
+.trading__item-change {
+    width: 182px;
+}
+
+.trading__item-chart {
+    width: 130px;
+}
+
+.trading__item-trade {
+    width: 200px;
+    margin-left: auto;
+    text-align: right;
+}
+
+.trading__items {
+    margin-top: 5px
+}
+
+.trading__box {
+    overflow: hidden;
+}
+
+.trading__wrapper {
+    overflow: auto;
+    position: relative;
+    z-index: 2;
+    padding: 0 30px;
+}
+
+.trading__wrapper::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+.trading__wrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 6px;
+    background-color: transparent;
+}
+
+.trading__wrapper::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #000;
+}
+
+.trading__items {
+    min-width: 900px;
+}
+
+.trading__item {
+    padding: 12px 40px 12px 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 26px;
+    -webkit-transition: background .3s ease-in-out;
+    -o-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+    border-radius: 8px;
+}
+
+.trading__item:hover {
+    background: #151515;
+}
+
+.trading__item:hover .trading__item-name,
+.trading__item:hover .trading__item-price {
+    color: #fff;
+}
+
+.trading__item:hover .trading__item-link span {
+    color: #FFFFFF;
+}
+
+.trading__item:hover .trading__item-link {
+    background: #0C3A31;
+}
+
+.trading__item .trading__item-link:hover {
+    background: rgba(12, 58, 49, 0.8);
+}
+
+.trading__item-name {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    transition: color .3s ease-in-out;
+    color: #000;
+}
+
+.trading__item-name span {
+    margin-left: 19px;
+    text-transform: uppercase;
+    color: #969696;
+}
+
+.trading__item-price {
+    transition: color .3s ease-in-out;
+    color: #000;
+}
+
+.trading__item-change.plus {
+    color: #49A485;
+}
+
+.trading__item-change.minus {
+    color: #DB5748;
+}
+
+.trading__item-link {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 27px;
+    padding: 5px 27px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: 8px;
+    border: 1px solid #000;
+    user-select: none;
+    -webkit-transition: background .3s ease-in-out, color .3s ease-in-out, color .3s ease-in-out, border .3s ease-in-out;
+    -o-transition: background .3s ease-in-out, color .3s ease-in-out, color .3s ease-in-out, border .3s ease-in-out;
+    transition: background .3s ease-in-out, color .3s ease-in-out, color .3s ease-in-out, border .3s ease-in-out;
+}
+
+.trading__item-link span {
+    color: #000;
+    transition: color .3s ease-in-out;
+}
+
+.trading__item-icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-right: 24px;
+}
+
+@media (max-width: 1100px) {
+    .trading__wrapper {
+        padding: 0;
+    }
+
+    .trading__item {
+        padding: 13px 30px;
+    }
+}
+
+@media (max-width: 850px) {
+    .trading {
+        margin-top: 100px;
+    }
+
+    .trading__description {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .trading__container {
+        padding: 0 18px;
+    }
+
+    .trading__item {
+        padding: 13px 15px 13px 8px;
+    }
+
+    .trading__items {
+        min-width: auto;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .trading__item-trade,
+    .trading__item-chart,
+    .trading__item-change {
+        display: none;
+    }
+
+    .trading__item-name {
+        width: 50%;
+        white-space: nowrap;
+    }
+
+    .trading__item-price {
+        text-align: right;
+        width: 50%;
+    }
+}

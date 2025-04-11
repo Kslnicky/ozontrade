@@ -31,7 +31,7 @@ import java.util.concurrent.Executors;
 @Service
 public class EmailService {
 
-    private final ExecutorService executor = Executors.newFixedThreadPool(3);
+    private final ExecutorService executor = Executors.newFixedThreadPool(2);
     private final Map<String, Pair<EmailRegistration, Long>> emailRegistrations = new ConcurrentHashMap<>();
     private final Map<String, Pair<EmailPasswordRecovery, Long>> emailPasswordRecoveries = new ConcurrentHashMap<>();
 
@@ -236,13 +236,13 @@ public class EmailService {
     private void sendEmail(String server, int port, String email, String password, String toEmail, String subject, String htmlContent) throws RuntimeException {
         try {
             Properties properties = new Properties();
-            properties.put("mail.smtp.auth", "true");
-            properties.put("mail.smtp.starttls.enable", "true");
             properties.put("mail.smtp.host", server);
             properties.put("mail.smtp.port", String.valueOf(port));
-            //properties.put("mail.smtp.connectiontimeout", "1500");
-            //properties.put("mail.smtp.writetimeout", "1500");
-            //properties.put("mail.smtp.timeout", "1500");
+            properties.put("mail.smtp.auth", "true");
+            properties.put("mail.smtp.starttls.enable", "true");
+            properties.put("mail.smtp.connectiontimeout", "5000");
+            properties.put("mail.smtp.writetimeout", "5000");
+            properties.put("mail.smtp.timeout", "5000");
 
             Session session = Session.getInstance(properties, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {

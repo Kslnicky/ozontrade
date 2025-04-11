@@ -102,6 +102,9 @@ public class User {
     @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
     private boolean emailConfirmed;
 
+    @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private boolean promoActivatedShowed;
+
     private long depositsCount;
 
     private double depositsPrice;

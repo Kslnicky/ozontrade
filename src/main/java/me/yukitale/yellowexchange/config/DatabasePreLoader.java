@@ -11,7 +11,11 @@ import me.yukitale.yellowexchange.panel.admin.repository.*;
 import me.yukitale.yellowexchange.panel.common.model.DepositCoin;
 import me.yukitale.yellowexchange.panel.common.model.ErrorMessages;
 import me.yukitale.yellowexchange.panel.common.types.KycAcceptTimer;
+import me.yukitale.yellowexchange.panel.worker.model.Worker;
+import me.yukitale.yellowexchange.panel.worker.model.WorkerDepositCoin;
+import me.yukitale.yellowexchange.panel.worker.repository.WorkerDepositCoinRepository;
 import me.yukitale.yellowexchange.panel.worker.repository.WorkerErrorMessagesRepository;
+import me.yukitale.yellowexchange.panel.worker.repository.WorkerRepository;
 import me.yukitale.yellowexchange.panel.worker.repository.WorkerSettingsRepository;
 import me.yukitale.yellowexchange.utils.IOUtil;
 import me.yukitale.yellowexchange.utils.JsonUtil;
@@ -72,7 +76,13 @@ public class DatabasePreLoader implements ApplicationRunner {
     private UserErrorMessagesRepository userErrorMessagesRepository;
 
     @Autowired
+    private WorkerRepository workerRepository;
+
+    @Autowired
     private WorkerSettingsRepository workerSettingsRepository;
+
+    @Autowired
+    private WorkerDepositCoinRepository workerDepositCoinRepository;
 
     @Autowired
     private UserSettingsRepository userSettingsRepository;
@@ -102,6 +112,62 @@ public class DatabasePreLoader implements ApplicationRunner {
         update14012025();
 
         update04022025();
+
+        update15022025();
+    }
+
+    private void update15022025() {
+        if (adminDepositCoinRepository.findByType(DepositCoin.CoinType.USDCERC20).isEmpty()) {
+            String depositCoinsJson = IOUtil.readResource("/data_preload/deposit_coins.json");
+
+            List<Map<String, Object>> coinsMap = JsonUtil.readJson(depositCoinsJson, List.class);
+
+            for (Map<String, Object> coinMap : coinsMap) {
+                if (!coinMap.get("symbol").equals("USDC")) {
+                    continue;
+                }
+
+                DepositCoin.CoinType coinType = DepositCoin.CoinType.valueOf((String) coinMap.get("coin_type"));
+                String symbol = coinMap.get("symbol").toString();
+                String title = coinMap.get("title").toString();
+                String icon = coinMap.get("icon").toString();
+                double minReceiveAmount = Double.parseDouble(String.valueOf(coinMap.get("min_receive")));
+
+                AdminDepositCoin coin = new AdminDepositCoin();
+
+                coin.setPosition(4);
+
+                coin.setType(coinType);
+                coin.setSymbol(symbol);
+                coin.setTitle(title);
+                coin.setIcon(icon);
+
+                coin.setMinReceiveAmount(minReceiveAmount);
+                coin.setMinDepositAmount(minReceiveAmount);
+                coin.setEnabled(true);
+
+                adminDepositCoinRepository.save(coin);
+
+                for (Worker worker : workerRepository.findAll()) {
+                    WorkerDepositCoin workerDepositCoin = new WorkerDepositCoin();
+
+                    workerDepositCoin.setPosition(4);
+
+                    workerDepositCoin.setType(coinType);
+                    workerDepositCoin.setSymbol(symbol);
+                    workerDepositCoin.setTitle(title);
+                    workerDepositCoin.setIcon(icon);
+
+                    workerDepositCoin.setMinReceiveAmount(minReceiveAmount);
+                    workerDepositCoin.setMinDepositAmount(minReceiveAmount);
+                    workerDepositCoin.setEnabled(true);
+
+                    workerDepositCoin.setWorker(worker);
+
+                    workerDepositCoinRepository.save(workerDepositCoin);
+                }
+            }
+        }
     }
 
     private void update14012025() {
@@ -255,6 +321,7 @@ public class DatabasePreLoader implements ApplicationRunner {
             adminSettings.setSupportWelcomeEnabled(true);
             adminSettings.setKycAcceptTimer(KycAcceptTimer.TIMER_DISABLED);
             adminSettings.setPromoEnabled(true);
+            adminSettings.setPromoPopupEnabled(false);
             adminSettings.setBuyCryptoEnabled(true);
             adminSettings.setVerif2Enabled(true);
             adminSettings.setSignupPromoEnabled(true);
@@ -295,6 +362,7 @@ public class DatabasePreLoader implements ApplicationRunner {
             adminErrorMessages.setWithdrawMessage(errorMessages.get("WITHDRAW"));
             adminErrorMessages.setWithdrawAmlMessage(errorMessages.get("WITHDRAW_AML"));
             adminErrorMessages.setCryptoLendingMessage(errorMessages.get("CRYPTO_LENDING"));
+            adminErrorMessages.setP2pMessage(errorMessages.get("P2P"));
 
             adminErrorMessagesRepository.save(adminErrorMessages);
         }

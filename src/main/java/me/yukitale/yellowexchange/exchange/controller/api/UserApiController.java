@@ -1205,7 +1205,7 @@ public class UserApiController {
             userService.createAction(user, request, "Sent support message", false);
         }
 
-        if (image != null && image.getOriginalFilename() != null) {
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
             String fileName = user.getId() + "_" + System.currentTimeMillis() + ".png";
             try {
                 FileUploadUtil.saveFile(Resources.SUPPORT_IMAGES, fileName, image);

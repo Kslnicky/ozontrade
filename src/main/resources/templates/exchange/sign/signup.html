@@ -2,7 +2,7 @@
 
 <head>
     <title th:if="${site_title == null || site_title.isEmpty()}" th:text="#{title(${site_name})}"></title>
-  <title th:if="${site_title != null && !site_title.isEmpty()}" th:text="${site_title}"></title>
+    <title th:if="${site_title != null && !site_title.isEmpty()}" th:text="${site_title}"></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
@@ -22,14 +22,14 @@
     <link data-hid="apple-touch-icon" rel="apple-touch-icon" th:href="${site_icon}" sizes="1024x1024">
     <meta name="description" th:content="${site_description}">
     <meta name="keywords" th:content="${site_keywords}">
-      <meta th:if="${site_title == null || site_title.isEmpty()}" property="og:title" th:content="#{title(${site_name})}">
-  <meta th:if="${site_title != null && !site_title.isEmpty()}" property="og:title" th:content="${site_title}">
+    <meta th:if="${site_title == null || site_title.isEmpty()}" property="og:title" th:content="#{title(${site_name})}">
+    <meta th:if="${site_title != null && !site_title.isEmpty()}" property="og:title" th:content="${site_title}">
     <meta property="og:description" th:content="${site_description}">
     <meta th:if="${site_title == null || site_title.isEmpty()}" property="twitter:title" th:content="#{title(${site_name})}">
     <meta th:if="${site_title != null && !site_title.isEmpty()}" property="twitter:title" th:content="${site_title}">
     <meta property="twitter:description" th:content="${site_description}">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/css/root.css">
+    <link rel="stylesheet" href="../assets/css/root.css?v=3">
 </head>
 
 <body>
@@ -221,35 +221,35 @@
                                 </button>
                                 <div class="main-menu__section__menu" style="display: none;">
                                     <a class="main-menu__section__menu__nav" href="../profile/staking">
-                    <div class="main-menu__section__menu__nav__icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 12C10.7614 12 13 9.76142 13 7C13 4.23858 10.7614 2 8 2C5.23858 2 3 4.23858 3 7C3 9.76142 5.23858 12 8 12ZM5.0525 7.94478C4.80307 5.69991 6.69991 3.80307 8.94478 4.0525L9.05522 3.05861C6.17343 2.73841 3.73841 5.17343 4.05861 8.05522L5.0525 7.94478Z" fill="#ffc014"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.07649 13.3621C5.02608 13.6739 5 13.9926 5 14.3167C5 16.313 5.98941 18.1041 7.5566 19.3245C7.82587 19.5342 8 19.8533 8 20.1998V20.9756C8 21.5413 8.44772 22 9 22H10C10.5523 22 11 21.5413 11 20.9756V20.8424C11.4847 20.9297 11.9863 20.9756 12.5 20.9756C13.0137 20.9756 13.5153 20.9297 14 20.8424V20.9756C14 21.5413 14.4477 22 15 22H16C16.5523 22 17 21.5413 17 20.9756V20.1998C17 19.8533 17.1741 19.5343 17.4433 19.3246C18.3417 18.625 19.0502 17.738 19.4913 16.7323C19.625 16.4274 19.9108 16.2128 20.237 16.2128C20.6584 16.2128 21 15.8628 21 15.4311V12.9836C21 12.5039 20.6204 12.115 20.1522 12.115C19.8066 12.115 19.5003 11.8975 19.3423 11.5826C18.9228 10.7466 18.3255 10.0024 17.5865 9.39277C17 9.04129 17.3936 7.05596 17.761 6.40002C17.872 6.20187 17.7369 5.97086 17.5161 6.00302C16.2228 6.19137 15.1122 7.27581 15 8.01661C14.9092 8.61602 14.723 9.18419 14.458 9.70542C13.4 12.2281 10.9069 14 8 14C6.95641 14 5.96616 13.7716 5.07649 13.3621ZM18 13.1395C18 13.7053 17.5523 14.1639 17 14.1639C16.4477 14.1639 16 13.7053 16 13.1395C16 12.5737 16.4477 12.115 17 12.115C17.5523 12.115 18 12.5737 18 13.1395Z" fill="#474752"></path>
-                      </svg>
-                    </div>
-                    <div class="main-menu__section__menu__nav__text">
-                      <div class="main-menu__section__menu__nav__title" th:text="#{header.earn.staking.title}"></div>
-                      <div class="main-menu__section__menu__nav__subtitle" th:text="#{header.earn.staking.description}"></div>
-                    </div>
-                  </a>
-                  <a class="main-menu__section__menu__nav" href="../earn">
-                    <div class="main-menu__section__menu__nav__icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                        <g id="Structured Products">
-                          <g id="Union">
-                            <path d="M5.65627 7.83772C5.79297 8.18411 5.60957 8.57068 5.24663 8.70114L1.95733 9.88356L10.9997 13.7306L20.0424 9.8871L16.7531 8.70468C16.3901 8.57422 16.2067 8.18765 16.3434 7.84126C16.4801 7.49487 16.8852 7.31983 17.2481 7.4503L21.2852 8.90151C22.2379 9.24399 22.2379 10.5302 21.2852 10.8727L11.3887 15.0231C11.138 15.1133 10.8615 15.1133 10.6108 15.0231L0.714542 10.8691C-0.238176 10.5267 -0.238185 9.24045 0.714541 8.89797L4.7516 7.44676C5.11454 7.31629 5.51957 7.49133 5.65627 7.83772Z" fill="#474752"/>
-                            <path d="M1.50576 14.0535C1.64234 13.7078 2.04664 13.5333 2.40879 13.6637L10.9997 17.3496L19.5918 13.6747C19.954 13.5446 20.3582 13.7193 20.4946 14.065C20.631 14.4107 20.4479 14.7965 20.0857 14.9267L11.3876 18.6395C11.1373 18.7295 10.8612 18.7294 10.6109 18.6393L1.91418 14.9153C1.55203 14.785 1.36917 14.3991 1.50576 14.0535Z" fill="#474752"/>
-                            <path d="M18.4756 18.7785C18.8385 18.6481 19.022 18.2615 18.8854 17.9151C18.7488 17.5687 18.3438 17.3936 17.9808 17.524L10.9967 20.6401L4.01069 17.5368C3.64758 17.4068 3.24278 17.5823 3.10654 17.9288C2.9703 18.2754 3.15421 18.6617 3.51732 18.7918L10.6092 21.933C10.8595 22.0226 11.1354 22.0224 11.3856 21.9326L18.4756 18.7785Z" fill="#474752"/>
-                          </g>
-                          <path id="Union_2" d="M11.1187 8.15005e-05C11.5093 0.0058254 11.8198 0.313724 11.8122 0.687792L11.7939 1.59092L13.1073 1.61023C13.4979 1.61598 13.8084 1.92387 13.8008 2.29794C13.7932 2.67201 13.4704 2.9706 13.0799 2.96485L10.1163 2.92127C9.46529 2.9117 8.92733 3.40934 8.91469 4.03279C8.90206 4.65623 9.41954 5.1694 10.0705 5.17897L11.9564 5.2067C13.3886 5.22776 14.527 6.35673 14.4993 7.72831C14.4715 9.09989 13.288 10.1947 11.8558 10.1736L11.6201 10.1702L11.6018 11.0732C11.5942 11.4473 11.2714 11.7459 10.8808 11.7401C10.4902 11.7344 10.1798 11.4265 10.1873 11.0524L10.2056 10.1494L8.69679 10.1301C8.30621 10.1243 7.99572 9.81642 8.0033 9.44235C8.01088 9.06828 8.33365 8.7697 8.72424 8.77544L11.8832 8.81902C12.5342 8.8286 13.0722 8.33095 13.0848 7.70751C13.0975 7.08406 12.58 6.5709 11.929 6.56132L10.0431 6.53359C8.61092 6.51253 7.47246 5.38357 7.50025 4.01199C7.52804 2.6404 8.71156 1.54559 10.1437 1.56665L10.3794 1.57012L10.3977 0.666991C10.4053 0.292923 10.7281 -0.00566238 11.1187 8.15005e-05Z" fill="#ffc014"/>
-                        </g>
-                      </svg>
-                    </div>
-                    <div class="main-menu__section__menu__nav__text">
-                      <div class="main-menu__section__menu__nav__title" th:text="#{header.earn.cryptolending.title}"></div>
-                      <div class="main-menu__section__menu__nav__subtitle" th:text="#{header.earn.cryptolending.description}"></div>
-                    </div>
-                  </a>
+                                        <div class="main-menu__section__menu__nav__icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 12C10.7614 12 13 9.76142 13 7C13 4.23858 10.7614 2 8 2C5.23858 2 3 4.23858 3 7C3 9.76142 5.23858 12 8 12ZM5.0525 7.94478C4.80307 5.69991 6.69991 3.80307 8.94478 4.0525L9.05522 3.05861C6.17343 2.73841 3.73841 5.17343 4.05861 8.05522L5.0525 7.94478Z" fill="#ffc014"></path>
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.07649 13.3621C5.02608 13.6739 5 13.9926 5 14.3167C5 16.313 5.98941 18.1041 7.5566 19.3245C7.82587 19.5342 8 19.8533 8 20.1998V20.9756C8 21.5413 8.44772 22 9 22H10C10.5523 22 11 21.5413 11 20.9756V20.8424C11.4847 20.9297 11.9863 20.9756 12.5 20.9756C13.0137 20.9756 13.5153 20.9297 14 20.8424V20.9756C14 21.5413 14.4477 22 15 22H16C16.5523 22 17 21.5413 17 20.9756V20.1998C17 19.8533 17.1741 19.5343 17.4433 19.3246C18.3417 18.625 19.0502 17.738 19.4913 16.7323C19.625 16.4274 19.9108 16.2128 20.237 16.2128C20.6584 16.2128 21 15.8628 21 15.4311V12.9836C21 12.5039 20.6204 12.115 20.1522 12.115C19.8066 12.115 19.5003 11.8975 19.3423 11.5826C18.9228 10.7466 18.3255 10.0024 17.5865 9.39277C17 9.04129 17.3936 7.05596 17.761 6.40002C17.872 6.20187 17.7369 5.97086 17.5161 6.00302C16.2228 6.19137 15.1122 7.27581 15 8.01661C14.9092 8.61602 14.723 9.18419 14.458 9.70542C13.4 12.2281 10.9069 14 8 14C6.95641 14 5.96616 13.7716 5.07649 13.3621ZM18 13.1395C18 13.7053 17.5523 14.1639 17 14.1639C16.4477 14.1639 16 13.7053 16 13.1395C16 12.5737 16.4477 12.115 17 12.115C17.5523 12.115 18 12.5737 18 13.1395Z" fill="#474752"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="main-menu__section__menu__nav__text">
+                                            <div class="main-menu__section__menu__nav__title" th:text="#{header.earn.staking.title}"></div>
+                                            <div class="main-menu__section__menu__nav__subtitle" th:text="#{header.earn.staking.description}"></div>
+                                        </div>
+                                    </a>
+                                    <a class="main-menu__section__menu__nav" href="../earn">
+                                        <div class="main-menu__section__menu__nav__icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                                <g id="Structured Products">
+                                                    <g id="Union">
+                                                        <path d="M5.65627 7.83772C5.79297 8.18411 5.60957 8.57068 5.24663 8.70114L1.95733 9.88356L10.9997 13.7306L20.0424 9.8871L16.7531 8.70468C16.3901 8.57422 16.2067 8.18765 16.3434 7.84126C16.4801 7.49487 16.8852 7.31983 17.2481 7.4503L21.2852 8.90151C22.2379 9.24399 22.2379 10.5302 21.2852 10.8727L11.3887 15.0231C11.138 15.1133 10.8615 15.1133 10.6108 15.0231L0.714542 10.8691C-0.238176 10.5267 -0.238185 9.24045 0.714541 8.89797L4.7516 7.44676C5.11454 7.31629 5.51957 7.49133 5.65627 7.83772Z" fill="#474752"/>
+                                                        <path d="M1.50576 14.0535C1.64234 13.7078 2.04664 13.5333 2.40879 13.6637L10.9997 17.3496L19.5918 13.6747C19.954 13.5446 20.3582 13.7193 20.4946 14.065C20.631 14.4107 20.4479 14.7965 20.0857 14.9267L11.3876 18.6395C11.1373 18.7295 10.8612 18.7294 10.6109 18.6393L1.91418 14.9153C1.55203 14.785 1.36917 14.3991 1.50576 14.0535Z" fill="#474752"/>
+                                                        <path d="M18.4756 18.7785C18.8385 18.6481 19.022 18.2615 18.8854 17.9151C18.7488 17.5687 18.3438 17.3936 17.9808 17.524L10.9967 20.6401L4.01069 17.5368C3.64758 17.4068 3.24278 17.5823 3.10654 17.9288C2.9703 18.2754 3.15421 18.6617 3.51732 18.7918L10.6092 21.933C10.8595 22.0226 11.1354 22.0224 11.3856 21.9326L18.4756 18.7785Z" fill="#474752"/>
+                                                    </g>
+                                                    <path id="Union_2" d="M11.1187 8.15005e-05C11.5093 0.0058254 11.8198 0.313724 11.8122 0.687792L11.7939 1.59092L13.1073 1.61023C13.4979 1.61598 13.8084 1.92387 13.8008 2.29794C13.7932 2.67201 13.4704 2.9706 13.0799 2.96485L10.1163 2.92127C9.46529 2.9117 8.92733 3.40934 8.91469 4.03279C8.90206 4.65623 9.41954 5.1694 10.0705 5.17897L11.9564 5.2067C13.3886 5.22776 14.527 6.35673 14.4993 7.72831C14.4715 9.09989 13.288 10.1947 11.8558 10.1736L11.6201 10.1702L11.6018 11.0732C11.5942 11.4473 11.2714 11.7459 10.8808 11.7401C10.4902 11.7344 10.1798 11.4265 10.1873 11.0524L10.2056 10.1494L8.69679 10.1301C8.30621 10.1243 7.99572 9.81642 8.0033 9.44235C8.01088 9.06828 8.33365 8.7697 8.72424 8.77544L11.8832 8.81902C12.5342 8.8286 13.0722 8.33095 13.0848 7.70751C13.0975 7.08406 12.58 6.5709 11.929 6.56132L10.0431 6.53359C8.61092 6.51253 7.47246 5.38357 7.50025 4.01199C7.52804 2.6404 8.71156 1.54559 10.1437 1.56665L10.3794 1.57012L10.3977 0.666991C10.4053 0.292923 10.7281 -0.00566238 11.1187 8.15005e-05Z" fill="#ffc014"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="main-menu__section__menu__nav__text">
+                                            <div class="main-menu__section__menu__nav__title" th:text="#{header.earn.cryptolending.title}"></div>
+                                            <div class="main-menu__section__menu__nav__subtitle" th:text="#{header.earn.cryptolending.description}"></div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                             <div class="main-menu__section">
@@ -323,14 +323,14 @@
                                         </div>
                                     </a>
                                     <a class="main-menu__section__menu__nav" href="../privacy-policy">
-                    <div class="main-menu__section__menu__nav__icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024" fill="none"><path d="M932.571429 329.142857v475.428572a182.857143 182.857143 0 0 1-182.857143 182.857142h-438.857143a109.750857 109.750857 0 0 1-105.033143-77.897142c10.130286 3.108571 20.845714 4.754286 31.890286 4.754285h475.428571a146.285714 146.285714 0 0 0 146.285714-146.285714V225.645714c42.605714 15.067429 73.142857 55.734857 73.142858 103.497143z" fill="#ffc014"></path><path d="M713.142857 36.571429a109.714286 109.714286 0 0 1 109.714286 109.714285v621.714286a109.714286 109.714286 0 0 1-109.714286 109.714286h-512a109.714286 109.714286 0 0 1-109.714286-109.714286V310.857143H292.571429a73.142857 73.142857 0 0 0 72.96-67.657143L365.714286 237.714286V36.571429h347.428571z m-109.714286 585.142857h-292.571428a36.571429 36.571429 0 0 0-36.571429 36.571428v7.314286a36.571429 36.571429 0 0 0 36.571429 36.571429h292.571428a36.571429 36.571429 0 0 0 36.571429-36.571429V658.285714a36.571429 36.571429 0 0 0-36.571429-36.571428z m0-182.857143h-292.571428a36.571429 36.571429 0 0 0-36.571429 36.571428v7.314286a36.571429 36.571429 0 0 0 36.571429 36.571429h292.571428a36.571429 36.571429 0 0 0 36.571429-36.571429V475.428571a36.571429 36.571429 0 0 0-36.571429-36.571428z m-292.571428-402.285714v164.571428A54.857143 54.857143 0 0 1 256 256H91.428571l219.428572-219.428571z" fill="#474752"></path></svg>
-                    </div>
-                    <div class="main-menu__section__menu__nav__text">
-                      <div class="main-menu__section__menu__nav__title" th:text="#{header.docs.privacy.policy.title}"></div>
-                      <div class="main-menu__section__menu__nav__subtitle" th:text="#{header.docs.privacy.policy.description}"></div>
-                    </div>
-                  </a>
+                                        <div class="main-menu__section__menu__nav__icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024" fill="none"><path d="M932.571429 329.142857v475.428572a182.857143 182.857143 0 0 1-182.857143 182.857142h-438.857143a109.750857 109.750857 0 0 1-105.033143-77.897142c10.130286 3.108571 20.845714 4.754286 31.890286 4.754285h475.428571a146.285714 146.285714 0 0 0 146.285714-146.285714V225.645714c42.605714 15.067429 73.142857 55.734857 73.142858 103.497143z" fill="#ffc014"></path><path d="M713.142857 36.571429a109.714286 109.714286 0 0 1 109.714286 109.714285v621.714286a109.714286 109.714286 0 0 1-109.714286 109.714286h-512a109.714286 109.714286 0 0 1-109.714286-109.714286V310.857143H292.571429a73.142857 73.142857 0 0 0 72.96-67.657143L365.714286 237.714286V36.571429h347.428571z m-109.714286 585.142857h-292.571428a36.571429 36.571429 0 0 0-36.571429 36.571428v7.314286a36.571429 36.571429 0 0 0 36.571429 36.571429h292.571428a36.571429 36.571429 0 0 0 36.571429-36.571429V658.285714a36.571429 36.571429 0 0 0-36.571429-36.571428z m0-182.857143h-292.571428a36.571429 36.571429 0 0 0-36.571429 36.571428v7.314286a36.571429 36.571429 0 0 0 36.571429 36.571429h292.571428a36.571429 36.571429 0 0 0 36.571429-36.571429V475.428571a36.571429 36.571429 0 0 0-36.571429-36.571428z m-292.571428-402.285714v164.571428A54.857143 54.857143 0 0 1 256 256H91.428571l219.428572-219.428571z" fill="#474752"></path></svg>
+                                        </div>
+                                        <div class="main-menu__section__menu__nav__text">
+                                            <div class="main-menu__section__menu__nav__title" th:text="#{header.docs.privacy.policy.title}"></div>
+                                            <div class="main-menu__section__menu__nav__subtitle" th:text="#{header.docs.privacy.policy.description}"></div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                             <div class="main-menu__section">
@@ -701,16 +701,16 @@
                                 <th:block th:text="#{header.earn.title}"></th:block>
                                 <div class="v-expansion-panel-header__icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-chevron-down theme--light"></i></div>
                             </button>
-              <a class="v-expansion-panel-content" href="../profile/staking">
-                <div class="v-expansion-panel-content__wrap">
-                  <div class="mobile-menu__item__element" th:text="#{header.earn.staking.title}"></div>
-                </div>
-              </a>
-              <a class="v-expansion-panel-content" href="../earn">
-                <div class="v-expansion-panel-content__wrap">
-                  <div class="mobile-menu__item__element" th:text="#{header.earn.cryptolending.title}"></div>
-                </div>
-              </a>
+                            <a class="v-expansion-panel-content" href="../profile/staking">
+                                <div class="v-expansion-panel-content__wrap">
+                                    <div class="mobile-menu__item__element" th:text="#{header.earn.staking.title}"></div>
+                                </div>
+                            </a>
+                            <a class="v-expansion-panel-content" href="../earn">
+                                <div class="v-expansion-panel-content__wrap">
+                                    <div class="mobile-menu__item__element" th:text="#{header.earn.cryptolending.title}"></div>
+                                </div>
+                            </a>
 
                         </div>
 
@@ -868,22 +868,42 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div th:styleappend="${signup_promo_enabled ? '' : 'display: none;'}" style="margin-top: 16px;"><span id="promo-input-show" style="color: hsla(0,0%,100%,.6); font-size: 14px; cursor: pointer;"><th:block th:text="#{sign.promocode.title}"></th:block> <i aria-hidden="true" class="v-icon notranslate main-menu__section__nav-button__icon mdi mdi-chevron-down theme--light" style=" color: hsla(0,0%,100%,.6); font-size: 14px; "></i></span></div>
-                                    <div th:styleappend="${signup_promo_enabled ? '' : 'display: none;'}" id="promo-input-wrapper" class="v-input register-form__input theme--light v-text-field v-text-field--filled v-text-field--is-booted v-text-field--enclosed" style="display: none; margin-top: 12px; margin-bottom: -8px">
-                                        <div class="v-input__control">
-                                            <div class="v-input__slot" style=" padding-left: 12px; padding-right: 6px; ">
-                                                <div class="v-text-field__slot">
-                                                    <label id="promo-label" for="promo-input" class="v-label theme--light" style="left:0px;right:auto;position:absolute;" th:text="#{sign.promocode}"></label>
-                                                    <input required="required" id="promo-input" type="text" th:value="${promo}">
+                                    <th:block th:if="${promo == null || promo.isEmpty()}">
+                                        <div th:styleappend="${signup_promo_enabled ? '' : 'display: none;'}" style="margin-top: 16px;"><span id="promo-input-show" style="color: hsla(0,0%,100%,.6); font-size: 14px; cursor: pointer;"><th:block th:text="#{sign.promocode.title}"></th:block> <i aria-hidden="true" class="v-icon notranslate main-menu__section__nav-button__icon mdi mdi-chevron-down theme--light" style=" color: hsla(0,0%,100%,.6); font-size: 14px; "></i></span></div>
+                                        <div th:styleappend="${signup_promo_enabled ? '' : 'display: none;'}" id="promo-input-wrapper" class="v-input register-form__input theme--light v-text-field v-text-field--filled v-text-field--is-booted v-text-field--enclosed" style="display: none; margin-top: 12px; margin-bottom: -8px">
+                                            <div class="v-input__control">
+                                                <div class="v-input__slot" style=" padding-left: 12px; padding-right: 6px; ">
+                                                    <div class="v-text-field__slot">
+                                                        <label id="promo-label" for="promo-input" class="v-label theme--light" style="left:0px;right:auto;position:absolute;" th:text="#{sign.promocode}"></label>
+                                                        <input required="required" id="promo-input" type="text" th:value="${promo}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="v-text-field__details">
-                                                <div class="v-messages theme--light">
-                                                    <div class="v-messages__wrapper"></div>
+                                                <div class="v-text-field__details">
+                                                    <div class="v-messages theme--light">
+                                                        <div class="v-messages__wrapper"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </th:block>
+                                    <th:block th:if="${promo != null && !promo.isEmpty()}">
+                                        <div th:styleappend="${signup_promo_enabled ? '' : 'display: none !important;'}" style="margin-top: 16px;"><span id="promo-input-show" style="color: #ffc35c; font-size: 14px; cursor: pointer;"><th:block th:text="#{sign.promocode.title}"></th:block> <i aria-hidden="true" class="v-icon notranslate main-menu__section__nav-button__icon mdi mdi-chevron-up theme--light" style=" color: #ffc35c; font-size: 14px; "></i></span></div>
+                                        <div th:styleappend="${signup_promo_enabled ? '' : 'display: none !important;'}" id="promo-input-wrapper" class="v-input register-form__input theme--light v-text-field v-text-field--filled v-text-field--is-booted v-text-field--enclosed" style="display: flex; margin-top: 12px; margin-bottom: -8px">
+                                            <div class="v-input__control">
+                                                <div class="v-input__slot" style=" padding-left: 12px; padding-right: 6px; ">
+                                                    <div class="v-text-field__slot">
+                                                        <label id="promo-label" for="promo-input" class="v-label theme--light" style="left:0px;right:auto;position:absolute;" th:text="#{sign.promocode}"></label>
+                                                        <input required="required" id="promo-input" type="text" th:value="${promo}">
+                                                    </div>
+                                                </div>
+                                                <div class="v-text-field__details">
+                                                    <div class="v-messages theme--light">
+                                                        <div class="v-messages__wrapper"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
                                     <div th:styleappend="${signup_ref_enabled ? '' : 'display: none;'}" style=" margin-top: 16px;"><span id="referral-input-show" style="color: hsla(0,0%,100%,.6); font-size: 14px; cursor: pointer;"><th:block th:text="#{sign.referral.code.title}"></th:block> <i aria-hidden="true" class="v-icon notranslate main-menu__section__nav-button__icon mdi mdi-chevron-down theme--light" style=" color: hsla(0,0%,100%,.6); font-size: 14px; "></i></span></div>
                                     <div th:styleappend="${signup_ref_enabled ? '' : 'display: none;'}" id="referral-input-wrapper" class="v-input register-form__input theme--light v-text-field v-text-field--filled v-text-field--is-booted v-text-field--enclosed" style="display: none; margin-top: 12px; margin-bottom: -8px">
                                         <div class="v-input__control">
@@ -949,7 +969,7 @@
                                         <div class="register__form-check__text" th:text="#{sign.blocked.countries(${site_name}, ${blocked_countries})}">
                                         </div>
                                     </div>
-                                    <button id="signup" type="button" class="form-button v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default"><span class="v-btn__content" th:text="#{sign.continue}"></span></button>
+                                    <button id="regBtn" type="button" class="form-button v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default"><span class="v-btn__content" th:text="#{sign.continue}"></span></button>
                                 </form>
                             </div>
                             <div id="error-1" class="error-form" th:text="#{sign.already.registered.error}" style="display: none"></div>
@@ -968,7 +988,7 @@
                     <button type="button" class="support-button" style="display: flex;">
                         <img alt="support chat" width="30" height="30" src="/assets/img/chat.svg">
                         <p style="text-transform: none; margin-bottom: 0" th:text="#{support.button}"></p>
-            <span class="support-unviewed" th:if="${support_unviewed != null && support_unviewed > 0}" th:text="${support_unviewed}"></span>
+                        <span class="support-unviewed" th:if="${support_unviewed != null && support_unviewed > 0}" th:text="${support_unviewed}"></span>
                     </button>
 
                     <div class="chat-box chat-box-meta" style="display: none;">
@@ -994,7 +1014,7 @@
                                     </svg>
                                 </button>
                                 <span id="support_photo_size" style="display: none;"></span>
-                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg" name="support_send_image">
+                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg,image/png" name="support_send_image">
                             </div>
                             <textarea id="chat_input" th:placeholder="#{support.textarea.placeholder}" class="chat-box-meta"></textarea>
                             <button id="support_send" class="chat-box-meta">
@@ -1011,32 +1031,551 @@
                 <div class="v-dialog__container">
                     <!---->
                 </div>
+
+                <footer style="display: none;"></footer>
             </div>
         </div>
     </div>
 </div>
 <script th:inline="javascript">
-    const cookie = [[${fbpixel}]];
+    var fbId = [[${fbpixel}]];
+    fbId = parseFloat(fbId) != -1 ? fbId : undefined;
 
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window,document,'script',
+    !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
         'https://connect.facebook.net/en_US/fbevents.js');
 
-    if (cookie !== null && cookie !== 'none' && cookie !== '') {
-        fbq('init', cookie);
-        fbq('track', 'PageView');
-    }
+    fbq('init', fbId);
+    fbq('track', 'PageView');
 </script>
-<script src="../assets/js/main.js?v=3"></script>
-<script src="../assets/js/signup.js?v=2"></script>
-<noscript>
-    <img th:if="${fbpixel != null && fbpixel != 'none'}" height="1" width="1" style="display:none"
-         th:src="'https://www.facebook.com/tr?id=' + ${fbpixel} + '&ev=PageView&noscript=1'"/>
-</noscript>
+<script src="../assets/js/main.js?v=5"></script>
+<script src="../assets/js/noti.js?v=2"></script>
+<script th:inline="javascript">
+    const error = [[${error}]];
+    const emailConfirmTitle = [[#{sign.email.confirm.title}]];
+    const emailConfirmError1 = [[#{sign.email.confirm.error.1}]];
+    const emailConfirmError2 = [[#{sign.email.confirm.error.2}]];
+    const btn = [[#{popup.button.good}]];
+
+    if (error) {
+        if (error === 'already_exists') {
+            popup(emailConfirmTitle, emailConfirmError1, "../assets/img/error-cross.svg", 'error', true, null, btn);
+        } else {
+            popup(emailConfirmTitle, emailConfirmError2, "../assets/img/error-cross.svg", 'error', true, null, btn);
+        }
+    }
+
+    const promoEnabled = [[${promo_show_enabled}]];
+
+    const emailInputWrapper = $("#email-input-wrapper");
+    const emailLabel = $("#email-label");
+    const emailInput = $("#email-input");
+    const passwordInputWrapper = $("#password-input-wrapper");
+    const passwordLabel = $("#password-label");
+    const passwordInput = $("#password-input");
+
+    const passwordInputWrapper2 = $("#password-input-wrapper-2");
+    const passwordLabel2 = $("#password-label-2");
+    const passwordInput2 = $("#password-input-2");
+    const showPassword2 = $("#show-password-2");
+    const passwordRepeatError = $("#error-password-repeat");
+
+    const promocodeInputWrapper = $("#promo-input-wrapper");
+    const promocodeLabel = $("#promo-label");
+    const promocodeInput = $("#promo-input");
+    const referralInputWrapper = $("#referral-input-wrapper");
+    const referralLabel = $("#referral-label");
+    const referralInput = $("#referral-input");
+    const captchaInputWrapper = $("#captcha-input-wrapper");
+    const captchaLabel = $("#captcha-label");
+    const captchaInput = $("#captcha-input");
+    const allowedSymbolsTrigger = $("#allowed-symbols-trigger");
+    const allowedSymbolsPopup = $("#allowed-symbols-popup");
+    const errorsSection = $("#errors-section");
+    const errorSymbols = $("#error-symbols");
+    const errorUpper = $("#error-upper");
+    const errorNumber = $("#error-number");
+    const errorBlockedSymbols = $("#error-blocked-symbols");
+    const errorEmail = $("#error-email");
+    const error1 = $("#error-1");
+    const error2 = $("#error-2");
+    const successPassword = $("#success-password");
+    const checkboxPolicyWrapper = $("#checkbox-policy");
+    const checkboxCountriesWrapper = $("#checkbox-countries");
+    const checkboxPolicy = $("#checkbox-policy-input");
+    const checkboxCountries = $("#checkbox-countries-input");
+    const showPassword = $("#show-password");
+    const promoInputShow = $("#promo-input-show");
+    const referralInputShow = $("#referral-input-show");
+
+    var emailValided = false;
+    var passwordValided = false;
+    var promocodeValided = true;
+    var referralValided = true;
+
+    var policyAccepted = false;
+    var countriesAccepted = checkboxCountries.closest('.register__form-check__wrapper').css('display') === 'none';
+
+    if ($("#promo-input") && $("#promo-input").val().length > 0) {
+        promocodeInputWrapper.addClass('v-input--is-focused');
+        promocodeLabel.addClass('v-label--active');
+    }
+
+    emailInput.on('focus', function () {
+        emailInputWrapper.addClass('v-input--is-focused');
+        emailLabel.addClass('v-label--active');
+    });
+
+    emailInput.on('blur', function () {
+        emailInputWrapper.removeClass('v-input--is-focused');
+
+        const email = emailInput.val();
+        if (email.length === 0) {
+            emailLabel.removeClass('v-label--active');
+        }
+    });
+
+    emailInput.on('input', function () {
+        const email = emailInput.val();
+        if (validateEmail(email)) {
+            emailValided = true;
+            emailInputWrapper.removeClass('error--text');
+            errorEmail.css('display', 'none');
+        } else {
+            emailValided = false;
+            emailInputWrapper.addClass('error--text');
+            errorEmail.css('display', 'flex');
+        }
+    });
+
+    passwordInput.on('focus', function () {
+        passwordInputWrapper.addClass('v-input--is-focused');
+        passwordLabel.addClass('v-label--active');
+    });
+
+    passwordInput.on('blur', function () {
+        passwordInputWrapper.removeClass('v-input--is-focused');
+
+        const password = passwordInput.val();
+        if (password.length === 0) {
+            passwordLabel.removeClass('v-label--active');
+        }
+    });
+
+    passwordInput.on('input', function () {
+        const password = passwordInput.val();
+
+        if (validatePassword(password)) {
+            passwordValided = true;
+            passwordInputWrapper.removeClass('error--text');
+            errorsSection.removeClass('error-red');
+            errorsSection.css('display', 'none');
+            successPassword.css('display', 'flex');
+            errorBlockedSymbols.css('display', 'none');
+        } else {
+            passwordValided = false;
+            passwordInputWrapper.addClass('error--text');
+            errorsSection.addClass('error-red');
+            errorsSection.css('display',  'flex');
+            successPassword.css('display', 'none');
+
+            var oneOfErrors = false;
+            if (validatePasswordLength(password)) {
+                errorSymbols.css('display', 'none');
+            } else {
+                oneOfErrors = true;
+                errorSymbols.css('display', 'flex');
+            }
+
+            if (validatePasswordUppercase(password)) {
+                errorUpper.css('display', 'none');
+            } else {
+                oneOfErrors = true;
+                errorUpper.css('display', 'flex');
+            }
+
+            if (validateDigit(password)) {
+                errorNumber.css('display', 'none');
+            } else {
+                oneOfErrors = true;
+                errorNumber.css('display', 'flex');
+            }
+
+            if (!oneOfErrors) {
+                errorBlockedSymbols.css('display', 'flex');
+            } else {
+                errorBlockedSymbols.css('display', 'none');
+            }
+        }
+
+        const password1 = passwordInput.val();
+        const password2 = passwordInput2.val();
+
+        if (password1 !== password2) {
+            passwordInputWrapper2.addClass('error--text');
+            passwordRepeatError.css('display', '');
+        } else {
+            passwordInputWrapper2.removeClass('error--text');
+            passwordRepeatError.css('display', 'none');
+        }
+    });
+
+    //password repeat start
+    passwordInput2.on('focus', function () {
+        passwordInputWrapper2.addClass('v-input--is-focused');
+        passwordLabel2.addClass('v-label--active');
+    });
+
+    passwordInput2.on('blur', function () {
+        passwordInputWrapper2.removeClass('v-input--is-focused');
+
+        const password = passwordInput2.val();
+        if (password.length === 0) {
+            passwordLabel2.removeClass('v-label--active');
+        }
+    });
+
+    passwordInput2.on('input', function () {
+        const password1 = passwordInput.val();
+        const password2 = passwordInput2.val();
+
+        if (password1 !== password2) {
+            passwordInputWrapper2.addClass('error--text');
+            passwordRepeatError.css('display', '');
+        } else {
+            passwordInputWrapper2.removeClass('error--text');
+            passwordRepeatError.css('display', 'none');
+        }
+    });
+    //password repeat end
+
+    allowedSymbolsTrigger.on('mouseenter', function () {
+        allowedSymbolsTrigger.attr('aria-expanded', 'true');
+        allowedSymbolsPopup.css('display', 'flex');
+    });
+
+    allowedSymbolsTrigger.on('mouseleave', function () {
+        allowedSymbolsTrigger.attr('aria-expanded', 'false');
+        allowedSymbolsPopup.css('display', 'none');
+    });
+
+    captchaInput.on('focus', function () {
+        captchaInputWrapper.addClass('v-input--is-focused');
+        captchaLabel.addClass('v-label--active');
+    });
+
+    captchaInput.on('blur', function () {
+        captchaInputWrapper.removeClass('v-input--is-focused');
+
+        const captcha = captchaInput.val();
+        if (captcha.length === 0) {
+            captchaLabel.removeClass('v-label--active');
+        }
+    });
+
+    promocodeInput.on('focus', function () {
+        promocodeInputWrapper.addClass('v-input--is-focused');
+        promocodeLabel.addClass('v-label--active');
+    });
+
+    promocodeInput.on('blur', function () {
+        promocodeInputWrapper.removeClass('v-input--is-focused');
+
+        const promocode = promocodeInput.val();
+        if (promocode.length === 0) {
+            promocodeLabel.removeClass('v-label--active');
+        }
+    });
+
+    promocodeInput.on('input', function () {
+        const promocode = promocodeInput.val();
+        if (promocode.length === 0 || validatePromocode(promocode)) {
+            promocodeValided = true;
+            promocodeInputWrapper.removeClass('error--text');
+        } else {
+            promocodeValided = false;
+            promocodeInputWrapper.addClass('error--text');
+        }
+    });
+
+    promoInputShow.on('click', function () {
+        const i = $(promoInputShow).find('i');
+        if (promocodeInputWrapper.css('display') === 'none') {
+            promocodeInputWrapper.css('display', 'flex');
+            promoInputShow.css('color', '#ffc014');
+            i.removeClass('mdi-chevron-down');
+            i.addClass('mdi-chevron-up');
+            i.css('color', '#ffc014');
+        } else {
+            promocodeInputWrapper.css('display', 'none');
+            promoInputShow.css('color', 'hsla(0,0%,100%,.6)');
+            i.addClass('mdi-chevron-down');
+            i.removeClass('mdi-chevron-up');
+            i.css('color', 'hsla(0,0%,100%,.6)');
+        }
+    });
+
+    referralInput.on('focus', function () {
+        referralInputWrapper.addClass('v-input--is-focused');
+        referralLabel.addClass('v-label--active');
+    });
+
+    referralInput.on('blur', function () {
+        referralInputWrapper.removeClass('v-input--is-focused');
+
+        const referral = referralInput.val();
+        if (referral.length === 0) {
+            referralLabel.removeClass('v-label--active');
+        }
+    });
+
+    referralInput.on('input', function () {
+        const referral = referralInput.val();
+        if (referral.length === 0 || validateReferral(referral)) {
+            referralValided = true;
+            referralInputWrapper.removeClass('error--text');
+        } else {
+            referralValided = false;
+            referralInputWrapper.addClass('error--text');
+        }
+    });
+
+    referralInputShow.on('click', function () {
+        const i = $(referralInputShow).find('i');
+        if (referralInputWrapper.css('display') === 'none') {
+            referralInputWrapper.css('display', 'flex');
+            referralInputShow.css('color', '#ffc014');
+            i.removeClass('mdi-chevron-down');
+            i.addClass('mdi-chevron-up');
+            i.css('color', '#ffc014');
+        } else {
+            referralInputWrapper.css('display', 'none');
+            referralInputShow.css('color', 'hsla(0,0%,100%,.6)');
+            i.addClass('mdi-chevron-down');
+            i.removeClass('mdi-chevron-up');
+            i.css('color', 'hsla(0,0%,100%,.6)');
+        }
+    });
+
+    checkboxPolicy.on('click', function () {
+        const i = checkboxPolicyWrapper.find('i');
+        if (checkboxPolicy.is(':checked')) {
+            policyAccepted = true;
+            checkboxPolicyWrapper.removeClass('error--text');
+            checkboxPolicyWrapper.removeClass('v-input--is-dirty');
+            checkboxPolicyWrapper.addClass('primary--text');
+            i.removeClass('material-icons');
+            i.removeClass('error--text');
+            i.addClass('mdi');
+            i.addClass('mdi-check');
+            i.addClass('primary--text');
+        } else {
+            policyAccepted = false;
+            checkboxPolicyWrapper.addClass('error--text');
+            checkboxPolicyWrapper.addClass('v-input--is-dirty');
+            checkboxPolicyWrapper.removeClass('primary--text');
+            i.addClass('material-icons');
+            i.addClass('error--text');
+            i.removeClass('mdi');
+            i.removeClass('mdi-check');
+            i.removeClass('primary--text');
+        }
+    });
+
+    checkboxPolicy.on('focus', function () {
+        checkboxPolicyWrapper.addClass('v-input--is-focused');
+    });
+
+    checkboxPolicy.on('blur', function () {
+        checkboxPolicyWrapper.removeClass('v-input--is-focused');
+    });
+
+
+    checkboxCountries.on('click', function () {
+        const i = checkboxCountriesWrapper.find('i');
+        if (checkboxCountries.is(':checked')) {
+            countriesAccepted = true;
+            checkboxCountriesWrapper.removeClass('error--text');
+            checkboxCountriesWrapper.removeClass('v-input--is-dirty');
+            checkboxCountriesWrapper.addClass('primary--text');
+            i.removeClass('material-icons');
+            i.removeClass('error--text');
+            i.addClass('mdi');
+            i.addClass('mdi-check');
+            i.addClass('primary--text');
+        } else {
+            countriesAccepted = false;
+            checkboxCountriesWrapper.addClass('error--text');
+            checkboxCountriesWrapper.addClass('v-input--is-dirty');
+            checkboxCountriesWrapper.removeClass('primary--text');
+            i.addClass('material-icons');
+            i.addClass('error--text');
+            i.removeClass('mdi');
+            i.removeClass('mdi-check');
+            i.removeClass('primary--text');
+        }
+    });
+
+    checkboxCountries.on('focus', function () {
+        checkboxCountriesWrapper.addClass('v-input--is-focused');
+    });
+
+    checkboxCountries.on('blur', function () {
+        checkboxCountriesWrapper.removeClass('v-input--is-focused');
+    });
+
+    showPassword.on('click', function () {
+        if (passwordInput.attr('type') === 'password') {
+            passwordInput.attr('type', 'text');
+            showPassword.removeClass('mdi-eye-off');
+            showPassword.addClass('mdi-eye');
+        } else {
+            passwordInput.attr('type', 'password');
+            showPassword.removeClass('mdi-eye');
+            showPassword.addClass('mdi-eye-off');
+        }
+    });
+
+    showPassword2.on('click', function () {
+        if (passwordInput2.attr('type') === 'password') {
+            passwordInput2.attr('type', 'text');
+            showPassword2.removeClass('mdi-eye-off');
+            showPassword2.addClass('mdi-eye');
+        } else {
+            passwordInput2.attr('type', 'password');
+            showPassword2.removeClass('mdi-eye');
+            showPassword2.addClass('mdi-eye-off');
+        }
+    });
+
+    function validateEmail(email) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        return emailPattern.test(email);
+    }
+
+    function validatePassword(password) {
+        const passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d_!@#$%^&*(),.?":{}|<>]{8,30}$/;
+        return passwordPattern.test(password);
+    }
+
+
+    function validatePasswordLength(password) {
+        return password.length >= 8 && password.length <= 30;
+    }
+
+    function validatePasswordUppercase(password) {
+        const uppercasePattern = /[A-Z]/;
+        return uppercasePattern.test(password);
+    }
+
+    function validateDigit(password) {
+        const digitPattern = /\d/;
+        return digitPattern.test(password);
+    }
+
+    function validatePromocode(promocode) {
+        const regex = /^[A-Za-z0-9_]{4,16}$/;
+        return regex.test(promocode);
+    }
+
+    function validateReferral(refCode) {
+        const regex = /^[A-Za-z0-9_]{8}$/;
+        return regex.test(refCode);
+    }
+
+    function showError(error) {
+        if (error.css('display') === 'flex') {
+            return;
+        }
+
+        error.css('display', 'flex');
+        setTimeout(() => {
+            error.css('display', 'none');
+        }, 5000);
+    }
+
+    $("#regBtn").on('click', function (event) {
+        event.preventDefault();
+
+        if (!emailValided || !passwordValided || !promocodeValided || !referralValided || !policyAccepted || !countriesAccepted) {
+            return;
+        }
+
+        const password1 = passwordInput.val();
+        const password2 = passwordInput2.val();
+
+        if (password1 !== password2) {
+            passwordInputWrapper2.addClass('error--text');
+            passwordRepeatError.css('display', '');
+            return;
+        }
+
+        const email = emailInput.val();
+        const password = passwordInput.val();
+        const promocode = promocodeInput.val();
+        const referralCode = referralInput.val();
+        const captcha = captchaInput.val();
+
+        $.ajax({
+            url: "../api/auth/register",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                email: email,
+                password: password,
+                captcha: captcha,
+                promocode: promocode,
+                referral_code: referralCode
+            }),
+            success: function (response) {
+                if (response === 'success') {
+                    try {
+                        fbq('track', 'Lead');
+                    } catch (ignored) {
+                    }
+
+                    error1.css('display', 'none');
+                    error2.css('display', 'none');
+
+                    setTimeout(() => {
+                        location.replace('../profile/wallet' + (promoEnabled ? '?action=promo' : ''));
+                    }, 700);
+                } else if (response === 'blocked_country') {
+                    noti("Your country is not available");
+                } else if (response === 'email_confirm') {
+                    noti("Registration is almost complete, please check your email", "success");
+                    popup(getMessage("signup.email.confirm.popup.title"), getMessage("signup.email.confirm.popup.description", [`<strong style='color: dodgerblue'>" + email + "</strong>`]), "../assets/img/success.svg", 'success', true, function () {
+                        location.replace('../signin');
+                    });
+                } else if (response === 'email_already_exists') {
+                    showError(error1)
+                } else if (response.startsWith('incorrect_captcha:;')) {
+                    showError(error2);
+                    const img = $("#captcha-img");
+                    if (img.attr('src') !== response.split(":;")[1]) {
+                        img.attr('src', response.split(":;")[1]);
+                    }
+                } else {
+                    location.reload();
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

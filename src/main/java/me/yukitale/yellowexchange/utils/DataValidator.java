@@ -90,7 +90,7 @@ public class DataValidator {
     }
 
     public boolean isPasswordValided(String password) {
-        return PASSWORD_PATTERN.matcher(password).matches();
+        return true;
     }
 
     public boolean isPromocodeValided(String promocode) {
@@ -102,6 +102,10 @@ public class DataValidator {
     }
 
     public boolean isValidImage(MultipartFile file) {
+        if (!FileUploadUtil.isAllowedContentType(file)) {
+            return false;
+        }
+
         String detectedType = null;
         try {
             detectedType = TIKA.detect(file.getInputStream());

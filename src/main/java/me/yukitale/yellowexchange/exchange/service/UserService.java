@@ -327,7 +327,7 @@ public class UserService {
         return false;
     }
 
-    public User createUser(String referrer, Domain domain, String domainName, String email, String password, String regIp, String platform, String promocodeName, String refCode, boolean emailConfirmed) {
+    public User createUser(String referrer, Domain domain, String domainName, String email, String password, String regIp, String platform, String promocodeName, String refCode, boolean emailConfirmed, String countryCode) {
         Worker worker = null;
         if (domain != null && domain.getWorker() != null) {
             worker = workerRepository.findById(domain.getWorker().getId()).orElse(null);
@@ -341,12 +341,6 @@ public class UserService {
         Promocode promocode = StringUtils.isBlank(promocodeName) ? null : promocodeRepository.findByName(promocodeName).orElse(null);
         if (worker == null && promocode != null && promocode.getWorker() != null) {
             worker = promocode.getWorker();
-        }
-
-        String countryCode = "NO";
-        GeoUtil.GeoData geoData = GeoUtil.getGeo(regIp);
-        if (geoData != null && !StringUtils.isBlank(countryCode)) {
-            countryCode = geoData.getCountryCode().equals("N/A") ? "NO" : geoData.getCountryCode();
         }
 
         User user = new User();
@@ -366,6 +360,7 @@ public class UserService {
         user.setRegistered(new Date());
         user.setRoleType(UserRole.UserRoleType.ROLE_USER);
         user.setPromocode(promocode == null ? null : promocode.getName());
+        user.setPromoActivatedShowed(promocode == null);
         user.setEmailConfirmed(emailConfirmed);
         user.setWorker(worker);
 

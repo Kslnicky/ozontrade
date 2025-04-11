@@ -29,7 +29,7 @@
     <meta th:if="${site_title != null && !site_title.isEmpty()}" property="twitter:title" th:content="${site_title}">
     <meta property="twitter:description" th:content="${site_description}">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/css/root.css">
+    <link rel="stylesheet" href="../assets/css/root.css?v=3">
 </head>
 
 <body>
@@ -1057,7 +1057,7 @@
                                     </svg>
                                 </button>
                                 <span id="support_photo_size" style="display: none;"></span>
-                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg" name="support_send_image">
+                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg,image/png" name="support_send_image">
                             </div>
                             <textarea id="chat_input" th:placeholder="#{support.textarea.placeholder}" class="chat-box-meta"></textarea>
                             <button id="support_send" class="chat-box-meta">
@@ -1202,14 +1202,18 @@
                 <div class="v-dialog__container">
                     <!---->
                 </div>
+
+                <div id="promo-popup" role="dialog" aria-modal="true" class="custom-popup v-dialog__content v-dialog__content--active" style="z-index: 4;" showed="false">
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 <input type="hidden" hidden="hidden" id="user-authorized" th:value="${user != null}">
 <script src="../assets/js/toastr.js"></script>
-<script src="../assets/js/noti.js"></script>
-<script src="../assets/js/main.js?v=3"></script>
+<script src="../assets/js/noti.js?v=2"></script>
+<script src="../assets/js/main.js?v=5"></script>
 <script>
     $(".settings-promocode-btn").on('click', function() {
         const promocode = $("#promocode").val();
@@ -1235,13 +1239,54 @@
                 } else if (response === 'promocodes.promo.not.found') {
                     noti(getMessage(response), 'error');
                 } else {
-                    popup(getMessage("promocodes.popup.title"), response === 'success' ? getMessage("promocodes.popup.description") : response, '../assets/img/gift.svg', 'success', true, function () {
-                        location.replace('../profile/history?type=earning')
-                    });
+                    showPromoActivate(response === 'success' ? getMessage("promocodes.popup.description") : response);
                 }
             }
         });
     });
+
+    function showPromoActivate(activationText) {
+        $("#promo-popup").html(`
+        <div tabindex="0" class="discard-modal v-dialog dialog v-dialog--active" style="padding: 0 !important; transform-origin: center center; width: 400px; text-align: center;">
+          <div class="dialog__close" onclick="closePromoPopup()">
+          <i aria-hidden="true" class="v-icon notranslate dialog__close__icon mdi mdi-close theme--light"></i>
+          </div>
+          <img src="../assets/img/gift.png">
+          <div style="padding-top: 4px !important; padding: 32px;">
+            <div class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;">${getMessage("promo.reg.bonus")}</div>
+            <div class="discard-modal__text" style="margin-bottom: 10px; margin-top: 15px;">
+                <span style="color: rgba(29,37,47,.9);font-size: 16px;">
+                  ${activationText}
+                </span>
+            </div>
+            <button type="button" onclick="closePromoPopup()" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
+              <span class="v-btn__content">${getMessage('popup.button.good')}</span>
+            </button>
+          </div>
+        </div>`);
+        $("#promo-popup").attr('showed', 'true');
+    }
+
+    document.addEventListener('click', function (event) {
+        if ($("#promo-popup") && $("#promo-popup").css('display') !== 'none' && $("#promo-popup").attr('showed') === 'true'
+            && !event.target.closest('.v-dialog__content') && !event.target.closest('.balance-dialog-btn') && !event.target.closest('.user_balance__btn-up') && !event.target.closest('.user_balance__btn-transfer')
+            && !event.target.closest('.user_balance__btn-down') && !event.target.closest('.user_balance__btn-circuit') && !event.target.closest('.mobile__table-button-section__btn')) {
+            closePromoPopup();
+        }
+    });
+
+    function closePromoPopup() {
+        const popup = $("#promo-popup");
+        popup.addClass('custom-popup-fade-out');
+
+        setTimeout(() => {
+            popup.remove();
+
+            location.replace('../profile/history')
+        }, 500);
+
+        $("#promo-popup").attr('showed', 'false');
+    }
 </script>
 <script>
     const mobileNav = $(".history.mobile-backdrop");

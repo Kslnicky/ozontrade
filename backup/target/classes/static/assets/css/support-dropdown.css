@@ -1,0 +1,90 @@
+.dropdown {
+    width: 600px;
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.dropbtn {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    color: var(--kt-primary);
+    border-color: var(--kt-primary-light);
+    background-color: var(--kt-primary-light);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.dropbtn svg {
+    width: 12px;
+    height: 12px;
+    stroke-width: 2;
+    margin-left: 5px;
+}
+
+.dropbtn span {
+    flex-grow: 1;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: linear-gradient(90deg, var(--kt-app-bg-color) 0%, var(--kt-app-bg-color) 100%);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 10px;
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.dropdown-gap {
+    height: 10px; /* Высота промежутка */
+}
+
+.dropdown-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.dropdown-content button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px;
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content button {
+    background-color: transparent;
+    border: 1px solid #009ef7;
+    border-radius: 25px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px;
+    cursor: pointer;
+    flex-grow: 1;
+    color: #565674;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-content button:hover {
+    background: linear-gradient(90deg, #009ef7 0%, #0095e8 100%);
+    color: white;
+}

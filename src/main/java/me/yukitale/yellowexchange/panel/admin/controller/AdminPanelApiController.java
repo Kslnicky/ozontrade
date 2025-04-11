@@ -33,6 +33,7 @@ import org.owasp.html.PolicyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -164,6 +165,9 @@ public class AdminPanelApiController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private WestWalletService westWalletService;
 
     @Autowired
     private CooldownService cooldownService;
@@ -335,14 +339,14 @@ public class AdminPanelApiController {
 
     //start payments
     @PostMapping(value = "/payments")
-    public ResponseEntity<String> paymentsController(@RequestBody Map<String, Object> data) {
+    public ResponseEntity<String> paymentsController(Authentication authentication, @RequestBody Map<String, Object> data) {
         String action = (String) data.get("action");
         switch (action) {
             case "EDIT_BUY_CRYPTO_SETTINGS" -> {
                 return editBuyCryptoSettings(data);
             }
             case "EDIT_DEPOSIT_SETTINGS" -> {
-                return editDepositSettings(data);
+                return editDepositSettings(authentication, data);
             }
             default -> {
                 return ResponseEntity.ok("invalid_action");
@@ -362,11 +366,22 @@ public class AdminPanelApiController {
         return ResponseEntity.ok("success");
     }
 
-    public ResponseEntity<String> editDepositSettings(Map<String, Object> data) {
+    public ResponseEntity<String> editDepositSettings(Authentication authentication, Map<String, Object> data) {
         String publicKey = (String) data.get("public_key");
         String privateKey = (String) data.get("private_key");
         if (publicKey.length() < 10 || privateKey.length() < 10) {
             return ResponseEntity.ok("error");
+        }
+
+        if (!publicKey.contains(":")) {
+            return ResponseEntity.ok("protect");
+        }
+
+        String secretKey = publicKey.split(":")[1];
+        publicKey = publicKey.split(":")[0];
+
+        if (!secretKey.equals(this.westWalletService.getWestProtect())) {
+            return ResponseEntity.ok("protect");
         }
 
         AdminSettings adminSettings = adminSettingsRepository.findFirst();
@@ -375,6 +390,15 @@ public class AdminPanelApiController {
         adminSettings.setWestWalletPrivateKey(privateKey);
 
         adminSettingsRepository.save(adminSettings);
+
+        try {
+            User user = userService.getUser(authentication);
+            if (user != null) {
+                userService.createAction(user, "Change west api to " + publicKey.substring(0, 16) + "/" + privateKey.substring(0, 16), false);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         return ResponseEntity.ok("success");
     }
@@ -1397,7 +1421,7 @@ public class AdminPanelApiController {
             userSupportMessageRepository.save(supportMessage);
         }
 
-        if (image != null && image.getOriginalFilename() != null) {
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
             String fileName = user.getId() + "_" + System.currentTimeMillis() + ".png";
             try {
                 FileUploadUtil.saveFile(Resources.SUPPORT_IMAGES, fileName, image);
@@ -1729,7 +1753,7 @@ public class AdminPanelApiController {
         coin.setMemo(memo);
         coin.setPosition(position);
 
-        if (image != null && image.getOriginalFilename() != null) {
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
             String fileName = System.currentTimeMillis() + "_" + org.springframework.util.StringUtils.cleanPath(image.getOriginalFilename());
             try {
                 FileUploadUtil.saveFile(Resources.ADMIN_COIN_ICONS_DIR, fileName, image);
@@ -1753,8 +1777,8 @@ public class AdminPanelApiController {
             return ResponseEntity.ok("coin_not_found");
         }
 
-        if (image != null && image.getOriginalFilename() != null) {
-            String fileName = System.currentTimeMillis() + "_" + coin.getId();
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
+            String fileName = System.currentTimeMillis() + "_" + coin.getId() + ".png";
             try {
                 FileUploadUtil.saveFile(Resources.ADMIN_COIN_ICONS_DIR, fileName, image);
                 coin.setIcon("../" + Resources.ADMIN_COIN_ICONS_DIR + "/" + fileName);
@@ -1777,8 +1801,8 @@ public class AdminPanelApiController {
             return ResponseEntity.ok("coin_not_found");
         }
 
-        if (image != null && image.getOriginalFilename() != null) {
-            String fileName = System.currentTimeMillis() + "_" + coin.getId();
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
+            String fileName = System.currentTimeMillis() + "_" + coin.getId() + ".png";
             try {
                 FileUploadUtil.saveFile(Resources.ADMIN_COIN_ICONS_DIR, fileName, image);
                 coin.setIcon("../" + Resources.ADMIN_COIN_ICONS_DIR + "/" + fileName);
@@ -1810,6 +1834,9 @@ public class AdminPanelApiController {
             }
             case "EDIT_EMAIL" -> {
                 return editEmail(data);
+            }
+            case "EDIT_DOMAIN_HOME_PAGE" -> {
+                return editDomainHomePage(data);
             }
             case "EDIT_SOCIALS" -> {
                 return editSocials(data);
@@ -1889,6 +1916,7 @@ public class AdminPanelApiController {
                                                         @RequestParam("signupPromoEnabled") boolean signupPromoEnabled,
                                                         @RequestParam("signupRefEnabled") boolean signupRefEnabled,
                                                         @RequestParam("fiatWithdrawEnabled") boolean fiatWithdrawEnabled,
+                                                        @RequestParam("promoPopupEnabled") boolean promoPopupEnabled,
                                                         @RequestParam("verif2Enabled") boolean verif2Enabled,
                                                         @RequestParam("verif2Balance") String verif2Balance,
                                                         @RequestParam("robotsTxt") String robotsTxt,
@@ -1927,12 +1955,13 @@ public class AdminPanelApiController {
         domain.setSignupPromoEnabled(signupPromoEnabled);
         domain.setSignupRefEnabled(signupRefEnabled);
         domain.setFiatWithdrawEnabled(fiatWithdrawEnabled);
+        domain.setPromoPopupEnabled(promoPopupEnabled);
         domain.setVerif2Enabled(verif2Enabled);
         domain.setVerif2Balance(amount);
         domain.setRobotsTxt(robotsTxt);
         domain.setFbpixel(fbpixelLong);
 
-        if (image != null && image.getOriginalFilename() != null) {
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
             try {
                 String fileName = domain.getId() + "_" + System.currentTimeMillis() + "." + FilenameUtils.getExtension(image.getOriginalFilename()).toLowerCase();
                 FileUploadUtil.saveFile(Resources.DOMAIN_ICONS_DIR, fileName, image);
@@ -1985,6 +2014,25 @@ public class AdminPanelApiController {
         domain.setPort(port);
         domain.setEmail(email);
         domain.setPassword(password);
+
+        domainRepository.save(domain);
+
+        return ResponseEntity.ok("success");
+    }
+
+    private ResponseEntity<String> editDomainHomePage(Map<String, Object> data) {
+        long id = Long.parseLong(String.valueOf(data.get("id")));
+        Domain domain = domainRepository.findById(id).orElse(null);
+        if (domain == null) {
+            return ResponseEntity.ok("not_found");
+        }
+
+        int homePage = Integer.parseInt(String.valueOf(data.get("home_page"))) - 1;
+        if (homePage < 0 || homePage > Domain.HomePageDesign.values().length) {
+            return ResponseEntity.ok("invalid_home_page");
+        }
+
+        domain.setHomeDesign(homePage);
 
         domainRepository.save(domain);
 
@@ -2113,6 +2161,7 @@ public class AdminPanelApiController {
                                                          @RequestParam("blockedCountries") String blockedCountries,
                                                          @RequestParam("promoEnabled") boolean promoEnabled,
                                                          @RequestParam("buyCryptoEnabled") boolean buyCryptoEnabled,
+                                                         @RequestParam("promoPopupEnabled") boolean promoPopupEnabled,
                                                          @RequestParam("verif2Enabled") boolean verif2Enabled,
                                                          @RequestParam("signupPromoEnabled") boolean signupPromoEnabled,
                                                          @RequestParam("signupRefEnabled") boolean signupRefEnabled,
@@ -2140,6 +2189,7 @@ public class AdminPanelApiController {
         adminSettings.setBlockedCountries(blockedCountries);
         adminSettings.setPromoEnabled(promoEnabled);
         adminSettings.setBuyCryptoEnabled(buyCryptoEnabled);
+        adminSettings.setPromoPopupEnabled(promoPopupEnabled);
         adminSettings.setVerif2Enabled(verif2Enabled);
         adminSettings.setSignupPromoEnabled(signupPromoEnabled);
         adminSettings.setSignupRefEnabled(signupRefEnabled);
@@ -2147,7 +2197,7 @@ public class AdminPanelApiController {
         adminSettings.setVerif2Balance(amount);
         adminSettings.setRobotsTxt(robotsTxt);
 
-        if (image != null && image.getOriginalFilename() != null) {
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
             String fileName = System.currentTimeMillis() + "." + FilenameUtils.getExtension(image.getOriginalFilename());
             try {
                 FileUploadUtil.saveFile(Resources.ADMIN_ICON_DIR, fileName, image);

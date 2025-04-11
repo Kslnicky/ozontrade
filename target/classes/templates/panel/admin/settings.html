@@ -76,7 +76,7 @@
                             </a>
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px" data-kt-menu="true" data-kt-element="english-menu" style="">
                                 <div class="menu-item px-3 my-0">
-                                    <a href="?panel_lang=en" class="menu-link px-3 py-2" th:classappend="${lang_code != 'RU' ? 'active' : ''}">
+                                    <a href="./?panel_lang=en" class="menu-link px-3 py-2" th:classappend="${lang_code != 'RU' ? 'active' : ''}">
                                 <span class="menu-icon" data-kt-element="icon">
                                   <img class="rounded-1" src="../assets/media/flags/united-states.svg" alt="" style=" width: 20px; height: 20px; ">
                                 </span>
@@ -84,7 +84,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item px-3 my-0">
-                                    <a href="?panel_lang=ru" class="menu-link px-3 py-2" th:classappend="${lang_code == 'RU' ? 'active' : ''}">
+                                    <a href="./?panel_lang=ru" class="menu-link px-3 py-2" th:classappend="${lang_code == 'RU' ? 'active' : ''}">
                                   <span class="menu-icon" data-kt-element="icon">
                                     <img class="rounded-1" src="../assets/media/flags/russia.svg" alt="" style=" width: 20px; height: 20px; ">
                                   </span>
@@ -730,7 +730,7 @@
                                                                 </svg>
                                                             </span>
                                                         </label>
-                                                        <input type="file" hidden id="siteIcon" accept="image/x-png,image/jpeg,image/svg+xml,image/x-icon">
+                                                        <input type="file" hidden id="siteIcon" accept="image/png,image/jpeg,image/svg+xml">
                                                     </div>
                                                 </div>
                                                 <div class="d-flex flex-stack mb-5">
@@ -835,6 +835,24 @@
                                                         <div class="form-check form-check-solid form-check-custom form-switch">
                                                             <input th:if="${settings.fiatWithdrawEnabled}" id="fiatWithdrawEnabled" class="form-check-input w-45px h-30px" style="cursor:pointer" type="checkbox" checked="">
                                                             <input th:unless="${settings.fiatWithdrawEnabled}" id="fiatWithdrawEnabled" class="form-check-input w-45px h-30px" style="cursor:pointer" type="checkbox">
+                                                            <label class="form-check-label" for="googleswitch">
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-stack mb-5">
+                                                    <div class="d-flex">
+                                                        <div class="d-flex flex-column">
+                                                            <div class="text-gray-600 mt-5">
+                                                                <th:block th:utext="#{settings.site.settings.type.7}"></th:block>
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <div class="form-check form-check-solid form-check-custom form-switch">
+                                                            <input th:if="${settings.promoPopupEnabled}" id="promoPopupEnabled" class="form-check-input w-45px h-30px" style="cursor:pointer" type="checkbox" checked="">
+                                                            <input th:unless="${settings.promoPopupEnabled}" id="promoPopupEnabled" class="form-check-input w-45px h-30px" style="cursor:pointer" type="checkbox">
                                                             <label class="form-check-label" for="googleswitch">
                                                             </label>
                                                         </div>
@@ -1521,7 +1539,7 @@
                 <div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
                     <div class="text-dark order-2 order-md-1">
                         <span class="text-muted fw-semibold me-1">2025&copy;</span>
-                        <a href="#" target="_blank" class="text-gray-800 text-hover-primary">X-IT Admin Panel</a>
+                        <a href="#" target="_blank" class="text-gray-800 text-hover-primary">Admin Panel</a>
                     </div>
                 </div>
             </div>
@@ -1547,7 +1565,7 @@
 </script>
 <script src="../assets/js/panelnoti.js">
 </script>
-<script src="../assets/js/panel-locale.js">
+<script src="../assets/js/panel-locale.js?v=2">
 </script>
 <script>
     const imageItems = document.querySelectorAll('.home-page_image-item');
@@ -1603,7 +1621,7 @@
                 type: type
             }),
             success: function(response) {
-                if(response === "success") {
+                if (response === "success") {
                     noti(getMessage('main.changes.saved'), "success");
                 } else {
                     noti(getMessage('main.common.error'), "error");
@@ -1630,6 +1648,7 @@
         const blockedCountries = $("#blockedCountries").val();
         const promoEnabled = $("#promoEnabled").is(':checked');
         const buyCryptoEnabled = $("#buyCryptoEnabled").is(':checked');
+        const promoPopupEnabled = $("#promoPopupEnabled").is(':checked');
         const verif2Enabled = $("#verif2Enabled").is(':checked');
         const signupPromoEnabled = $("#signupPromoEnabled").is(':checked');
         const signupRefEnabled = $("#signupRefEnabled").is(':checked');
@@ -1643,6 +1662,7 @@
         formData.append('blockedCountries', blockedCountries);
         formData.append('promoEnabled', promoEnabled);
         formData.append('buyCryptoEnabled', buyCryptoEnabled);
+        formData.append('promoPopupEnabled', promoPopupEnabled);
         formData.append('verif2Enabled', verif2Enabled);
         formData.append('signupPromoEnabled', signupPromoEnabled);
         formData.append('signupRefEnabled', signupRefEnabled);
@@ -1660,7 +1680,7 @@
             processData: false,
             type: 'POST',
             success: function(response) {
-                if(response === "success") {
+                if (response === "success") {
                     noti(getMessage('main.changes.saved'), "success");
                     setTimeout(() => location.reload(), 500);
                 } else if(response === "name_title_error") {
@@ -1688,7 +1708,7 @@
                 worker_top_stats: workerTopStats
             }),
             success: function(response) {
-                if(response === "success") {
+                if (response === "success") {
                     noti(getMessage('main.changes.saved'), "success");
                 } else {
                     noti(getMessage('main.common.error'), "error");
@@ -1715,7 +1735,7 @@
                 enabled: enabled
             }),
             success: function(response) {
-                if(response === "success") {
+                if (response === "success") {
                     noti(getMessage('main.changes.saved'), "success");
                 } else if(response === "message_is_empty") {
                     noti(getMessage('main.empty.message.error'), 'error');
@@ -1819,7 +1839,7 @@
                 crypto_lending_enabled: cryptoLendingEnabled
             }),
             success: function(response) {
-                if(response === "success") {
+                if (response === "success") {
                     noti(getMessage('main.changes.saved'), 'success');
                 } else {
                     noti(getMessage('main.common.error'), "error");
@@ -1858,7 +1878,7 @@
                 p2p_error: p2pError
             }),
             success: function(response) {
-                if(response === "success") {
+                if (response === "success") {
                     noti(getMessage('main.changes.saved'), 'success');
                 } else {
                     noti(getMessage('main.common.error'), "error");

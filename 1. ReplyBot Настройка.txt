@@ -1,0 +1,6 @@
+1. Настраиваем bot-config.yml
+2. Заливаем bot-config и reply-bot в /home 
+3. 
+screen -S replybot
+cd /home
+java -Xmx2G -jar reply-bot.jar

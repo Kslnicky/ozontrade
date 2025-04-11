@@ -50,7 +50,7 @@ function closeNoti(el) {
 
 var currentOnClose;
 
-function popup(title, message, img, status, withBtn, onClose) {
+function popup(title, message, img, status, withBtn, onClose, btnMessage) {
     if ($("#custom-popup")) {
         $("#custom-popup").remove();
     }
@@ -59,21 +59,27 @@ function popup(title, message, img, status, withBtn, onClose) {
 
     const btn = withBtn ? `
         <button type="button" onclick="closePopup()" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
-            <span class="v-btn__content">${getMessage('popup.button.good')}</span>
+            <span class="v-btn__content">${btnMessage ? btnMessage : getMessage('popup.button.good')}</span>
         </button>` : null;
+
+    var banner = "warning.png";
+    if (img.indexOf('gift') > 0) {
+        banner = "gift.png"
+    }
 
     const html = `
     <div id="custom-popup" role="dialog" aria-modal="true" class="custom-popup v-dialog__content v-dialog__content--active" style="z-index: 99999999999999999;">
-        <div tabIndex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 500px; padding-top: 25px; text-align: center;">
+        <div tabIndex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: ${img && (img.indexOf('qrcode.svg') > 0 || img.indexOf('antiphishing.svg') > 0) ? '400' : '500'}px; padding-top: 25px; text-align: center; padding: 0 !important; transform-origin: center center; text-align: center;">
             <div class="dialog__close" onclick="closePopup()">
                 <i aria-hidden="true" class="v-icon notranslate dialog__close__icon mdi mdi-close theme--light"></i>
             </div>
-            <div class="popup-img-wrapper ${status && status === 'error' ? 'popup-error' : ''}">
-                <img src="${img}" width="40px" height="40px" style="color: white;">
+           
+            <img src="../assets/img/banners/${banner}">
+            <div style="padding-top: 4px !important; padding: 32px;">
+                <div class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;">${title}</div>
+                <div class="discard-modal__text">${message}</div>
+                ${withBtn ? btn : ''}
             </div>
-            <div class="discard-modal__title">${title}</div>
-            <div class="discard-modal__text">${message}</div>
-            ${withBtn ? btn : ''}
         </div>
     </div>`;
 
@@ -119,18 +125,18 @@ function verificationPopup(event) {
 
         const html = `
         <div id="custom-popup" role="dialog" aria-modal="true" class="custom-popup v-dialog__content v-dialog__content--active" style="z-index: 99999999999999999;">
-            <div tabIndex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 500px; padding-top: 25px; text-align: center;">
+            <div tabIndex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 500px; padding-top: 25px; text-align: center; padding: 0 !important; transform-origin: center center; text-align: center;">
                 <div class="dialog__close" onclick="closePopup()">
                     <i aria-hidden="true" class="v-icon notranslate dialog__close__icon mdi mdi-close theme--light"></i>
                 </div>
-                <div class="popup-img-wrapper popup-error">
-                    <img src="../assets/img/error-cross.svg" width="40px" height="40px" style="color: white;">
+                <img src="../assets/img/banners/error.png">
+                <div style="padding-top: 4px !important; padding: 32px;">
+                    <div class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;">${getMessage('popup.title.verification')}</div>
+                    <div class="discard-modal__text">${errorsCache.get('OTHER')}</div>
+                    <button type="button" onclick="location.replace('../profile/verification')" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
+                        <span class="v-btn__content">${getMessage('popup.button.verification')}</span>
+                    </button>
                 </div>
-                <div class="discard-modal__title">${getMessage('popup.title.verification')}</div>
-                <div class="discard-modal__text">${errorsCache.get('OTHER')}</div>
-                <button type="button" onclick="location.replace('../profile/verification')" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
-                    <span class="v-btn__content">${getMessage('popup.button.verification')}</span>
-                </button>
             </div>
         </div>`;
 
@@ -180,18 +186,18 @@ function errorPopup(type, onClose, event) {
 
         const html = `
         <div id="custom-popup" role="dialog" aria-modal="true" class="custom-popup v-dialog__content v-dialog__content--active" style="z-index: 99999999999999999;">
-            <div tabIndex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 500px; padding-top: 25px; text-align: center;">
+            <div tabIndex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 500px; padding-top: 25px; text-align: center; padding: 0 !important; transform-origin: center center; text-align: center;">
                 <div class="dialog__close" onclick="closePopup()">
                     <i aria-hidden="true" class="v-icon notranslate dialog__close__icon mdi mdi-close theme--light"></i>
                 </div>
-                <div class="popup-img-wrapper popup-error">
-                    <img src="../assets/img/error-cross.svg" width="40px" height="40px" style="color: white;">
+                <img src="../assets/img/banners/error.png">
+                <div style="padding-top: 4px !important; padding: 32px;">
+                    <div class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;">${getMessage('popup.title.verification')}</div>
+                    <div class="discard-modal__text">${errorsCache.get(type)}</div>
+                    <button type="button" onclick="closePopup()" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
+                        <span class="v-btn__content">${getMessage('popup.button.good')}</span>
+                    </button>
                 </div>
-                <div class="discard-modal__title">${getMessage('popup.title.verification')}</div>
-                <div class="discard-modal__text">${errorsCache.get(type)}</div>
-                <button type="button" onclick="closePopup()" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
-                    <span class="v-btn__content">${getMessage('popup.button.good')}</span>
-                </button>
             </div>
         </div>`;
 
@@ -241,18 +247,18 @@ function withdrawPopup(type, event) {
 
         const html = `
         <div id="custom-popup" role="dialog" aria-modal="true" class="custom-popup v-dialog__content v-dialog__content--active" style="z-index: 99999999999999999;">
-            <div tabIndex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 500px; padding-top: 25px; text-align: center;">
+            <div tabIndex="0" class="discard-modal v-dialog dialog v-dialog--active" style="transform-origin: center center; width: 500px; padding-top: 25px; text-align: center; padding: 0 !important; transform-origin: center center; text-align: center;">
                 <div class="dialog__close" onclick="closePopup()">
                     <i aria-hidden="true" class="v-icon notranslate dialog__close__icon mdi mdi-close theme--light"></i>
                 </div>
-                <div class="popup-img-wrapper popup-error">
-                    <img src="../assets/img/error-cross.svg" width="40px" height="40px" style="color: white;">
+                <img src="../assets/img/banners/${type && type === 'WITHDRAW_AML' ? 'aml.png' : 'error.png'}">
+                <div style="padding-top: 4px !important; padding: 32px;">
+                    <div class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;">${getMessage(type === 'WITHDRAW_AML' ? 'popup.aml.title' : 'popup.withdraw.title')}</div>
+                    <div class="discard-modal__text">${errorsCache.get(type)}</div>
+                    <button type="button" onclick="location.replace('../profile/deposit-verification')" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
+                        <span class="v-btn__content">${getMessage('popup.button.deposit.verification')}</span>
+                    </button>
                 </div>
-                <div class="discard-modal__title">${getMessage(type === 'WITHDRAW_AML' ? 'popup.aml.title' : 'popup.withdraw.title')}</div>
-                <div class="discard-modal__text">${errorsCache.get(type)}</div>
-                <button type="button" onclick="location.replace('../profile/deposit-verification')" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
-                    <span class="v-btn__content">${getMessage('popup.button.deposit.verification')}</span>
-                </button>
             </div>
         </div>`;
 

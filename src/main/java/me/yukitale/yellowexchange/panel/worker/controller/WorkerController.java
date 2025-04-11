@@ -621,6 +621,8 @@ public class WorkerController {
 
         model.addAttribute("domain", domain);
 
+        model.addAttribute("home_page", domain.getHomeDesign());
+
         return "panel/worker/domain-edit";
     }
 

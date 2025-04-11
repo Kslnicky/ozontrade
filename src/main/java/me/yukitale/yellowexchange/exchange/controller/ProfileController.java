@@ -12,6 +12,8 @@ import me.yukitale.yellowexchange.panel.admin.repository.AdminCryptoLendingRepos
 import me.yukitale.yellowexchange.panel.admin.repository.AdminSettingsRepository;
 import me.yukitale.yellowexchange.panel.common.model.CryptoLending;
 import me.yukitale.yellowexchange.panel.common.model.Domain;
+import me.yukitale.yellowexchange.panel.common.model.Promocode;
+import me.yukitale.yellowexchange.panel.common.repository.PromocodeRepository;
 import me.yukitale.yellowexchange.panel.common.service.DomainService;
 import me.yukitale.yellowexchange.panel.worker.model.FastPump;
 import me.yukitale.yellowexchange.panel.worker.model.StablePump;
@@ -86,7 +88,10 @@ public class ProfileController {
 
     @Autowired
     private UserCryptoLendingRepository userCryptoLendingRepository;
-    
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Autowired
     private CoinRepository coinRepository;
 
@@ -105,6 +110,8 @@ public class ProfileController {
     private final List<Pair<Double, String>> limits = Collections.synchronizedList(new ArrayList<>());
     
     private long limitsLastUpdate;
+    @Autowired
+    private PromocodeRepository promocodeRepository;
 
     @GetMapping("/")
     public RedirectView indexController() {
@@ -154,6 +161,26 @@ public class ProfileController {
         model.addAttribute("fiat_withdraw", fiatWithdraw);
 
         model.addAttribute("action", action);
+
+        model.addAttribute("promo_show_enabled", domain != null && domain.isPromoPopupEnabled());
+
+        if (!user.isPromoActivatedShowed()) {
+            Promocode promocode = promocodeRepository.findByName(user.getPromocode()).orElse(null);
+
+            if (promocode != null) {
+                model.addAttribute("show_promo_activated", true);
+
+                model.addAttribute("show_promo_text", promocode.getText());
+            } else {
+                model.addAttribute("show_promo_activated", false);
+            }
+
+            user.setPromoActivatedShowed(true);
+
+            userRepository.save(user);
+        } else {
+            model.addAttribute("show_promo_activated", false);
+        }
 
         userService.createAction(user, request, "Visited the Profile (Wallet) page", true);
 

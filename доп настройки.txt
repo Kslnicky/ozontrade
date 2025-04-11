@@ -1,0 +1,19 @@
+mysql -u root -p
+вводим пароль от майскл и жмем энтер (пароль при вводе не показывается)
+
+use exchange;
+
+ALTER TABLE admin_deposit_coins DROP CONSTRAINT admin_deposit_coins_chk_1;
+ALTER TABLE worker_deposit_coins DROP CONSTRAINT worker_deposit_coins_chk_1;
+ALTER TABLE user_addresses DROP CONSTRAINT user_addresses_chk_1;
+
+ALTER TABLE admin_deposit_coins ADD CONSTRAINT admin_deposit_coins_chk_1 CHECK ( type IN (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24) );
+ALTER TABLE worker_deposit_coins ADD CONSTRAINT worker_deposit_coins_chk_1 CHECK ( type IN (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24) );
+ALTER TABLE user_addresses ADD CONSTRAINT user_addresses_chk_1 CHECK ( coin_type IN (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24) );
+
+exit;
+
+fuser -k 8080/tcp 
+fuser -k 8080/tcp 
+screen -r exchange 
+java -Xmx10G -jar yellow-exchange.jar --spring.config.location=/home/application.properties

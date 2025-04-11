@@ -32,7 +32,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../assets/css/root.css">
+  <link rel="stylesheet" href="../assets/css/root.css?v=3">
 
 </head>
 
@@ -5407,7 +5407,7 @@
                                 </div>
                                 <div class="verifications-document-wrapper">
                                   <div class="verifications-document">
-                                    <input accept=".heic,image/x-png,image/gif,image/jpeg,image/png,image/svg" type="file" name="photo" id="upload-photo-gallery" class="verifications-document__input">
+                                    <input accept=".heic,image/x-png,image/jpeg,image/png" type="file" name="photo" id="upload-photo-gallery" class="verifications-document__input">
                                     <label for="upload-photo-gallery" class="verifications-document__label"></label>
                                     <div class="label-content">
                                       <i aria-hidden="true" class="v-icon notranslate label-content__icon mdi mdi-download theme--light"></i>
@@ -5419,7 +5419,7 @@
                                     <i aria-hidden="true" class="v-icon notranslate change_icon mdi mdi-swap-vertical-bold theme--light"></i>
                                   </div>
                                   <div class="verifications-document">
-                                    <input accept=".heic,image/x-png,image/gif,image/jpeg,image/png,image/svg" type="file" name="photo" id="upload-photo-gallery_1" class="verifications-document__input">
+                                    <input accept=".heic,image/x-png,image/jpeg,image/png" type="file" name="photo" id="upload-photo-gallery_1" class="verifications-document__input">
                                     <label for="upload-photo-gallery_1" class="verifications-document__label"></label>
                                     <div class="label-content">
                                       <i aria-hidden="true" class="v-icon notranslate label-content__icon mdi mdi-download theme--light"></i>
@@ -5447,7 +5447,7 @@
 
                               </div>
                               <div class="verifications-document-avatar verifications-document">
-                                <input accept=".heic,image/x-png,image/gif,image/jpeg,image/png,image/svg" type="file" name="photo" id="upload-photo-avatar" class="verifications-document__input">
+                                <input accept=".heic,image/x-png,image/jpeg,image/png" type="file" name="photo" id="upload-photo-avatar" class="verifications-document__input">
                                 <label for="upload-photo-avatar" class="verifications-document__label"></label>
                                 <div class="label-content">
                                   <div class="v-image v-responsive label-content__img theme--light">
@@ -5658,7 +5658,7 @@
                   </svg>
                 </button>
                 <span id="support_photo_size" style="display: none;"></span>
-                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg" name="support_send_image">
+                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg,image/png" name="support_send_image">
               </div>
               <textarea id="chat_input" th:placeholder="#{support.textarea.placeholder}" class="chat-box-meta"></textarea>
               <button id="support_send" class="chat-box-meta">
@@ -5809,8 +5809,8 @@
 </div>
 <input type="hidden" hidden="hidden" id="user-authorized" th:value="${user != null}">
 <script src="../assets/js/toastr.js"></script>
-<script src="../assets/js/noti.js"></script>
-<script src="../assets/js/main.js?v=3"></script>
+<script src="../assets/js/noti.js?v=2"></script>
+<script src="../assets/js/main.js?v=5"></script>
 <script>
   $("#country-input").on('click', function (event) {
 

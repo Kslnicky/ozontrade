@@ -920,6 +920,9 @@ public class WorkerPanelApiController {
             case "EDIT_EMAIL" -> {
                 return editEmail(authentication, data);
             }
+            case "EDIT_DOMAIN_HOME_PAGE" -> {
+                return editDomainHomePage(authentication, data);
+            }
             case "EDIT_SOCIALS" -> {
                 return editSocials(authentication, data);
             }
@@ -941,6 +944,7 @@ public class WorkerPanelApiController {
                                                         @RequestParam("signupPromoEnabled") boolean signupPromoEnabled,
                                                         @RequestParam("signupRefEnabled") boolean signupRefEnabled,
                                                         @RequestParam("fiatWithdrawEnabled") boolean fiatWithdrawEnabled,
+                                                        @RequestParam("promoPopupEnabled") boolean promoPopupEnabled,
                                                         @RequestParam("verif2Enabled") boolean verif2Enabled,
                                                         @RequestParam("verif2Balance") String verif2Balance,
                                                         @RequestParam("robotsTxt") String robotsTxt,
@@ -980,14 +984,15 @@ public class WorkerPanelApiController {
         domain.setSignupPromoEnabled(signupPromoEnabled);
         domain.setSignupRefEnabled(signupRefEnabled);
         domain.setFiatWithdrawEnabled(fiatWithdrawEnabled);
+        domain.setPromoPopupEnabled(promoPopupEnabled);
         domain.setVerif2Enabled(verif2Enabled);
         domain.setVerif2Balance(amount);
         domain.setRobotsTxt(robotsTxt);
         domain.setFbpixel(fbpixelLong);
 
-        if (image != null && image.getOriginalFilename() != null) {
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
             try {
-                String fileName = domain.getId() + "_" + System.currentTimeMillis() + "." + FilenameUtils.getExtension(image.getOriginalFilename()).toLowerCase();
+                String fileName = domain.getId() + "_" + System.currentTimeMillis() + ".png";// + FilenameUtils.getExtension(image.getOriginalFilename()).toLowerCase();
                 FileUploadUtil.saveFile(Resources.DOMAIN_ICONS_DIR, fileName, image);
                 domain.setIcon("../" + Resources.DOMAIN_ICONS_DIR + "/" + fileName);
             } catch (IOException e) {
@@ -1040,6 +1045,27 @@ public class WorkerPanelApiController {
         domain.setPort(port);
         domain.setEmail(email);
         domain.setPassword(password);
+
+        domainRepository.save(domain);
+
+        return ResponseEntity.ok("success");
+    }
+
+    private ResponseEntity<String> editDomainHomePage(Authentication authentication, Map<String, Object> data) {
+        long id = Long.parseLong(String.valueOf(data.get("id")));
+        Worker worker = workerService.getWorker(authentication);
+
+        Domain domain = domainRepository.findByIdAndWorkerId(id, worker.getId()).orElse(null);
+        if (domain == null) {
+            return ResponseEntity.ok("not_found");
+        }
+
+        int homePage = Integer.parseInt(String.valueOf(data.get("home_page"))) - 1;
+        if (homePage < 0 || homePage > Domain.HomePageDesign.values().length) {
+            return ResponseEntity.ok("invalid_home_page");
+        }
+
+        domain.setHomeDesign(homePage);
 
         domainRepository.save(domain);
 
@@ -1316,8 +1342,8 @@ public class WorkerPanelApiController {
             return ResponseEntity.ok("coin_not_found");
         }
 
-        if (image != null && image.getOriginalFilename() != null) {
-            String fileName = System.currentTimeMillis() + "_" + coin.getId();
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
+            String fileName = System.currentTimeMillis() + "_" + coin.getId() + ".png";
             try {
                 FileUploadUtil.saveFile(Resources.ADMIN_COIN_ICONS_DIR, fileName, image);
                 coin.setIcon("../" + Resources.ADMIN_COIN_ICONS_DIR + "/" + fileName);
@@ -1533,7 +1559,7 @@ public class WorkerPanelApiController {
             userSupportMessageRepository.save(supportMessage);
         }
 
-        if (image != null && image.getOriginalFilename() != null) {
+        if (image != null && image.getOriginalFilename() != null && FileUploadUtil.isAllowedContentType(image)) {
             String fileName = user.getId() + "_" + System.currentTimeMillis() + ".png";
             try {
                 FileUploadUtil.saveFile(Resources.SUPPORT_IMAGES, fileName, image);

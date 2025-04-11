@@ -1,0 +1,74 @@
+.home-page_image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.home-page_image-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 10px);
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.home-page_image-item {
+    flex: 0 0 calc(33.33% - 10px);
+    position: relative;
+    margin: 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.home-page_img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.home-page_image-item:hover img {
+    opacity: 0.8;
+}
+
+.site-design_image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.site-design_image-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 10px);
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.site-design_image-item {
+    flex: 0 0 calc(33.33% - 10px);
+    position: relative;
+    margin: 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.site-design_img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.site-design_image-item:hover img {
+    opacity: 0.8;
+}
+
+input[type="radio"] {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    color: #009ef7;
+}

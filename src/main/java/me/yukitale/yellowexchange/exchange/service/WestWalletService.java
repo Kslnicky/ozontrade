@@ -1,6 +1,8 @@
 package me.yukitale.yellowexchange.exchange.service;
 
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
+import lombok.SneakyThrows;
 import me.yukitale.yellowexchange.exchange.model.Coin;
 import me.yukitale.yellowexchange.exchange.model.user.*;
 import me.yukitale.yellowexchange.exchange.repository.CoinRepository;
@@ -27,6 +29,7 @@ import me.yukitale.yellowexchange.utils.HttpUtil;
 import me.yukitale.yellowexchange.utils.JsonUtil;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.HmacUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpRequest;
@@ -38,11 +41,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Instant;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -103,8 +107,21 @@ public class WestWalletService {
     @Autowired
     private TelegramService telegramService;
 
+    @Getter
+    private String westProtect;
+
+    @SneakyThrows
     @PostConstruct
     public void init() {
+        Path path = Paths.get("secret.key");
+        File file = path.toFile();
+        if (file.exists()) {
+            this.westProtect = Files.readString(path).trim();
+        } else {
+            this.westProtect = RandomStringUtils.random(32, true, true);
+            Files.write(path, this.westProtect.getBytes());
+        }
+
         startMonitoring();
     }
 
@@ -192,7 +209,7 @@ public class WestWalletService {
                                     if (adminTelegramSettings.isChannelNotification() && adminTelegramSettings.getChannelId() != -1 && adminTelegramSettings.getChannelId() != 0 && !StringUtils.isBlank(adminTelegramSettings.getChannelMessage())) {
                                         User workerUser = worker == null ? null : userRepository.findById(worker.getUser().getId()).orElse(null);
                                         String message = String.format(adminTelegramSettings.getChannelMessage(), workerUser == null ? "-" : workerUser.getShortEmail(), user.getDomain(), StringUtils.isBlank(user.getPromocode()) ? "-" : user.getPromocode(), userDeposit.getFormattedPrice(), userDeposit.getFormattedAmount(), userDeposit.getCoinType().name());
-                                        telegramService.sendMessageToChannel(message, adminTelegramSettings.getChannelId());
+                                        telegramService.sendMessageToChannel(message, adminTelegramSettings.getChannelId(), message.contains("`"));
                                     }
                                 } catch (Exception ex) {
                                     ex.printStackTrace();
@@ -322,7 +339,7 @@ public class WestWalletService {
                                 if (adminTelegramSettings.isChannelNotification() && adminTelegramSettings.getChannelId() != -1 && adminTelegramSettings.getChannelId() != 0 && !StringUtils.isBlank(adminTelegramSettings.getChannelMessage())) {
                                     User workerUser = worker == null ? null : userRepository.findById(worker.getUser().getId()).orElse(null);
                                     String message = String.format(adminTelegramSettings.getChannelMessage(), workerUser == null ? "-" : workerUser.getShortEmail(), user.getDomain(), StringUtils.isBlank(user.getPromocode()) ? "-" : user.getPromocode(), userDeposit.getFormattedPrice(), userDeposit.getFormattedAmount(), userDeposit.getCoinType().name());
-                                    telegramService.sendMessageToChannel(message, adminTelegramSettings.getChannelId());
+                                    telegramService.sendMessageToChannel(message, adminTelegramSettings.getChannelId(), message.contains("`"));
                                 }
                             } catch (Exception ex) {
                                 ex.printStackTrace();

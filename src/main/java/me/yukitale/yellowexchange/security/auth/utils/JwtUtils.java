@@ -23,7 +23,7 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-  private final Key jwtSecret = Keys.hmacShaKeyFor(new byte[] {13, 4, -48, 112, -2, 77, 29, 116, -24, 116, 122, 43, -2, -49, -5, 100, 88, -1, -127, 72, 89, -39, 54, -16, 34, -99, -107, -92, 72, 85, 78, -36, 66, 98, 111, -43, 30, 10, -103, 108, 20, 83, -41, -47, 118, 16, 22, -84, 124, -97, -105, -35, -83, -58, -2, -93, -49, -65, -88, -49, -85, -90, 12, 34});
+  private final Key jwtSecret = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
   @Value("${yukitale.app.jwtExpirationMs}")
   private long jwtExpirationMs;

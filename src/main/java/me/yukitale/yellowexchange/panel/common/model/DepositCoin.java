@@ -86,7 +86,9 @@ public abstract class DepositCoin {
         ETC,
         EOS,
         XLM,
-        SHIBBEP20;
+        SHIBBEP20,
+        USDCERC20,
+        USDCTRC20;
 
         public static CoinType getByName(String name) {
             return Arrays.stream(values()).filter(type -> type.name().equals(name)).findFirst().orElse(null);

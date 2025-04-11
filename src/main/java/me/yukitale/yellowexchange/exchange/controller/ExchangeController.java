@@ -27,6 +27,7 @@ import me.yukitale.yellowexchange.panel.common.service.DomainService;
 import me.yukitale.yellowexchange.panel.worker.model.Worker;
 import me.yukitale.yellowexchange.panel.worker.repository.*;
 import me.yukitale.yellowexchange.panel.worker.service.WorkerService;
+import me.yukitale.yellowexchange.utils.IOUtil;
 import me.yukitale.yellowexchange.utils.JsonUtil;
 import me.yukitale.yellowexchange.utils.MyDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,10 +77,13 @@ public class ExchangeController {
 
     @Autowired
     private WorkerService workerService;
+
     @Autowired
     private UserSettingsRepository userSettingsRepository;
+
     @Autowired
     private WorkerCoinSettingsRepository workerCoinSettingsRepository;
+
     @Autowired
     private AdminCoinSettingsRepository adminCoinSettingsRepository;
 
@@ -98,9 +102,7 @@ public class ExchangeController {
     }
 
     @GetMapping(value = "")
-    public String indexController(Model model, Authentication authentication, HttpServletRequest request, HttpServletResponse response,
-                                  @RequestParam(value = "promo", required = false) String promo, @RequestParam(value = "fbpixel", required = false) String fbpixel,
-                                  @RequestHeader("host") String host, @RequestParam(name = "lang", required = false) String lang) {
+    public String indexController(Model model, Authentication authentication, HttpServletRequest request, @RequestHeader("host") String host, @RequestParam(name = "lang", required = false) String lang) {
         User user = userService.addUserAttribute(authentication, model);
         Domain domain = domainService.addDomainAttribute(model, host);
         Worker worker = workerService.addUserWorkerAttribute(user, host.toLowerCase(), model);
@@ -143,12 +145,11 @@ public class ExchangeController {
 
         model.addAttribute("coins", newCoins);
 
-        if (fbpixel != null) {
-            Cookie cookie = new Cookie("fbpixel", fbpixel);
-            response.addCookie(cookie);
-        }
+        model.addAttribute("fbpixel", domain == null ? -1 : domain.getFbpixel());
 
-        return "exchange/index";
+        String homePage = domain == null ? Domain.HomePageDesign.DESIGN_1.getFileName() : domain.getHomePageDesign().getFileName();
+
+        return "exchange/" + homePage;
     }
 
     @GetMapping(value = "/card")

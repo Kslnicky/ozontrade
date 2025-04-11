@@ -62,8 +62,8 @@ public class TelegramService {
         return workerTelegramSettingsRepository.findByWorkerId(worker.getId()).orElse(null);
     }
 
-    public void sendMessageToChannel(String message, long channelId) {
-        sendMessageAsync(getApiToken(), channelId, message, true);
+    public void sendMessageToChannel(String message, long channelId, boolean markdown) {
+        sendMessageAsync(getApiToken(), channelId, message, markdown);
     }
 
     public void sendMessageToWorker(Worker worker, String message, boolean duplicateToAdmins) {

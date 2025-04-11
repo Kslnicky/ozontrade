@@ -1,0 +1,33 @@
+<tr th:if="${stats_type == 'userCountries'}" th:each="entry, iter: ${detailed_stats.userCountries}">
+    <td th:text="${iter.index + 1}"></td>
+    <td>
+        <img th:src="'../assets/img/flags/' + ${entry.key.toLowerCase()} + '.png'" style="width: 25px">
+        <span style="margin-left: 10px" th:text="${entry.key}"></span>
+    </td>
+    <td th:text="${entry.value}"></td>
+</tr>
+<tr th:if="${stats_type == 'userRefers'}" th:each="entry, iter: ${detailed_stats.userRefers}">
+    <td th:text="${iter.index + 1}"></td>
+    <td th:text="${entry.key}"></td>
+    <td th:text="${entry.value.a}"></td>
+    <td th:text="${entry.value.b}"></td>
+    <td th:text="${entry.value.c + '$'}"></td>
+</tr>
+<tr th:if="${stats_type == 'depositCountries'}" th:each="entry, iter: ${detailed_stats.userDeposits}">
+    <td th:text="${iter.index + 1}"></td>
+    <td>
+        <img th:src="'../assets/img/flags/' + ${entry.key.toLowerCase()} + '.png'" style="width: 25px">
+        <span style="margin-left: 10px" th:text="${entry.key}"></span>
+    </td>
+    <td th:text="${entry.value.first}"></td>
+    <td th:text="${entry.value.second + '$'}"></td>
+</tr>
+<tr th:if="${stats_type == 'depositCoins'}" th:each="entry, iter: ${detailed_stats.coinDeposits}">
+    <td th:text="${iter.index + 1}"></td>
+    <td>
+        <img th:src="${entry.key.icon}" style="width: 25px">
+        <span style="margin-left: 10px" th:text="${entry.key.title}"></span>
+    </td>
+    <td th:text="${entry.value.first}"></td>
+    <td th:text="${entry.value.second + '$'}"></td>
+</tr>

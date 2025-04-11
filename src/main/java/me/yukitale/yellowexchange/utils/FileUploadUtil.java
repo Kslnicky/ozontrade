@@ -9,9 +9,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.List;
 
 @UtilityClass
 public class FileUploadUtil {
+
+    private final List<String> allowedTypes = Arrays.asList("image/heic", "image/x-png", "image/jpeg", "image/png", "image/x-jpeg");
 
     public void saveFile(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException {
         Path uploadPath = Paths.get(uploadDir);
@@ -26,5 +30,9 @@ public class FileUploadUtil {
         } catch (IOException ex) {
             throw new IOException("Could not save image file: " + fileName, ex);
         }
+    }
+
+    public boolean isAllowedContentType(MultipartFile image) {
+        return allowedTypes.contains(image.getContentType());
     }
 }
