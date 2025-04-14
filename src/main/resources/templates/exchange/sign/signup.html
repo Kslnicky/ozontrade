@@ -984,47 +984,47 @@
                 <!---->
                 <div class="background-menu" style="display:none;"></div>
 
-                <div class="support-chat">
-                    <button type="button" class="support-button" style="display: flex;">
-                        <img alt="support chat" width="30" height="30" src="/assets/img/chat.svg">
-                        <p style="text-transform: none; margin-bottom: 0" th:text="#{support.button}"></p>
-                        <span class="support-unviewed" th:if="${support_unviewed != null && support_unviewed > 0}" th:text="${support_unviewed}"></span>
-                    </button>
+<!--                <div class="support-chat">-->
+<!--                    <button type="button" class="support-button" style="display: flex;">-->
+<!--                        <img alt="support chat" width="30" height="30" src="/assets/img/chat.svg">-->
+<!--                        <p style="text-transform: none; margin-bottom: 0" th:text="#{support.button}"></p>-->
+<!--                        <span class="support-unviewed" th:if="${support_unviewed != null && support_unviewed > 0}" th:text="${support_unviewed}"></span>-->
+<!--                    </button>-->
 
-                    <div class="chat-box chat-box-meta" style="display: none;">
-                        <div class="chat-box-header chat-box-meta">
-                            <div class="support-header">
-                                <img alt="support" src="/assets/img/support-logo-chat.svg" style="color: transparent;">
-                                <span th:text="#{support.customer.support}"></span>
-                            </div>
-                            <div style="display: flex; align-items: center; justify-content: center; width: 30px; height: 25px; cursor: pointer;">
-                                <img id="support-hide" src="/assets/img/arrow-down.svg" alt="support hide" style="width: 15px; height: 15px;">
-                            </div>
-                        </div>
-                        <div id="chat_box_body" class="chat-box-body chat-box-meta">
-                            <div id="chat_messages">
+<!--                    <div class="chat-box chat-box-meta" style="display: none;">-->
+<!--                        <div class="chat-box-header chat-box-meta">-->
+<!--                            <div class="support-header">-->
+<!--                                <img alt="support" src="/assets/img/support-logo-chat.svg" style="color: transparent;">-->
+<!--                                <span th:text="#{support.customer.support}"></span>-->
+<!--                            </div>-->
+<!--                            <div style="display: flex; align-items: center; justify-content: center; width: 30px; height: 25px; cursor: pointer;">-->
+<!--                                <img id="support-hide" src="/assets/img/arrow-down.svg" alt="support hide" style="width: 15px; height: 15px;">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div id="chat_box_body" class="chat-box-body chat-box-meta">-->
+<!--                            <div id="chat_messages">-->
 
-                            </div>
-                        </div>
-                        <div class="chat-box-footer chat-box-meta">
-                            <div class="support__link-photo-wrapper chat-box-meta">
-                                <button id="support_link_photo" class="chat-box-meta">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" data-garden-id="buttons.icon" data-garden-version="8.76.7" class="StyledIcon-sc-19meqgg-0 cqORhS">
-                                        <path fill="none" stroke="currentColor" stroke-linecap="round" d="M9.5 4v7.7c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V3C6.5 1.6 7.6.5 9 .5s2.5 1.1 2.5 2.5v9c0 1.9-1.6 3.5-3.5 3.5S4.5 13.9 4.5 12V4"></path>
-                                    </svg>
-                                </button>
-                                <span id="support_photo_size" style="display: none;"></span>
-                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg,image/png" name="support_send_image">
-                            </div>
-                            <textarea id="chat_input" th:placeholder="#{support.textarea.placeholder}" class="chat-box-meta"></textarea>
-                            <button id="support_send" class="chat-box-meta">
-                                <svg style="width:24px; height:24px;" viewBox="0 0 24 24">
-                                    <path fill="#f7a600" d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="chat-box-footer chat-box-meta">-->
+<!--                            <div class="support__link-photo-wrapper chat-box-meta">-->
+<!--                                <button id="support_link_photo" class="chat-box-meta">-->
+<!--                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" data-garden-id="buttons.icon" data-garden-version="8.76.7" class="StyledIcon-sc-19meqgg-0 cqORhS">-->
+<!--                                        <path fill="none" stroke="currentColor" stroke-linecap="round" d="M9.5 4v7.7c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V3C6.5 1.6 7.6.5 9 .5s2.5 1.1 2.5 2.5v9c0 1.9-1.6 3.5-3.5 3.5S4.5 13.9 4.5 12V4"></path>-->
+<!--                                    </svg>-->
+<!--                                </button>-->
+<!--                                <span id="support_photo_size" style="display: none;"></span>-->
+<!--                                <input type="file" hidden="" id="support_photo_input" accept="image/x-png,image/jpeg,image/png" name="support_send_image">-->
+<!--                            </div>-->
+<!--                            <textarea id="chat_input" th:placeholder="#{support.textarea.placeholder}" class="chat-box-meta"></textarea>-->
+<!--                            <button id="support_send" class="chat-box-meta">-->
+<!--                                <svg style="width:24px; height:24px;" viewBox="0 0 24 24">-->
+<!--                                    <path fill="#f7a600" d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>-->
+<!--                                </svg>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <div id="allowed-symbols-popup" class="v-tooltip__content black-tooltip menuable__content__active" style="left: 683.5px; top: 412px; z-index: 8; display: none;"> <span th:text="#{sign.allowed.symbols}"></span></div>
                 <!----> <!---->
@@ -1037,6 +1037,16 @@
         </div>
     </div>
 </div>
+<script>
+    var googlepixel = '[[${googlepixel}]]';
+
+    document.getElementById('gtag-js').src = 'https://www.googletagmanager.com/gtag/js?id=' + googlepixel;
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', googlepixel);
+</script>
 <script th:inline="javascript">
     var fbId = [[${fbpixel}]];
     fbId = parseFloat(fbId) != -1 ? fbId : undefined;
@@ -1064,7 +1074,7 @@
     fbq('track', 'PageView');
 </script>
 <script src="../assets/js/main.js?v=5"></script>
-<script src="../assets/js/noti.js?v=2"></script>
+<script src="../assets/js/noti.js?v=3"></script>
 <script th:inline="javascript">
     const error = [[${error}]];
     const emailConfirmTitle = [[#{sign.email.confirm.title}]];

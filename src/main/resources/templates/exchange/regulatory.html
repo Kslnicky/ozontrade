@@ -815,10 +815,10 @@
                     <button type="button" class="support-button" style="display: flex;">
                         <img alt="support chat" width="30" height="30" src="/assets/img/chat.svg">
                         <p style="text-transform: none; margin-bottom: 0" th:text="#{support.button}"></p>
-            <span class="support-unviewed" th:if="${support_unviewed != null && support_unviewed > 0}" th:text="${support_unviewed}"></span>
+                        <span class="support-unviewed" th:if="${support_unviewed != null && support_unviewed > 0}" th:text="${support_unviewed}"></span>
                     </button>
 
-                    <div class="chat-box chat-box-meta" style="display: none;">
+                    <div class="chat-box chat-box-meta">
                         <div class="chat-box-header chat-box-meta">
                             <div class="support-header">
                                 <img alt="support" src="/assets/img/support-logo-chat.svg" style="color: transparent;">
@@ -992,7 +992,48 @@
 </div>
 <input type="hidden" hidden="hidden" id="user-authorized" th:value="${user != null}">
 <script src="../assets/js/toastr.js"></script>
-<script src="../assets/js/noti.js?v=2"></script>
+<script src="../assets/js/noti.js?v=3"></script>
 <script src="../assets/js/main.js?v=5"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const supportButton = document.querySelector('.support-button');
+        const chatBox = document.querySelector('.chat-box');
+        const hideButton = document.getElementById('support-hide');
+
+        let isOpen = false;
+        const transitionDuration = 300; // ms, должен совпадать с transition в CSS
+
+        function openChatBox() {
+            chatBox.classList.remove('closing');
+            void chatBox.offsetWidth; // форсируем перерисовку
+            chatBox.classList.add('open');
+            isOpen = true;
+        }
+
+        function closeChatBox() {
+            chatBox.classList.remove('open');
+            chatBox.classList.add('closing');
+            isOpen = false;
+
+            // после завершения transition убираем .closing
+            setTimeout(() => {
+                chatBox.classList.remove('closing');
+            }, transitionDuration);
+        }
+
+        supportButton.addEventListener('click', function () {
+            if (!isOpen) {
+                openChatBox();
+            } else {
+                closeChatBox();
+            }
+        });
+
+        hideButton.addEventListener('click', function () {
+            closeChatBox();
+        });
+    });
+
+</script>
 </body>
 </html>

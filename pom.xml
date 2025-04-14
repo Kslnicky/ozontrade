@@ -11,7 +11,7 @@
         <relativePath />
     </parent>
 
-    <groupId>me.yukitale</groupId>
+    <groupId>me.hikaricp</groupId>
     <artifactId>yellow-exchange</artifactId>
     <version>1.0</version>
     <name>YellowExchange</name>

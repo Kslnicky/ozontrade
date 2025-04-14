@@ -133,7 +133,7 @@ function verificationPopup(event) {
                 <div style="padding-top: 4px !important; padding: 32px;">
                     <div class="discard-modal__title discard-title" style="font-size: 1.6rem; position: relative; display: inline-block;">${getMessage('popup.title.verification')}</div>
                     <div class="discard-modal__text">${errorsCache.get('OTHER')}</div>
-                    <button type="button" onclick="location.replace('../profile/verification')" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
+                    <button type="button" onclick="window.location.href = '../profile/verification';" class="discard-modal__verification-btn v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default" style="width: 100%;">
                         <span class="v-btn__content">${getMessage('popup.button.verification')}</span>
                     </button>
                 </div>

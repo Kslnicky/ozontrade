@@ -1,4 +1,4 @@
-package me.yukitale;
+package me.hikaricp;
 
 public class Test {
 

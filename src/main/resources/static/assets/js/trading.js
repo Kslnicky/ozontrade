@@ -397,6 +397,18 @@ function load(domain, timeDiff) {
                             } else {
                                 fixed_price = fixed_price.toFixed(6);
                             }
+                            high = get_stable_percent(parseFloat(resp_socket.k.h));
+                            low = get_stable_percent(parseFloat(resp_socket.k.l));
+                            close = fixed_price;
+                            open = get_stable_percent(parseFloat(resp_socket.k.o));
+                            rez = {
+                                time: closeTime,
+                                open: open,
+                                high: high,
+                                low: low,
+                                close: close
+                            };
+                            candleSeries.update(rez)
 
                             $("#c_i_p_ajax_sp2").html(fixed_price);
                             $("#aj_live_price_3").html(fixed_price);

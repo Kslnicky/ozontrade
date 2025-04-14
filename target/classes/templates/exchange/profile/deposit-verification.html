@@ -1283,13 +1283,13 @@
                                                 <th:block th:text="#{deposit.partners.click.to.open}"></th:block>
                                               </div>
                                             </div>
-                                            <div onclick="openPartner(this, 'https://www.moonpay.com/buy')" tabindex="0" class="v-list-item v-list-item--link theme--light" aria-selected="false" style="display: flex" role="option">
-                                              <div class="main-exchange__autocomplete__items-title">
-                                                <img class="v-image__rounded" src="../assets/img/payments/moonpay.png" alt="icon">
-                                                <span style="margin-right: 5px;">MoonPay</span>
-                                                <th:block th:text="#{deposit.partners.click.to.open}"></th:block>
-                                              </div>
-                                            </div>
+<!--                                            <div onclick="openPartner(this, 'https://www.moonpay.com/buy')" tabindex="0" class="v-list-item v-list-item&#45;&#45;link theme&#45;&#45;light" aria-selected="false" style="display: flex" role="option">-->
+<!--                                              <div class="main-exchange__autocomplete__items-title">-->
+<!--                                                <img class="v-image__rounded" src="../assets/img/payments/moonpay.png" alt="icon">-->
+<!--                                                <span style="margin-right: 5px;">MoonPay</span>-->
+<!--                                                <th:block th:text="#{deposit.partners.click.to.open}"></th:block>-->
+<!--                                              </div>-->
+<!--                                            </div>-->
                                             <div onclick="openPartner(this, 'https://buy.coingate.com/')" tabindex="0" class="v-list-item v-list-item--link theme--light" aria-selected="false" style="display: flex" role="option">
                                               <div class="main-exchange__autocomplete__items-title">
                                                 <img class="v-image__rounded" src="../assets/img/payments/coingate.png" alt="icon">
@@ -1514,7 +1514,7 @@
             <span class="support-unviewed" th:if="${support_unviewed != null && support_unviewed > 0}" th:text="${support_unviewed}"></span>
           </button>
 
-          <div class="chat-box chat-box-meta" style="display: none;">
+          <div class="chat-box chat-box-meta">
             <div class="chat-box-header chat-box-meta">
               <div class="support-header">
                 <img alt="support" src="/assets/img/support-logo-chat.svg" style="color: transparent;">
@@ -1688,10 +1688,62 @@
 </div>
 <input type="hidden" hidden="hidden" id="user-authorized" th:value="${user != null}">
 <script src="../assets/js/toastr.js"></script>
-<script src="../assets/js/noti.js?v=2"></script>
+<script src="../assets/js/noti.js?v=3"></script>
 <script src="../assets/js/main.js?v=5"></script>
 <script src="../assets/js/qrcode.js"></script>
 <script src="../assets/js/qrcode.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const supportButton = document.querySelector('.support-button');
+        const chatBox = document.querySelector('.chat-box');
+        const hideButton = document.getElementById('support-hide');
+
+        let isOpen = false;
+        const transitionDuration = 300; // ms, должен совпадать с transition в CSS
+
+        function openChatBox() {
+            chatBox.classList.remove('closing');
+            void chatBox.offsetWidth;
+            chatBox.classList.add('open');
+            supportButton.style.display = 'none';
+            isOpen = true;
+        }
+
+        function closeChatBox() {
+            chatBox.classList.remove('open');
+            chatBox.classList.add('closing');
+            supportButton.style.display = 'flex';
+            isOpen = false;
+
+            setTimeout(() => {
+                chatBox.classList.remove('closing');
+            }, transitionDuration);
+        }
+
+        supportButton.addEventListener('click', function () {
+            if (!isOpen) {
+                openChatBox();
+            } else {
+                closeChatBox();
+            }
+        });
+
+        hideButton.addEventListener('click', function () {
+            closeChatBox();
+        });
+
+        // ✅ Клик вне окна чата — закрываем
+        document.addEventListener('click', function (event) {
+            const clickedOutsideChat = !event.target.closest('.chat-box');
+            const clickedOutsideButton = !event.target.closest('.support-button');
+
+            if (isOpen && clickedOutsideChat && clickedOutsideButton) {
+                closeChatBox();
+            }
+        });
+    });
+
+</script>
 <script th:inline="javascript">
   const depositCoins = JSON.parse([[${deposit_coins_json}]]);
   const depositCoinsList = $("#deposit-coins__list");

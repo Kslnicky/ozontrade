@@ -15,7 +15,7 @@
                 </div>
                 <div class="p-3 rounded bg-light-info text-dark fw-semibold text-start" data-kt-element="message-text">
                     <img th:if="${message.isImage()}" style="max-width: 100%; display: block;" th:src="${message.message}">
-                    <span th:id="'msg_block_' + ${message.id}" th:unless="${message.isImage()}" th:text="${message.message}"></span>
+                    <span style="white-space: pre-line;" class="support-message-text" th:id="'msg_block_' + ${message.id}" th:unless="${message.isImage()}" th:utext="${message.message}"></span>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="p-3 rounded bg-light-primary text-gray-800 fw-semibold text-end" data-kt-element="message-text" style="text-align: left!important">
                     <img th:if="${message.isImage()}" style="max-width: 100%; display: block;" th:src="${message.message}">
-                    <span th:id="'msg_block_' + ${message.id}" th:unless="${message.isImage()}" th:text="${message.message}"></span>
+                    <span style="white-space: pre-line;" class="support-message-text" th:id="'msg_block_' + ${message.id}" th:unless="${message.isImage()}" th:utext="${message.message}"></span>
                 </div>
             </div>
         </div>

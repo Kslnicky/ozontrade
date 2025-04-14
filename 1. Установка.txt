@@ -149,3 +149,15 @@ screen -r exchange
 java -Xmx6G -jar yellow-exchange.jar --spring.config.location=/home/application.properties
 
 Теперь в профиле у вас будет доступна кнопка для перехода в админ панель.
+
+
+После перезапуска биржи в /home появится файл secret.key
+Открывайте его любым текстовым редактором, там будет сгенерированный пароль, необходимый для смены ключей в Payments (Платежи) в панели
+
+Теперь, чтобы сменить ключи, в public key нужно в конце через : указывать этот пароль (public_key:secret_key)
+
+Например:
+
+peIPjCHjgUf8RSdbhH4ZCtkEdrYAuR6Rfl9HFDd5:0IroI1qQQoaNrvwqERtStW2qBQce0DL5
+
+Так же теперь ключи в панели отображаются на половину скрытыми

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>hot</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FE7701" offset="0%"></stop>
+            <stop stop-color="#DE402D" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="首页" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="WEB_demo1白" transform="translate(-704.000000, -24.000000)">
+            <g id="1" transform="translate(-460.000000, 0.000000)">
+                <g id="编组-8" transform="translate(834.000000, 20.000000)">
+                    <g id="编组-52" transform="translate(273.000000, 0.000000)">
+                        <g id="hot" transform="translate(57.000000, 4.000000)">
+                            <rect id="矩形" x="0" y="0" width="12" height="12"></rect>
+                            <path d="M5.82053852,1.7361679 C5.61045944,2.40322762 5.60645477,2.9505613 5.8085245,3.37816894 C6.85504973,1.4357961 8.38341269,0.476551512 10.3936134,0.500435164 C9.45046637,2.12124049 9.20121992,3.64097118 9.64587404,5.05962725 C10.3128552,7.18761135 9.84675609,9.27586118 8.52072095,10.3759557 C7.19468581,11.4760502 5.36232106,11.7833676 3.83947754,11.2328125 C2.31663403,10.6822574 0.77577969,8.70483877 1.34974372,5.92442472 C1.7323864,4.07081535 3.22265134,2.67472975 5.82053852,1.7361679 Z" id="路径-15备份" fill="url(#linearGradient-1)"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

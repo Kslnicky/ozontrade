@@ -1,4 +1,4 @@
-<th:block th:each="message: ${support_messages}">
+<th:block th:each="message : ${support_messages}">
     <div th:classappend="${message.toSupport() ? ('support_' + '_my-message') : ('support_' + '_support-message')}">
         <div class="support-profile">
             <span th:if="${message.toSupport()}" th:text="#{support.you}"></span>
@@ -6,11 +6,18 @@
         </div>
 
         <div class="support-message">
+
             <a th:if="${message.isImage()}" th:href="'../' + ${message.message}" class="support-message-img" target="_blank">
                 <img th:src="${message.message}">
             </a>
-            <th:block th:unless="${message.isImage()}" th:text="${message.message}"></th:block>
+
+
+            <span class="support-message-text"
+                  th:unless="${message.isImage()}"
+                  th:utext="${message.message}">
+            </span>
         </div>
+
         <span class="support-date" th:text="${message.formattedDate}"></span>
     </div>
 </th:block>

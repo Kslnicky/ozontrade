@@ -8,5 +8,5 @@
   "TRANSFER": "Transfer is forbidden for your account. Probably, it is the result of non-compliance. More information you can get from support manager.",
   "CRYPTO_LENDING": "Crypto Lending is forbidden for your account. Probably, it is the result of non-compliance. More information you can get from support manager.",
   "P2P": "Currently, you cannot use P2P trading.<br>Complete the required level of verification to open.",
-  "OTHER": "You don't have full access to our exchange service yet.<br> To unlock all features and functionality, you need to get<br><strong>Lv.2 Verification</strong>. This will only take a few minutes and is required for security and compliance reasons. To begin the verification process, go to the <a class=\\“violethrefintext\\” href=“../profile/verification\\”>Verification page</a> and follow the required steps."
+  "OTHER": "You don't have full access to our exchange service yet.<br> To unlock all features and functionality, you need to get<br><strong>Lv.2 Verification</strong>. This will only take a few minutes and is required for security and compliance reasons. To begin the verification process, go to the<a class=\"violethrefintext\" href=\"../profile/verification\">Verification page</a>\n and follow the required steps."
 }

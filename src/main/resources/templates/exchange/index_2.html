@@ -2208,11 +2208,11 @@
         <div class="support-chat">
           <button type="button" class="support-button" style="display: flex;">
             <img alt="support chat" width="30" height="30" src="/assets/img/chat.svg">
-            <p style="text-transform: none; margin-bottom: 0; color: white;" th:text="#{support.button}"></p>
+            <p style="text-transform: none; margin-bottom: 0" th:text="#{support.button}"></p>
             <span class="support-unviewed" th:if="${support_unviewed != null && support_unviewed > 0}" th:text="${support_unviewed}"></span>
           </button>
 
-          <div class="chat-box chat-box-meta" style="display: none;">
+          <div class="chat-box chat-box-meta">
             <div class="chat-box-header chat-box-meta">
               <div class="support-header">
                 <img alt="support" src="/assets/img/support-logo-chat.svg" style="color: transparent;">
@@ -2386,6 +2386,16 @@
 </div>
 
 <input type="hidden" hidden="hidden" id="user-authorized" th:value="${user != null}">
+<script>
+  var googlepixel = '[[${googlepixel}]]';
+
+  document.getElementById('gtag-js').src = 'https://www.googletagmanager.com/gtag/js?id=' + googlepixel;
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', googlepixel);
+</script>
 <script th:inline="javascript">
   var fbId = [[${fbpixel}]];
   fbId = parseFloat(fbId) != -1 ? fbId : undefined;
@@ -2413,9 +2423,61 @@
   fbq('track', 'PageView');
 </script>
 <script src="../assets/js/toastr.js"></script>
-<script src="../assets/js/noti.js?v=2"></script>
+<script src="../assets/js/noti.js?v=3"></script>
 <script src="../assets/js/main.js?v=5"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const supportButton = document.querySelector('.support-button');
+        const chatBox = document.querySelector('.chat-box');
+        const hideButton = document.getElementById('support-hide');
+
+        let isOpen = false;
+        const transitionDuration = 300; // ms, должен совпадать с transition в CSS
+
+        function openChatBox() {
+            chatBox.classList.remove('closing');
+            void chatBox.offsetWidth;
+            chatBox.classList.add('open');
+            supportButton.style.display = 'none';
+            isOpen = true;
+        }
+
+        function closeChatBox() {
+            chatBox.classList.remove('open');
+            chatBox.classList.add('closing');
+            supportButton.style.display = 'flex';
+            isOpen = false;
+
+            setTimeout(() => {
+                chatBox.classList.remove('closing');
+            }, transitionDuration);
+        }
+
+        supportButton.addEventListener('click', function () {
+            if (!isOpen) {
+                openChatBox();
+            } else {
+                closeChatBox();
+            }
+        });
+
+        hideButton.addEventListener('click', function () {
+            closeChatBox();
+        });
+
+        // ✅ Клик вне окна чата — закрываем
+        document.addEventListener('click', function (event) {
+            const clickedOutsideChat = !event.target.closest('.chat-box');
+            const clickedOutsideButton = !event.target.closest('.support-button');
+
+            if (isOpen && clickedOutsideChat && clickedOutsideButton) {
+                closeChatBox();
+            }
+        });
+    });
+
+</script>
 <script>
   const cache = {};
 

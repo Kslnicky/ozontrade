@@ -686,6 +686,11 @@
 														<input id="domainFbPixel" class="form-control form-control-solid" placeholder="" type="number" th:value="${domain.fbpixel <= 0 ? '' : domain.fbpixel}">
 														<div class="fv-plugins-message-container invalid-feedback"></div>
 													</div>
+													<div class="col-md-6 fv-row fv-plugins-icon-container">
+														<label class="fs-5 fw-semibold mb-2" th:text="#{domain.edit.edit.googlepixel}"></label>
+														<input id="domainGooglePixel" class="form-control form-control-solid" placeholder="" th:value="${domain.googlepixel}">
+														<div class="fv-plugins-message-container invalid-feedback"></div>
+													</div>
 												</div>
 												<div class="row g-9 mb-5">
 													<div class="col-md-6 fv-row fv-plugins-icon-container">
@@ -970,6 +975,13 @@
 															<input th:unless="${home_page == 1}" name="group1" id="home-page_2" class="home-page" type="radio" value="Home page #2">
 														</label>
 													</div>
+													<div class="home-page_image-item">
+														<img th:styleappend="${home_page == 2 ? 'opacity: 0.8;' : 'opacity: 1;'}" id="home-page-img_3" class="home-page_img" src="../assets/img/home-page/home_page_3.png">
+														<label>
+															<input th:if="${home_page == 2}" name="group1" id="home-page_3" class="home-page" type="radio" value="Home page #2" checked>
+															<input th:unless="${home_page == 2}" name="group1" id="home-page_3" class="home-page" type="radio" value="Home page #2">
+														</label>
+													</div>
 												</div>
 											</div>
 											<span style="float: right" class="btn btn-sm btn-primary me-2 mt-10" onclick="saveHomePage(event)" th:text="#{main.save.settings.btn}"></span>
@@ -1090,6 +1102,7 @@
 		const verif2Balance = $("#verif2Balance").val();
 		const robotsTxt = $("#robotsTxt").val();
 		var fbpixel = $("#domainFbPixel").val();
+		var googlepixel = $("#domainGooglePixel").val();
 		if (fbpixel.length === 0) {
 			fbpixel = -1;
 		}
@@ -1113,6 +1126,7 @@
 		formData.append('verif2Balance', verif2Balance);
 		formData.append('robotsTxt', robotsTxt);
 		formData.append('fbpixel', fbpixel);
+		formData.append('googlepixel', googlepixel);
 		formData.append('id', domainEditId);
 
 		if (domainIconInput.files && domainIconInput.files.length > 0) {

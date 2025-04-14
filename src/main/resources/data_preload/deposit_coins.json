@@ -77,6 +77,12 @@
   "title" : "Solana",
   "min_receive" : 0.1
 }, {
+  "symbol" : "USDT",
+  "coin_type" : "USDTSOL",
+  "icon" : "../assets/img/coins/USDT.png",
+  "title" : "Tether",
+  "min_receive" : 0.1
+}, {
   "symbol" : "LTC",
   "coin_type" : "LTC",
   "icon" : "../assets/img/coins/LTC.png",

@@ -950,6 +950,13 @@
 															<input th:unless="${home_page == 1}" name="group1" id="home-page_2" class="home-page" type="radio" value="Home page #2">
 														</label>
 													</div>
+													<div class="home-page_image-item">
+														<img th:styleappend="${home_page == 2 ? 'opacity: 0.8;' : 'opacity: 1;'}" id="home-page-img_3" class="home-page_img" src="../assets/img/home-page/home_page_3.png">
+														<label>
+															<input th:if="${home_page == 2}" name="group1" id="home-page_3" class="home-page" type="radio" value="Home page #2" checked>
+															<input th:unless="${home_page == 2}" name="group1" id="home-page_3" class="home-page" type="radio" value="Home page #2">
+														</label>
+													</div>
 												</div>
 											</div>
 											<span style="float: right" class="btn btn-sm btn-primary me-2 mt-10" onclick="saveHomePage(event)" th:text="#{main.save.settings.btn}"></span>

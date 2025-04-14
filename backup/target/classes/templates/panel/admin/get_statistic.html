@@ -1,7 +1,0 @@
-<tr th:each="stat: ${all_stats}">
-    <td th:text="${stat.id}"></td>
-    <td th:text="${stat.worker.user.shortEmail}"></td>
-    <td th:text="${stat.usersCount}"></td>
-    <td th:text="${stat.depositsPrice} + '$ / ' + ${stat.depositsCount}"></td>
-    <td th:text="${stat.worker.user.formattedRegistered}"></td>
-</tr>

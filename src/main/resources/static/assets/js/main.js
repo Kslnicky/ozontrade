@@ -432,40 +432,45 @@ if ($("#user-authorized").length === 0  || $("#user-authorized").val() === 'fals
                 <path d="M9.68848 12.5399L9.68848 7.76465" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
             </svg>`;
 
-    document.addEventListener('click', () => {
-        if (chatBox.style.display !== 'none' && !event.target.closest('.chat-box-meta') && !event.target.closest('.support-button')) {
-            chatBox.style.display = 'none';
-            supportButton.style.display = 'flex';
+    document.addEventListener('click', (event) => {
+        if (
+            chatBox.classList.contains('open') &&
+            !event.target.closest('.chat-box-meta') &&
+            !event.target.closest('.support-button')
+        ) {
+            chatBox.classList.remove('open'); // плавное закрытие
         }
     });
 
+
     supportHide.addEventListener('click', () => {
-        chatBox.style.display = 'none';
+        chatBox.classList.remove('open');
         supportButton.style.display = 'flex';
     });
 
+
+
     supportButton.addEventListener('click', () => {
         updateSupport(true);
-        chatBox.style.display = 'flex';
+        chatBox.classList.add('open'); // Плавное открытие
         supportButton.style.display = 'none';
 
         $(".support-unviewed").css('display', 'none');
     });
 
+
     function updateSupport(scroll) {
         $("#chat_messages").load("../api/user/support/get", function(responseText) {
-            var regex = /\bhttps:\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]/gi;
-            var wrappedText = responseText.replace(regex, function(match) {
-                return '<a style="text-decoration-style: bold; font-weight: bold; color: mediumblue; text-decoration-line: underline;" rel="noreferrer" target="_blank" href="' + match + '">' + match + '</a>';
-            });
-            $("#chat_messages").html(wrappedText);
+
+            $("#chat_messages").html(responseText);
 
             if (scroll) {
-                var chatMessages = document.getElementById('chat_messages');
+                const chatMessages = document.getElementById('chat_messages');
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }
         });
     }
+
 
     $("#support_send").on('click', function(event) {
         event.preventDefault();
@@ -516,10 +521,12 @@ if ($("#user-authorized").length === 0  || $("#user-authorized").val() === 'fals
                 if (response === 'success') {
                     $("#chat_input").val('');
                     updateSupport();
+
                     setTimeout(function() {
-                        var chatMessages = document.getElementById('chat_messages');
+                        const chatMessages = document.getElementById('chat_messages');
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                     }, 300);
+
                     return;
                 }
 
@@ -532,6 +539,7 @@ if ($("#user-authorized").length === 0  || $("#user-authorized").val() === 'fals
             }
         });
     });
+
 
     var uploadStatus = false;
 
